@@ -1,0 +1,20 @@
+handshaking lemma?
+ In a k-ary tree where every node has either 0 or k children, following property is always true.
+
+ L = (k - 1)*I + 1
+Where L = Number of leaf nodes
+      I = Number of internal nodes  
+
+Full Binary Tree A Binary Tree is full if every node has 0 or 2 children.
+
+In a Full Binary, number of leaf nodes is number of internal nodes plus 1
+       L = I + 1
+Where L = Number of leaf nodes, I = Number of internal nodes
+
+
+Perfect Binary Tree:: A Binary tree is Perfect Binary Tree in which all internal nodes have two children and all leaves are at the same level.
+
+Balance binary tree::Balanced Binary Tree
+A binary tree is balanced if the height of the tree is O(Log n) where n is the number of nodes. For Example, AVL tree maintains O(Log n) height by making sure that the difference between heights of left and right subtrees is 1. Red-Black trees maintain O(Log n) height by making sure that the number of Black nodes on every root to leaf paths are same and there are no adjacent red nodes
+
+A degenerate (or pathological) tree A Tree where every internal node has one child. Such trees are performance-wise same as linked list.
