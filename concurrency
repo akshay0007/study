@@ -1,0 +1,48 @@
+Concurrent framework:::
+Executor
+ExecutorService
+ScheduledExecutorService
+Future
+CountDownLatch
+CyclicBarrier
+Semaphore
+ThreadFactory
+BlockingQueue
+DelayQueue
+Locks
+Phaser
+//
+
+blocking queue
+insert:: add ,offer ,put,offer
+
+remove::
+remove,poll,take,poll
+
+blocking queue doesnt accept null elements
+
+blocking queue implementation is thread safe
+
+implementation of producer and consumer problemes::
+
+blocking queue put an element into FIFO 
+
+
+class Producer implementation Runnable{
+BlockingQueue q;
+Producer( BlockingQueue q){
+this.q=q;
+}
+
+public void run(){
+try{
+ while(true){
+	q.put(produce())
+}
+}catch(Exeception | InterruptException ex){
+
+}
+
+pubilc void produce(){}
+}
+}
