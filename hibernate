@@ -220,3 +220,76 @@ primary key(id)
 <genrator class="native"/>
 
 </id>
+
+
+<property name="first" column="first" type="string">
+</hibernate-mapping>
+
+
+The <id> element maps the unique ID attribute in class to the primary key of the database table. The name attribute of the id element refers to the property in the class and the column attribute refers to the column in the database table. The type attribute holds the hibernate mapping type, this mapping types will convert from Java to SQL data type.
+
+The <generator> element within the id element is used to generate the primary key values automatically. The class attribute of the generator element is set to native to let hibernate pick up either identity, sequence, or hilo algorithm to create primary key depending upon the capabilities of the underlying database.
+
+
+The <property> element is used to map a Java class property to a column in the database table. The name attribute of the element refers to the property in the class and the column attribute refers to the column in the database table. The type attribute holds the hibernate mapping type, this mapping types will convert from Java to SQL data type.
+
+
+Primitive Types
+Mapping type	Java type	ANSI SQL Type
+integer	int or java.lang.Integer	INTEGER
+long	long or java.lang.Long	BIGINT
+short	short or java.lang.Short	SMALLINT
+float	float or java.lang.Float	FLOAT
+double	double or java.lang.Double	DOUBLE
+big_decimal	java.math.BigDecimal	NUMERIC
+character	java.lang.String	CHAR(1)
+string	java.lang.String	VARCHAR
+byte	byte or java.lang.Byte	TINYINT
+boolean	boolean or java.lang.Boolean	BIT
+yes/no	boolean or java.lang.Boolean	CHAR(1) ('Y' or 'N')
+true/false	boolean or java.lang.Boolean	CHAR(1) ('T' or 'F')
+Date and Time Types
+Mapping type	Java type	ANSI SQL Type
+date	java.util.Date or java.sql.Date	DATE
+time	java.util.Date or java.sql.Time	TIME
+timestamp	java.util.Date or java.sql.Timestamp	TIMESTAMP
+calendar	java.util.Calendar	TIMESTAMP
+calendar_date	java.util.Calendar	DATE
+Binary and Large Object Types
+Mapping type	Java type	ANSI SQL Type
+binary	byte[]	VARBINARY (or BLOB)
+text	java.lang.String	CLOB
+serializable	any Java class that implements java.io.Serializable	VARBINARY (or BLOB)
+clob	java.sql.Clob	CLOB
+blob	java.sql.Blob	BLOB
+JDK-related Types
+Mapping type	Java type	ANSI SQL Type
+class	java.lang.Class	VARCHAR
+locale	java.util.Locale	VARCHAR
+timezone	java.util.TimeZone	VARCHAR
+currency	java.util.Currency	VARCHAR
+
+
+ POJO (Plain Old Java Object) 
+
+SessionFactory factory=new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+
+tx=session.beginTransaction();
+List employees=session.createQuery("From Employee").list;
+
+
+for(Iterator iterator=employee.iterator();iterator.hasnext();){
+Employee emp=(Employee)iterator.next();
+}
+tx.commit();
+
+
+mapping of collections;
+mapping of assocation b/w entity class;
+component mapping
+
+Map,Set,SortedMap,SortedSet,List 
+
+
+Association Mapping::
