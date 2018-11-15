@@ -291,5 +291,365 @@ component mapping
 
 Map,Set,SortedMap,SortedSet,List 
 
-
+//////////////////////////////
 Association Mapping::
+Set mapping::
+
+create table Employee(
+id int  not null  auto increment,
+first name varchar(33) default null,
+last_name varchar(22) default null,
+salary int default null,
+primary key(id)
+)
+
+create table certificate(
+id int not null auto increment,
+certificate name varchar(33) default null,
+employeeid int default null,
+primary key(id)
+)
+
+public class Employee {
+   private int id;
+   private String firstName; 
+   private String lastName;   
+   private int salary;
+   private Set certificates;
+}
+
+
+<hibernate-mapping>
+<class name="Employee" table="employee">
+<meta attribute="class description">
+<id name="id" type="int" column="id">
+<genrator class="native">
+</id>
+
+<set name="certificates" cascade="all">
+<key column="employee_id">
+<one-to-many class="certificate">
+</set>
+
+<list name="certificates" cascade="all">
+<key column="employee_id"/>
+<list-index column="idx"/>
+
+//list 
+<list> element is used to set the relationship between Certificate and Employee classes
+<one-to-many class="certificate"/>
+</list>
+
+//collection
+<bag name="cetificates" cascade="all">
+<key column="employee_id"/>
+<one-to-many class="certificate"/>
+</bag>
+ 
+<property name="firstname" column="firstname" type="string">
+</meta>
+</class>
+</hibernate-mapping>
+
+
+<map name="certificates" cascade="all">
+<key column="employee_id"/>
+<index column="certificate_type" type="string"/>
+<one-to-many class="certificate"/>
+</map>
+
+
+The <bag> element is used to set the relationship between Certificate and Employee classes. We used the cascade attribute in the <bag> element to tell Hibernate to persist the Certificate objects at the same time as the Employee objects
+
+The <generator> element within the id element is used to generate the primary key values automatically. The class attribute of the generator element is set to native to let hibernate pick up either identity, sequence or hilo algorithm to create primary key depending upon the capabilities of the underlying database.
+
+
+The <set> element is new here and has been introduced to set the relationship between Certificate and Employee classes. We used the cascade attribute in the <set> element to tell Hibernate to persist the Certificate objects at the same time as the Employee objects. 
+
+
+class ManageEmp{
+public static void main(String arg[]){
+try{
+
+SessionFactory factory=new Configuration().configure("hibarnate.cfg").buildSessionFactory();
+
+ManageEmployee me =new ManageEmployee();
+HashSet set=new HashSet();
+set.add(new Certificate("ff"))
+set.add(new Certificate("ff"))
+
+Integer empId=me.addEmployee("manog","kumar",set)
+
+
+}catch(Exception ex){}
+}
+
+
+public Integer addEmployee(String fname,String lname,int salary,Set set){
+Session session=factroy.openSession();
+
+Transaction tx=session.beginTransaction();
+session.save(emp);
+
+List empl=session.createQuery("From Employee").list();
+for(Iterator iterator=emp1;iteratro.hasNext();){
+Employee emp=iterator.next();
+tx.commit();
+}
+
+for(Iterator iterator1=)
+
+}
+}
+
+class Certificate implements Comparable<Certificate>{
+
+public in complareTo(Certificate cert){
+int Before=-1;
+int After=1;
+
+if(cert==null){
+return before}
+
+Comparabel thisCertificate=this.getName();
+Comparabel thatCertifciate=cert.getName();
+
+if(thithisCertificatesCert==null){
+return After}else (thatCertifciate==null){
+retrunr before}else{
+return this.certficate.compareTo(thatCertificate);
+}
+}
+}
+
+
+
+Association Mappings:::
+1	Many-to-One
+Mapping many-to-one relationship using Hibernate
+
+2	One-to-One
+Mapping one-to-one relationship using Hibernate
+
+3	One-to-Many
+Mapping one-to-many relationship using Hibernate
+
+4	Many-to-Many
+Mapping many-to-many relationship using Hibernate
+'
+
+
+Many to One::
+crate table employee(
+id int not null auto_increment,
+firstname varchar(33) default null,
+lasstname varchar(44) default null,
+salary int default null,
+address int not null,
+primary key(id)
+)
+
+create table address(
+id int not null auto_increment,
+streetname varchar(44) default null,
+cityname varchar(44) default null
+statename varchar(454) default null,
+zipcode varchar(33) default null
+primary key(id)
+)
+
+class Employee{
+int id;
+String firstname;
+String lastname;
+private int salary;
+private Address adddress;
+
+
+}
+
+public class Address{
+int id
+String street;
+String city;
+String state;
+String zipcode;
+}
+
+<hibernate-mapping>
+<meta attributes="class desc">the class contains des</meta>
+
+<id name='id' type="int" column="id">
+<genrate class="native">
+<id>
+
+<property naem ="firstname" column="firstname" type="string">
+
+one-to-one::
+A one-to-one association is similar to many-to-one association with a difference that the column will be set as unique. For example, an address object can be associated with a single employee object.
+
+A One-to-Many::
+ mapping can be implemented using a Set java collection that does not contain any duplicate element. We already have seen how to map Set collection in hibernate, so if you already learned Set mapping then you are all set to go with one-to-many mapping.
+
+
+A many-to-one::
+ association is the most common kind of association where an Object can be associated with multiple objects. For example, the same address object can be associated with multiple employee objects.
+
+
+<many-to-one name="address" column="address">
+classs="address" not-null="true">
+</many-to-one>
+</hibernate-mapping>
+
+The <many-to-one> element is used to set the relationship between EMPLOYEE and ADDRESS entities. The name attribute is set to the defined variable in the parent class, in our case it is address. The column attribute is used to set the column name in the parent table EMPLOYEE.
+
+
+<many-to-one name="address" column="address" unique="true" class="Address" not-null="true">
+The <many-to-one> element is used to set the relationship between EMPLOYEE and ADDRESS entities. The name attribute is set to the defined variable in the parent class, in our case it is address. The column attribute is used to set the column name in the parent table EMPLOYEE, which is set to unique so that only one Employee object can be associated with an address object.
+
+
+<may-to-many name="addres" column="address" class="Address" not-null=true>
+
+
+new Configuration().configure().buildSessionFactory();
+factory.openSession();
+session.beginTransaction();
+empid=session.save(emp,empid)
+tx.commit()
+if(tx!=null)
+tx.rollback();
+session.createQuery('from employee').list();
+session.close()
+
+
+many to many
+
+<set name="certificates" cascade="save-update" table="EMP_CERT">
+<key column='employee_id'/>
+<many-to-many column="certificate-id" class='certificate'/>
+</set>
+The <set> element sets the relationship between Certificate and Employee classes. We set cascade attribute to save-update to tell Hibernate to persist the Certificate objects for SAVE i.e. CREATE and UPDATE operations at the same time as the Employee objects. The name attribute is set to the defined Set variable in the parent class, in our case it is certificates. For each set variable, we need to define a separate set element in the mapping file. Here we used name attribute to set the intermediate table name to EMP_CERT.
+
+
+Hibernate - Component Mappings
+A Component mapping is a mapping for a class having a reference to another class as a member variable. We have seen such mapping while having two tables and using <set> element in the mapping file. Now we will use <component> element in the mapping file and a single table would be used to keep the attributes contained inside the class variable.
+
+The <component> element sets the existence of different attributes of Address class inside Employee classes.
+
+
+<component name="address" class="Address">
+<property name="firstname" column="firstname" type="string">
+<property name="lastname" column="lastname" type="string">
+
+<component>
+
+hibernate annoation::
+@Entity
+@Table
+class Employee{
+
+@Id
+@GenratedValue(value="")
+@Column(name="salary")
+int id;
+}
+
+
+
+@Entity Annotation
+
+@Table Annotation
+
+@Id and @GeneratedValue Annotations  @GeneratedValue annotation, which takes two parameters strategy and generator that 
+
+@Column Annotation
+
+
+factory=new AnnoationConfiguration().configure().addAnnoatedClass(abc.class).buildSessionFactory();
+
+hql query::
+from empliyee e where e.id>10 order by e.salary desc
+
+hql=Delete from employee where id=:employeeid
+qurey=session.cerateQuery(hql);
+qurey.setParameter("empid",employeeid);
+
+
+Criteria cr=session.createCriteria(Employye.class);
+cr.add(Restrictions.eq("salary",100));
+List result=cr.list();
+
+Criterion salary=Restriction.gt("salary",2000)
+Criterion name=Restriction.gt("name",2000)
+LogicalExpression exor=Restriction.or(salary,name);
+cr.add(exor)
+LogicalExpression exand=Restriction.and(salary,name);
+cr.add(exand)
+
+
+
+The Criteria API provides the org.hibernate.criterion.Projections class, which can be used to get average, maximum, or minimum of the property values. The Projections class is similar to the Restrictions class, in that it provides several static factory methods for obtaining Projection instances.
+
+
+String sql="select * from employeee"
+SqlQuery query=session.createSqlQuery(sql)
+query.addEntity(Employee.class)
+query.setParameter("employee_id",10);
+
+
+
+Caching is important to Hibernate as well. It utilizes a multilevel caching scheme as explained below −
+database
+firstlevelcache sessoin object
+second level cache
+
+
+First-level Cache
+The first-level cache is the Session cache and is a mandatory cache through which all requests must pass. The Session object keeps an object under its own power before committing it to the database.
+
+Second-level Cache
+Second level cache is an optional cache and first-level cache will always be consulted before any attempt is made to locate an object in the second-level cache. The second level cache can be configured on a per-class and per-collection basis and mainly responsible for caching objects across sessions.
+
+
+Query-level Cache
+Hibernate also implements a cache for query resultsets that integrates closely with the second-level cache.
+
+
+A concurrency strategy is a mediator, which is responsible for storing items of data in the cache and retrieving them from the cache. If you are going to enable a second-level cache, you will have to decide, for each persistent class and collection, which cache concurrency strategy to use
+
+
+Transactional − Use this strategy for read-mostly data where it is critical to prevent stale data in concurrent transactions, in the rare case of an update.
+
+Read-write − Again use this strategy for read-mostly data where it is critical to prevent stale data in concurrent transactions, in the rare case of an update.
+
+Nonstrict-read-write − This strategy makes no guarantee of consistency between the cache and the database. Use this strategy if data hardly ever changes and a small likelihood of stale data is not of critical concern.
+
+Read-only − A concurrency strategy suitable for data, which never changes. Use it for reference data only.
+
+
+
+ batch processing 
+
+
+Session session = SessionFactory.openSession();
+Transaction tx = session.beginTransaction();
+for ( int i=0; i<100000; i++ ) {
+   Employee employee = new Employee(.....);
+   session.save(employee);
+   if( i % 50 == 0 ) { // Same as the JDBC batch size
+      //flush a batch of inserts and release memory:
+      session.flush();
+      session.clear();
+   }
+}
+tx.commit();
+session.close();
+
+ScrollableResults empcursor=session.crateQuery().scroll();
+
+whilr(empcursor.next()){
+
+}
+
+<mapping resource = "Employee.hbm.xml"/>
+
