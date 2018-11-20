@@ -7,6 +7,14 @@ database
 
 data base configuration using hibernate.cfg.xml
 
+hibarnate::
+transient − A new instance of a persistent class, which is not associated with a Session and has no representation in the database and no identifier value is considered transient by Hibernate.
+
+persistent − You can make a transient instance persistent by associating it with a Session. A persistent instance has a representation in the database, an identifier value and is associated with a Session.
+
+detached − Once we close the Hibernate Session, the persistent instance will become a detached instance.
+
+
 class mapping setup 
 
 Session Factory::
