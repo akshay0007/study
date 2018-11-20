@@ -93,3 +93,17 @@ hardware
 
 JVM Shutdown Hook in Java:::
 Shutdown Hooks are a special construct that allow developers to plug in a piece of code to be executed when the JVM is shutting down. This comes in handy in cases where we need to do special clean up operations in case the VM is shutting down.
+
+
+
+1. Shutdown Hooks may not be executed in some cases!
+2. Once started, Shutdown Hooks can be forcibly stopped before completion.
+3. We can have more than one Shutdown Hooks, but their execution order is not guaranteed.
+4. We cannot register / unregister Shutdown Hooks with in Shutdown Hooks
+5. Once shutdown sequence starts, it can be stopped by Runtime.halt() only.
+6. Using shutdown hooks require security permissions.
+
+
+Main difference between .equals() method and == operator is that one is method and other is operator.
+We can use == operators for reference comparison (address comparison) and .equals() method for content comparison. In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+If a class does not override the equals method, then by default it uses equals(Object o) method of the closest parent class that has overridden this method. See this for detail
