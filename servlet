@@ -1,0 +1,5 @@
+servlet life cycle:::
+Loading a Servlet.
+Initializing the Servlet.
+Request handling.
+Destroying the Servlet.
