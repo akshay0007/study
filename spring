@@ -1,0 +1,36 @@
+
+jdbc templetes;
+jdbctemplet.query("select firstname,last_name from users",new RowMapper<User,User>(){
+pubic User mapRow(ResultSet rs,int row){
+return new User(rs.getString(1),rs.getString(2)
+}
+})
+
+
+ApplicationRunner
+
+ @RequestMapping(value = "/products", method = RequestMethod.POST)
+   public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+      productRepo.put(product.getId(), product);
+      return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+   }
+
+
+  @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+   public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) { 
+      productRepo.remove(id);
+      product.setId(id);
+      productRepo.put(id, product);
+      return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
+   } 
+
+
+Exception Handler
+ControllerAdvice
+
+@ExceptionHandler(value = ProductNotfoundException.class)
+ControllerAdvice
+
+
+DispatcherServlet will be loaded and initialized by calling init() method
+init() of DispatcherServlet will try to identify the Spring Configuration Document with naming conventions like  "servlet_name-servlet.xml" then all beans can be identified.
