@@ -1,0 +1,205 @@
+suppose we have cource review student and passwport table
+
+cource(id ,name) 
+review (id,rating,description,courseid)    
+
+
+ or is courseid is review id
+
+
+class Course{
+@OneToMany(mappedBy="course",fetch=FetctType.EaGER)//bcoz review is owing side
+List<Review > data;
+}
+
+class Review{
+@ManyToOne
+private Course course;
+}
+
+
+
+manytomany
+course:: id,name
+student:: id name passportid
+
+
+student_course::stu_id course_id
+
+
+Course{
+
+@ManyToMany()
+List<Student>
+}
+
+Student{
+@Manytomany
+List<Course> courses
+}
+
+in thatt cse two join column created course_studnetn,studnet_course
+
+Course{
+
+@ManyToMany(mappedby="courses")
+List<Student>
+}
+
+
+Student{
+@Manytomany(fetch=FetchStratg.EAGER)
+List<Course> courses
+}
+
+
+
+
+
+
+in lazy initalize
+
+@Transactonal
+public void retireForCourse(){
+course.getReviews();//again hit for data base but due to lazy geting lazy initalize so used @Transactonal now it getting persist
+}
+
+
+
+course have multiple student and vice versa::
+
+Course Student passport Review::
+
+
+Course{id,name}
+Student {id,name} 
+passport{id,number}
+Review{id,rating,description}
+
+course and student manytomany
+student and passport onetoone
+course and review onetomany vice versa manytoone
+
+
+
+student and passport one to one cretae either stu_id or passprot_id
+
+student id,name,passport_id
+
+class Student{
+@Onetoone
+Passport passport;//owining side of relationship
+}
+
+
+class Review{
+
+}
+
+
+public void savestudandpassport(){
+Passport pass=new Passport('433');
+em.persist(pass)//if we are not writing this line it through passport is not persist
+Student stu=new Student;
+stu.setPassport(pass)
+em.persist(sti)
+}
+
+
+
+eager fatching::
+onetoone manytoone is by default eager fatching:
+
+Lazy fetching::
+@OnetoOne(fetch=FetchType.Lazy)
+
+lazy initailzation exc could not inintalize proxy  ::no session
+
+
+
+
+
+em.perssit()//create hibernate sequence and assign value into id
+
+
+Transaction entity mananager and persistent context
+either all things are succed or nothing succed rollback
+
+persistent context for each beans in block of methods
+
+
+
+in @Trascation block persistent context create for this block and execute each query at the end of block
+
+
+/////////////
+OneToOne bydirectional mapping:::
+
+Class {
+OnetoOne
+Passport passport;
+}
+
+class Passport{
+@onetoOne
+Student stu
+}
+
+both table create new entries student_id,passport_id
+
+so used owing side of relationship properties
+
+student to create owing side of relationship
+
+class Passport{//non owing side
+@OnetoOne(mappedby="passp")
+Student stu
+}
+
+class Student{//owing side 
+@OnetoOne
+Passport passp
+}
+
+
+@Transactional
+void somethig(){
+
+//create object
+em.persist(user1);//assign user to id but not save to db
+em.persist(user2);// ""
+
+//update
+change user1//now update into user1
+change user2//"" to user2
+
+
+
+}//all chages down to the db saves
+
+
+@Transactional
+void somethig(){
+
+//create object
+em.persist(user1);//assign user to id but not save to db
+em.persist(user2);// ""
+
+em.flush()//changes push down into db
+
+//update
+change user1//if there is problems it rollback from init
+change user2//"" to user2
+
+
+
+}//all chages down to the db saves
+
+
+why u need transactonal :::
+Repository=>EntittyManager
+UnitTesting=>EntiityManager
+
+entire logic within boundries is transactional
+
+update in any block or changes by using entitymangaer directly we need tranasactional
