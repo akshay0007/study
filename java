@@ -107,3 +107,245 @@ Shutdown Hooks are a special construct that allow developers to plug in a piece 
 Main difference between .equals() method and == operator is that one is method and other is operator.
 We can use == operators for reference comparison (address comparison) and .equals() method for content comparison. In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
 If a class does not override the equals method, then by default it uses equals(Object o) method of the closest parent class that has overridden this method. See this for detail
+
+
+Threads producerss::
+Two types of thread in java::
+deamon thread::run in background low prorities threads
+user thread::higer prority thread run in foreground
+
+
+User Thread or Non-Daemon are designed to do specific or complex task where as daemon threads are used to perform supporting tasks.
+
+JVM doesn’t wait for daemon thread to finish but it waits for User Thread 
+
+Thread Priority : The User threads are high priority as compare to daemon thread means they won’t get CPU as easily as a user thread can get.
+
+
+Creation of Thread : User thread is usually created by the application for executing some task concurrently. On the other hand, daemon thread is mostly created by JVM like for some garbage collection job.
+
+
+Termination of Thread : JVM will force daemon thread to terminate if all user threads have finished their execution but The user thread is closed by application or by itself. A user thread can keep running by the JVM running but a daemon thread cannot keep running by the JVM. This is the most critical difference between user thread and daemon thread.
+
+
+Usage : The daemons threads are not used for any critical task. Any important task is done by user thread. A daemon thread is generally used for some background tasks which are not critical task.
+
+
+User threads are created by the application.
+
+// Java program check thread is Daemon or not 
+
+
+//producer and consumer problems:::
+
+In computing, the producer–consumer problem (also known as the bounded-buffer problem) is a classic example of a multi-process synchronization problem. The problem describes two processes, the producer and the consumer, which share a common, fixed-size buffer used as a queue.
+
+The producer’s job is to generate data, put it into the buffer, and start again.
+At the same time, the consumer is consuming the data (i.e. removing it from the buffer), one piece at a time.
+
+
+
+Implementation of Producer Consumer Class:::
+
+A LinkedList list – to store list of jobs in queue.
+A Variable Capacity – to check for if the list is full or not
+A mechanism to control the insertion and extraction from this list so that we do not insert into list if it is full or remove from it if it is empty.
+
+
+public class MainClass {
+
+    public static void main(String arg[]) {
+
+        final PC obj = new PC();
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    obj.produces();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                try 
+}
+
+class ThreadJoining extends Thread {
+    String name;
+
+    public ThreadJoining(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        try {
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(1000);
+                System.out.println("call here " + name);
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
+
+
+Thread Pools in Java:::
+A server that creates a new thread for every request would spend more time and consume more system resources in creating and destroying threads than processing actual requests.
+
+A thread pool reuses previously created threads to execute current tasks and offers a solution to the problem of thread cycle overhead and resource thrashing.
+
+Since active threads consume system resources, a JVM creating too many threads at the same time can cause the system to run out of memory. This necessitates the need to limit the number of threads being created.
+
+
+ava provides the Executor framework which is centered around the Executor interface, its sub-interface –ExecutorService and the class-ThreadPoolExecutor, which implements both of these interfaces. By using the executor, one only has to implement the Runnable objects and send them to the executor to execute.
+
+
+newFixedThreadPool(int)           Creates a fixed size thread pool.
+newCachedThreadPool()             Creates a thread pool that creates new 
+                                  threads as needed, but will reuse previously 
+                                  constructed threads when they are available
+newSingleThreadExecutor()         Creates a single thread.
+
+{
+                    obj.consume();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+        // t1 finishes before t2
+//        t1.join();
+//        t2.join();
+
+    }
+
+}
+
+
+class PC {
+    LinkedList<Integer> list = new LinkedList<>();
+    int capcity = 10;
+
+    public void produces() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            synchronized (this) {
+                while (list.size() == capcity)
+                    wait();
+                Syst
+}
+
+class ThreadJoining extends Thread {
+    String name;
+
+    public ThreadJoining(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        try {
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(1000);
+                System.out.println("call here " + name);
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
+
+
+Thread Pools in Java:::
+A server that creates a new thread for every request would spend more time and consume more system resources in creating and destroying threads than processing actual requests.
+
+A thread pool reuses previously created threads to execute current tasks and offers a solution to the problem of thread cycle overhead and resource thrashing.
+
+Since active threads consume system resources, a JVM creating too many threads at the same time can cause the system to run out of memory. This necessitates the need to limit the number of threads being created.
+
+
+ava provides the Executor framework which is centered around the Executor interface, its sub-interface –ExecutorService and the class-ThreadPoolExecutor, which implements both of these interfaces. By using the executor, one only has to implement the Runnable objects and send them to the executor to execute.
+
+
+newFixedThreadPool(int)           Creates a fixed size thread pool.
+newCachedThreadPool()             Creates a thread pool that creates new 
+                                  threads as needed, but will reuse previously 
+                                  constructed threads when they are available
+newSingleThreadExecutor()         Creates a single thread.
+
+em.out.println("produces produce value" + value);
+                list.add(value++);
+                notify();
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+    public void consume() throws InterruptedException {
+        while (true) {
+            synchronized (this) {
+                while (list.size() == 0)
+                    wait();
+
+                Integer val = (Integer) list.removeFirst();
+                notify();
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+
+}
+
+class ThreadJoining extends Thread {
+    String name;
+
+    public ThreadJoining(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        try {
+            for (int i = 0; i < 2; i++) {
+                Thread.sleep(1000);
+                System.out.println("call here " + name);
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
+
+
+Thread Pools in Java:::
+A server that creates a new thread for every request would spend more time and consume more system resources in creating and destroying threads than processing actual requests.
+
+A thread pool reuses previously created threads to execute current tasks and offers a solution to the problem of thread cycle overhead and resource thrashing.
+
+Since active threads consume system resources, a JVM creating too many threads at the same time can cause the system to run out of memory. This necessitates the need to limit the number of threads being created.
+
+
+ava provides the Executor framework which is centered around the Executor interface, its sub-interface –ExecutorService and the class-ThreadPoolExecutor, which implements both of these interfaces. By using the executor, one only has to implement the Runnable objects and send them to the executor to execute.
+
+
+newFixedThreadPool(int)           Creates a fixed size thread pool.
+newCachedThreadPool()             Creates a thread pool that creates new 
+                                  threads as needed, but will reuse previously 
+                                  constructed threads when they are available
+newSingleThreadExecutor()         Creates a single thread.
+
+
+ 
+
+
+
+
+
