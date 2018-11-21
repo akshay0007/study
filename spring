@@ -34,3 +34,23 @@ ControllerAdvice
 
 DispatcherServlet will be loaded and initialized by calling init() method
 init() of DispatcherServlet will try to identify the Spring Configuration Document with naming conventions like  "servlet_name-servlet.xml" then all beans can be identified.
+
+
+
+<bean id="entitl" class="classname">
+
+<costructor-arg name="name" value="hdflsf">
+</bean>
+<costructor-arg name="id" value="hdflsf">
+
+
+Bean defination Reader::
+XmlBeanDefinitionReader::
+This class loads a DOM document and applies the BeanDefinitionDocumentReader to it.
+ * The document reader will register each bean definition with the given bean factory,
+ * talking to the latter's implementation of the
+
+
+ Default implementation of the {@link BeanDefinitionDocumentReader} interface that
+ * reads bean definitions according to the "spring-beans" DTD and XSD format
+ * (Spring's default XML bean definition format).
