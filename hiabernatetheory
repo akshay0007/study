@@ -203,3 +203,42 @@ UnitTesting=>EntiityManager
 entire logic within boundries is transactional
 
 update in any block or changes by using entitymangaer directly we need tranasactional
+
+
+///////////////////////////////////////////
+Class Student{
+@manytomany
+@JoinTable(name="student_course",
+joinColumn=@JoinColumn(name="student_id"),
+inversejoinColumn=@JoinColumn(name="course_id"))
+List<Course> course;
+}
+
+class Course{
+
+@ManytoMany(mappedBy="course")
+List<Student> students
+}
+
+
+
+/////////////////////////////////////////
+faq3
+
+User user=em.find(USer.class,1)
+
+
+List<Comment> comment=user.getComments();//if we are not write transacton in this block data base connection is not established
+so require transacton
+
+return comments
+
+@Test
+@DirectiesContext
+inside block on testing method if all updates happens database 
+roll back
+ 
+
+fetchStrategy=Strategy.Eager
+
+call next value of hibernate sequence(id ===some value)
