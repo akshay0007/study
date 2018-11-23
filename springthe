@@ -168,3 +168,1042 @@ example of
    </bean>
    
 </beans>
+
+public class InitHelloWorld implements BeanPostProcessor {
+   public Object postProcessBeforeInitialization(Object bean, String beanName) 
+      throws BeansException {
+      
+      System.out.println("BeforeInitialization : " + beanName);
+      return bean;  // you can return any other object as well
+   }
+   public Object postProcessAfterInitialization(Object bean, String beanName) 
+      throws BeansException {
+      
+      System.out.println("AfterInitialization : " + beanName);
+      return bean;  // you can return any other object as well
+   }
+}
+
+
+Bean Definition Template
+You can create a Bean definition template, which can be used by other child bean definitions without putting much effort. While defining a Bean Definition Template, you should not specify the class attribute and should specify abstract attribute and should specify the abstract attribute with a value of true as shown in the following code snippet −
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id = "beanTeamplate" abstract = "true">
+      <property name = "message1" value = "Hello World!"/>
+      <property name = "message2" value = "Hello Second World!"/>
+      <property name = "message3" value = "Namaste India!"/>
+   </bean>
+
+   <bean id = "helloIndia" class = "com.tutorialspoint.HelloIndia" parent = "beanTeamplate">
+      <property name = "message1" value = "Hello India!"/>
+      <property name = "message3" value = "Namaste India!"/>
+   </bean>
+   
+</beans>
+
+
+constructor dependency::
+ <bean id = "exampleBean" class = "examples.ExampleBean">
+      <constructor-arg type = "int" value = "2001"/>
+      <constructor-arg type = "java.lang.String" value = "Zara"/>
+   </bean>
+
+
+<bean id = "exampleBean" class = "examples.ExampleBean">
+      <constructor-arg index = "0" value = "2001"/>
+      <constructor-arg index = "1" value = "Zara"/>
+   </bean>
+
+ <bean id = "foo" class = "x.y.Foo">
+      <constructor-arg ref = "bar"/>
+      <constructor-arg ref = "baz"/>
+   </bean>
+
+<!-- Definition for textEditor bean -->
+   <bean id = "textEditor" class = "com.tutorialspoint.TextEditor">
+      <constructor-arg ref = "spellChecker"/>
+   </bean>
+
+
+
+Setter dependecy injection::
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for textEditor bean -->
+   <bean id = "textEditor" class = "com.tutorialspoint.TextEditor">
+      <property name = "spellChecker" ref = "spellChecker"/>
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id = "spellChecker" class = "com.tutorialspoint.SpellChecker"></bean>
+
+</beans>
+
+
+
+XML Configuration using p-namespace:::
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id = "john-classic" class = "com.example.Person">
+      <property name = "name" value = "John Doe"/>
+      <property name = "spouse" ref = "jane"/>
+   </bean>
+
+   <bean name = "jane" class = "com.example.Person">
+      <property name = "name" value = "John Doe"/>
+   </bean>
+
+</beans>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p = "http://www.springframework.org/schema/p"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id = "john-classic" class = "com.example.Person"
+      p:name = "John Doe"
+      p:spouse-ref = "jane"/>
+   </bean>
+
+   <bean name =" jane" class = "com.example.Person"
+      p:name = "John Doe"/>
+   </bean>
+
+</beans>
+
+
+Spring - Injecting Inner Beans::
+As you know Java inner classes are defined within the scope of other classes:::
+
+similarly, inner beans are beans that are defined within the scope of another bean.
+
+<bean name="" class="">
+<property name="">
+
+<bean id="" class="">
+</property>
+</bean>
+
+
+Spring - Injecting Collection
+Advertisements
+
+ 
+ Previous Page Next Page  
+You have seen how to configure primitive data type using value attribute and object references using ref attribute of the <property> tag in your Bean configuration file. Both the cases deal with passing singular value to a bean.
+
+Now what if you want to pass plural values like Java Collection types such as List, Set, Map, and Properties. To handle the situation, Spring offers four types of collection configuration elements which are as follows −
+
+Sr.No	Element & Description
+1	
+<list>
+
+This helps in wiring ie injecting a list of values, allowing duplicates.
+
+2	
+<set>
+
+This helps in wiring a set of values but without any duplicates.
+
+3	
+<map>
+
+This can be used to inject a collection of name-value pairs where name and value can be of any type.
+
+4	
+<props>
+
+This can be used to inject a collection of name-value pairs where the name and value are both Strings.
+
+You can use either <list> or <set> to wire any implementation of java.util.Collection or an array.
+
+You will come across two situations (a) Passing direct values of the collection and (b) Passing a reference of a bean as one of the collection elements.
+
+Example
+Let us have a working Eclipse IDE in place and take the following steps to create a Spring application −
+
+Steps	Description
+1	Create a project with a name SpringExample and create a package com.tutorialspoint under the src folder in the created project.
+2	Add required Spring libraries using Add External JARs option as explained in the Spring Hello World Example chapter.
+3	Create Java classes JavaCollection, and MainApp under the com.tutorialspoint package.
+4	Create Beans configuration file Beans.xml under the src folder.
+5	The final step is to create the content of all the Java files and Bean Configuration file and run the application as explained below.
+Here is the content of JavaCollection.java file −
+
+package com.tutorialspoint;
+import java.util.*;
+
+public class JavaCollection {
+   List addressList;
+   Set  addressSet;
+   Map  addressMap;
+   Properties addressProp;
+
+   // a setter method to set List
+   public void setAddressList(List addressList) {
+      this.addressList = addressList;
+   }
+   
+   // prints and returns all the elements of the list.
+   public List getAddressList() {
+      System.out.println("List Elements :"  + addressList);
+      return addressList;
+   }
+   
+   // a setter method to set Set
+   public void setAddressSet(Set addressSet) {
+      this.addressSet = addressSet;
+   }
+   
+   // prints and returns all the elements of the Set.
+   public Set getAddressSet() {
+      System.out.println("Set Elements :"  + addressSet);
+      return addressSet;
+   }
+   
+   // a setter method to set Map
+   public void setAddressMap(Map addressMap) {
+      this.addressMap = addressMap;
+   }
+   
+   // prints and returns all the elements of the Map.
+   public Map getAddressMap() {
+      System.out.println("Map Elements :"  + addressMap);
+      return addressMap;
+   }
+   
+   // a setter method to set Property
+   public void setAddressProp(Properties addressProp) {
+      this.addressProp = addressProp;
+   }
+   
+   // prints and returns all the elements of the Property.
+   public Properties getAddressProp() {
+      System.out.println("Property Elements :"  + addressProp);
+      return addressProp;
+   }
+}
+Following is the content of the MainApp.java file −
+
+package com.tutorialspoint;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+      JavaCollection jc=(JavaCollection)context.getBean("javaCollection");
+
+      jc.getAddressList();
+      jc.getAddressSet();
+      jc.getAddressMap();
+      jc.getAddressProp();
+   }
+}
+Following is the configuration file Beans.xml which has configuration for all the type of collections −
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for javaCollection -->
+   <bean id = "javaCollection" class = "com.tutorialspoint.JavaCollection">
+      
+      <!-- results in a setAddressList(java.util.List) call -->
+      <property name = "addressList">
+         <list>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+         </list>
+      </property>
+
+      <!-- results in a setAddressSet(java.util.Set) call -->
+      <property name = "addressSet">
+         <set>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+         </set>
+      </property>
+
+      <!-- results in a setAddressMap(java.util.Map) call -->
+      <property name = "addressMap">
+         <map>
+            <entry key = "1" value = "INDIA"/>
+            <entry key = "2" value = "Pakistan"/>
+            <entry key = "3" value = "USA"/>
+            <entry key = "4" value = "USA"/>
+         </map>
+      </property>
+      
+      <!-- results in a setAddressProp(java.util.Properties) call -->
+      <property name = "addressProp">
+         <props>
+            <prop key = "one">INDIA</prop>
+            <prop key = "one">INDIA</prop>
+            <prop key = "two">Pakistan</prop>
+            <prop key = "three">USA</prop>
+            <prop key = "four">USA</prop>
+         </props>
+      </property>
+   </bean>
+
+</beans>
+Once you are done creating the source and bean configuration files, let us run the application. If everything is fine with your application, it will print the following message −
+
+List Elements :[INDIA, Pakistan, USA, USA] 
+Set Elements :[INDIA, Pakistan, USA] 
+ap Elements :{1 = INDIA, 2 = Pakistan, 3 = USA, 4 = USA} 
+Property Elements :{two = Pakistan, one = INDIA, three = USA, four = USA} 
+Injecting Bean References
+The following Bean definition will help you understand how to inject bean references as one of the collection's element. Even you can mix references and values all together as shown in the following code snippet −
+
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Bean Definition to handle references and values -->
+   <bean id = "..." class = "...">
+
+      <!-- Passing bean reference  for java.util.List -->
+      <property name = "addressList">
+         <list>
+            <ref bean = "address1"/>
+            <ref bean = "address2"/>
+            <value>Pakistan</value>
+         </list>
+      </property>
+      
+      <!-- Passing bean reference  for java.util.Set -->
+      <property name = "addressSet">
+         <set>
+            <ref bean = "address1"/>
+            <ref bean = "address2"/>
+            <value>Pakistan</value>
+         </set>
+      </property>
+      
+      <!-- Passing bean reference  for java.util.Map -->
+      <property name = "addressMap">
+         <map>
+            <entry key = "one" value = "INDIA"/>
+            <entry key = "two" value-ref = "address1"/>
+            <entry key = "three" value-ref = "address2"/>
+         </map>
+      </property>
+   </bean>
+
+</beans>
+To use the above bean definition, you need to define your setter methods in such a way that they should be able to handle references as well.
+
+Injecting null and empty string values
+If you need to pass an empty string as a value, then you can pass it as follows −
+
+<bean id = "..." class = "exampleBean">
+   <property name = "email" value = ""/>
+</bean>
+The preceding example is equivalent to the Java code: exampleBean.setEmail("")
+
+If you need to pass a NULL value, then you can pass it as follows −
+
+<bean id = "..." class = "exampleBean">
+   <property name = "email"><null/></property>
+</bean>
+The preceding example is equivalent to the Java code: exampleBean.setEmail(null)
+
+Spring - Injecting Collection::
+Now what if you want to pass plural values like Java Collection types such as List, Set, Map, and Properties. To handle the situation, Spring offers four types of collection configuration elements which are as follows −
+
+1	
+<list>
+
+This helps in wiring ie injecting a list of values, allowing duplicates.
+
+2	
+<set>
+
+This helps in wiring a set of values but without any duplicates.
+
+3	
+<map>
+
+This can be used to inject a collection of name-value pairs where name and value can be of any type.
+
+4	
+<props>
+
+This can be used to inject a collection of name-value pairs where the name and value are both Strings
+
+
+.public class JavaCollection {
+   List addressList;
+   Set  addressSet;
+   Map  addressMap;
+   Properties addressProp;
+
+   // a setter method to set List
+   public void setAddressList(List addressList) {
+      this.addressList = addressList;
+   }
+   
+   // prints and returns all the elements of the list.
+   public List getAddressList() {
+      System.out.println("List Elements :"  + addressList);
+      return addressList;
+   }
+   
+   // a setter method to set Set
+   public void setAddressSet(Set addressSet) {
+      this.addressSet = addressSet;
+   }
+   
+   // prints and returns all the elements of the Set.
+   public Set getAddressSet() {
+      System.out.println("Set Elements :"  + addressSet);
+      return addressSet;
+   }
+   
+   // a setter method to set Map
+   public void setAddressMap(Map addressMap) {
+      this.addressMap = addressMap;
+   }
+   
+   // prints and returns all the elements of the Map.
+   public Map getAddressMap() {
+      System.out.println("Map Elements :"  + addressMap);
+      return addressMap;
+   }
+   
+   // a setter method to set Property
+   public void setAddressProp(Properties addressProp) {
+      this.addressProp = addressProp;
+   }
+   
+   // prints and returns all the elements of the Property.
+   public Properties getAddressProp() {
+      System.out.println("Property Elements :"  + addressProp);
+      return addressProp;
+   }
+}
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for javaCollection -->
+   <bean id = "javaCollection" class = "com.tutorialspoint.JavaCollection">
+      
+      <!-- results in a setAddressList(java.util.List) call -->
+      <property name = "addressList">
+         <list>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+         </list>
+      </property>
+
+      <!-- results in a setAddressSet(java.util.Set) call -->
+      <property name = "addressSet">
+         <set>
+            <value>INDIA</value>
+            <value>Pakistan</value>
+            <value>USA</value>
+            <value>USA</value>
+         </set>
+      </property>
+
+      <!-- results in a setAddressMap(java.util.Map) call -->
+      <property name = "addressMap">
+         <map>
+            <entry key = "1" value = "INDIA"/>
+            <entry key = "2" value = "Pakistan"/>
+            <entry key = "3" value = "USA"/>
+            <entry key = "4" value = "USA"/>
+         </map>
+      </property>
+      
+      <!-- results in a setAddressProp(java.util.Properties) call -->
+      <property name = "addressProp">
+         <props>
+            <prop key = "one">INDIA</prop>
+            <prop key = "one">INDIA</prop>
+            <prop key = "two">Pakistan</prop>
+            <prop key = "three">USA</prop>
+            <prop key = "four">USA</prop>
+         </props>
+      </property>
+   </bean>
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Bean Definition to handle references and values -->
+   <bean id = "..." class = "...">
+
+      <!-- Passing bean reference  for java.util.List -->
+      <property name = "addressList">
+         <list>
+            <ref bean = "address1"/>
+            <ref bean = "address2"/>
+            <value>Pakistan</value>
+         </list>
+      </property>
+      
+      <!-- Passing bean reference  for java.util.Set -->
+      <property name = "addressSet">
+         <set>
+            <ref bean = "address1"/>
+            <ref bean = "address2"/>
+            <value>Pakistan</value>
+         </set>
+      </property>
+      
+      <!-- Passing bean reference  for java.util.Map -->
+      <property name = "addressMap">
+         <map>
+            <entry key = "one" value = "INDIA"/>
+            <entry key = "two" value-ref = "address1"/>
+            <entry key = "three" value-ref = "address2"/>
+         </map>
+      </property>
+   </bean>
+
+</beans>
+
+
+Spring - Beans Auto-Wiring::
+The Spring container can autowire relationships between collaborating beans without using <constructor-arg> and <property> elements, which helps cut down on the amount of XML configuration you write for a big Spring-based application.
+
+Autowiring Modes::
+
+Sr.No	Mode & Description
+1	no
+This is default setting which means no autowiring and you should use explicit bean reference for wiring. You have nothing to do special for this wiring. This is what you already have seen in Dependency Injection chapter.
+
+2	byName
+Autowiring by property name. Spring container looks at the properties of the beans on which autowire attribute is set to byName in the XML configuration file. It then tries to match and wire its properties with the beans defined by the same names in the configuration file.
+
+3	byType
+Autowiring by property datatype. Spring container looks at the properties of the beans on which autowire attribute is set to byType in the XML configuration file. It then tries to match and wire a property if its type matches with exactly one of the beans name in configuration file. If more than one such beans exists, a fatal exception is thrown.
+
+4	constructor
+Similar to byType, but type applies to constructor arguments. If there is not exactly one bean of the constructor argument type in the container, a fatal error is raised.
+
+5	autodetect
+Spring first tries to wire using autowire by constructor, if it does not work, Spring tries to autowire by byType.
+
+
+autowire byName::
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for textEditor bean -->
+   <bean id = "textEditor" class = "com.tutorialspoint.TextEditor">
+      <property name = "spellChecker" ref = "spellChecker" />
+      <property name = "name" value = "Generic Text Editor" />
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id = "spellChecker" class = "com.tutorialspoint.SpellChecker"></bean>
+
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- Definition for textEditor bean -->
+   <bean id = "textEditor" class = "com.tutorialspoint.TextEditor" autowire = "byName">
+      <property name = "name" value = "Generic Text Editor" />
+   </bean>
+
+   <!-- Definition for spellChecker bean -->
+   <bean id = "spellChecker" class = "com.tutorialspoint.SpellChecker"></bean>
+
+</beans>
+
+
+
+Spring Autowiring 'byType'::
+autowire no,byName,byType,constructor,autodetect
+
+
+Limitations with autowiring
+Autowiring works best when it is used consistently across a project. If autowiring is not used in general, it might be confusing for developers to use it to wire only one or two bean definitions. Though, autowiring can significantly reduce the need to specify properties or constructor arguments but you should consider the limitations and disadvantages of autowiring before using them.
+
+Sr.No.	Limitations & Description
+1	
+Overriding possibility
+
+You can still specify dependencies using <constructor-arg> and <property> settings which will always override autowiring.
+
+2	
+Primitive data types
+
+You cannot autowire so-called simple properties such as primitives, Strings, and Classes.
+
+3	
+Confusing nature
+
+Autowiring is less exact than explicit wiring, so if possible prefer using explict wiring.
+
+
+
+Spring - Annotation Based Configuration:::
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
+   <!-- bean definitions go here -->
+</bean>
+
+1	@Required::
+The @Required annotation applies to bean property setter methods.
+
+2	@Autowired
+The @Autowired annotation can apply to bean property setter methods, non-setter methods, constructor and properties.
+
+3	@Qualifier
+The @Qualifier annotation along with @Autowired can be used to remove the confusion by specifiying which exact bean will be wired.
+
+4	JSR-250 Annotations
+Spring supports JSR-250 based annotations which include @Resource, @PostConstruct and @PreDestroy annotations.
+
+Required::The @Required annotation applies to bean property setter methods and it indicates that the affected bean property must be populated in XML configuration file at configuration time. 
+
+
+public class Student {
+   private Integer age;
+   private String name;
+
+   @Required
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   public Integer getAge() {
+      return age;
+   }
+   
+   @Required
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getName() {
+      return name;
+   }
+}
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
+
+   <!-- Definition for student bean -->
+   <bean id = "student" class = "com.tutorialspoint.Student">
+      <property name = "name" value = "Zara" />
+
+      <!-- try without passing age and check the result -->
+      <!-- property name = "age"  value = "11"-->
+   </bean>
+
+</beans>
+
+
+The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished. The @Autowired annotation can be used to autowire bean on the setter method just like @Required annotation, constructor, a property or methods with arbitrary names and/or multiple arguments.
+
+
+Autowire on costructor:::
+
+
+public class TextEditor {
+   private SpellChecker spellChecker;
+
+   @Autowired
+   public void setSpellChecker( SpellChecker spellChecker ){
+      this.spellChecker = spellChecker;
+   }
+   public SpellChecker getSpellChecker( ) {
+      return spellChecker;
+   }
+   public void spellCheck() {
+      spellChecker.checkSpelling();
+   }
+}
+
+
+@Autowired on Properties::
+public class Student {
+   private Integer age;
+   private String name;
+
+   @Autowired(required=false)
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   public Integer getAge() {
+      return age;
+   }
+   
+   @Autowired
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getName() {
+      return name;
+   }
+}
+
+@Autowired with (required = false) option
+By default, the @Autowired annotation implies the dependency is required similar to @Required annotation, however, you can turn off the default behavior by using (required=false) option with @Autowired.
+
+
+
+The following example will work even if you do not pass any value for age property but still it will demand for name property
+
+public class Student {
+   private Integer age;
+   private String name;
+
+   @Autowired(required=false)
+   public void setAge(Integer age) {
+      this.age = age;
+   }
+   public Integer getAge() {
+      return age;
+   }
+   
+   @Autowired
+   public void setName(String name) {
+      this.name = name;
+   }
+   public String getName() {
+      return name;
+   }
+}
+
+
+@Qualifier::
+
+There may be a situation when you create more than one bean of the same type and want to wire only one of them with a property. In such cases, you can use the @Qualifier annotation along with @Autowired to remove the confusion by specifying which exact bean will be wired. Following is an example to show the use of @Qualifier annotation
+
+public class Profile {
+   @Autowired
+   @Qualifier("student1")
+   private Student student;
+
+   public Profile(){
+      System.out.println("Inside Profile constructor." );
+   }
+   public void printAge() {
+      System.out.println("Age : " + student.getAge() );
+   }
+   public void printName() {
+      System.out.println("Name : " + student.getName() );
+   }
+}
+
+
+Spring JSR-250 Annotations:::
+@PostConstruct and @PreDestroy Annotations
+You can use @PostConstruct annotation as an alternate of initialization callback and @PreDestroy annotation as an alternate of destruction callback as explained in the below example.
+
+public class HelloWorld {
+   private String message;
+
+   public void setMessage(String message){
+      this.message  = message;
+   }
+   public String getMessage(){
+      System.out.println("Your Message : " + message);
+      return message;
+   }
+   
+   @PostConstruct
+   public void init(){
+      System.out.println("Bean is going through init.");
+   }
+   
+   @PreDestroy
+   public void destroy(){
+      System.out.println("Bean will destroy now.");
+   }
+}
+
+for sml confirgure::
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
+   <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld"
+      init-method = "init" destroy-method = "destroy">
+      <property name = "message" value = "Hello World!"/>
+   </bean>
+
+</beans>
+
+@Resource Annotation::
+@Resource annotation takes a 'name' attribute which will be interpreted as the bean name to be injected. 
+
+public class TextEditor {
+   private SpellChecker spellChecker;
+
+   @Resource(name = "spellChecker")
+   public void setSpellChecker( SpellChecker spellChecker ){
+      this.spellChecker = spellChecker;
+   }
+   public SpellChecker getSpellChecker(){
+      return spellChecker;
+   }
+   public void spellCheck(){
+      spellChecker.checkSpelling();
+   }
+}
+
+
+
+Spring - Java Based Configuration:::
+@Configuration & @Bean Annotations
+Annotating a class with the @Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions. The @Bean annotation tells Spring that a method annotated with @Bean will return an object that should be registered as a bean in the Spring application context. The simplest possible @Configuration class would be as follows −
+
+
+@Configuration
+public class HelloWorldConfig {
+   @Bean 
+   public HelloWorld helloWorld(){
+      return new HelloWorld();
+   }
+}
+
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+   @Bean
+   public B a() {
+      return new A(); 
+   }
+}
+
+
+Lifecycle Callbacks
+The @Bean annotation supports specifying arbitrary initialization and destruction callback methods, much like Spring XML's init-method and destroy-method attributes on the bean element 
+public class Foo {
+   public void init() {
+      // initialization logic
+   }
+   public void cleanup() {
+      // destruction logic
+   }
+}
+
+
+public class MainApp {
+   public static void main(String[] args) {
+      ApplicationContext ctx = 
+         new AnnotationConfigApplicationContext(TextEditorConfig.class);
+
+      TextEditor te = ctx.getBean(TextEditor.class);
+      te.spellCheck();
+   }
+}
+
+Specifying Bean Scope
+The default scope is singleton, but you can override this with the @Scope annotation as follows −
+
+@Configuration
+public class AppConfig {
+   @Bean
+   @Scope("prototype")
+   public Foo foo() {
+      return new Foo();
+   }
+}
+
+
+Event Handling in Spring::
+You have seen in all the chapters that the core of Spring is the ApplicationContext, which manages the complete life cycle of the beans. The ApplicationContext publishes certain types of events when loading the beans. For example, a ContextStartedEvent is published when the context is started and ContextStoppedEvent is published when the context is stopped.
+
+
+Event handling in the ApplicationContext is provided through the ApplicationEvent class and ApplicationListener interface. Hence, if a bean implements the ApplicationListener, then every time an ApplicationEvent gets published to the ApplicationContext, that bean is notified.
+
+Sr.No.	Spring Built-in Events & Description
+1	
+ContextRefreshedEvent
+
+This event is published when the ApplicationContext is either initialized or refreshed. This can also be raised using the refresh() method on the ConfigurableApplicationContext interface.
+
+2	
+ContextStartedEvent
+
+This event is published when the ApplicationContext is started using the start() method on the ConfigurableApplicationContext interface. You can poll your database or you can restart any stopped application after receiving this event.
+
+3	
+ContextStoppedEvent
+
+This event is published when the ApplicationContext is stopped using the stop() method on the ConfigurableApplicationContext interface. You can do required housekeep work after receiving this event.
+
+4	
+ContextClosedEvent
+
+This event is published when the ApplicationContext is closed using the close() method on the ConfigurableApplicationContext interface. A closed context reaches its end of life; it cannot be refreshed or restarted.
+
+5	
+RequestHandledEvent
+
+This is a web-specific event telling all beans that an HTTP request has been serviced.
+
+
+Listening to Context Events
+To listen to a context event, a bean should implement the ApplicationListener interface which has just one method onApplicationEvent(). So let us write an example to see how the events propagates and how you can put your code to do required task based on certain events.
+
+
+
+Custom Events in Spring:::
+There are number of steps to be taken to write and publish your own custom events. Follow the instructions given in this chapter to write, publish and handle Custom Spring Events.
+
+public class CustomEvent extends ApplicationEvent{
+   public CustomEvent(Object source) {
+      super(source);
+   }
+   public String toString(){
+      return "My Custom Event";
+   }
+}
+
+
+
+public class CustomEventPublisher implements ApplicationEventPublisherAware {
+   private ApplicationEventPublisher publisher;
+   
+   public void setApplicationEventPublisher (ApplicationEventPublisher publisher) {
+      this.publisher = publisher;
+   }
+   public void publish() {
+      CustomEvent ce = new CustomEvent(this);
+      publisher.publishEvent(ce);
+   }
+}
+
+
+
+public class CustomEventHandler implements ApplicationListener<CustomEvent> {
+   public void onApplicationEvent(CustomEvent event) {
+      System.out.println(event.toString());
+   }
+}
+
+
+AOP Terminologies
+Before we start working with AOP, let us become familiar with the AOP concepts and terminology. These terms are not specific to Spring, rather they are related to AOP.
+
+Sr.No	Terms & Description
+1	
+Aspect
+
+This is a module which has a set of APIs providing cross-cutting requirements. For example, a logging module would be called AOP aspect for logging. An application can have any number of aspects depending on the requirement.
+
+2	
+Join point
+
+This represents a point in your application where you can plug-in the AOP aspect. You can also say, it is the actual place in the application where an action will be taken using Spring AOP framework.
+
+3	
+Advice
+
+This is the actual action to be taken either before or after the method execution. This is an actual piece of code that is invoked during the program execution by Spring AOP framework.
+
+4	
+Pointcut
+
+This is a set of one or more join points where an advice should be executed. You can specify pointcuts using expressions or patterns as we will see in our AOP examples.
+
+5	
+Introduction
+
+An introduction allows you to add new methods or attributes to the existing classes.
+
+6	
+Target object
+
+The object being advised by one or more aspects. This object will always be a proxied object, also referred to as the advised object.
+
+7	
+Weaving
+
+Weaving is the process of linking aspects with other application types or objects to create an advised object. This can be done at compile time, load time, or at runtime.
+
+
+Types of Advice::
+1	
+before
+
+Run advice before the a method execution.
+
+2	
+after
+
+Run advice after the method execution, regardless of its outcome.
+
+3	
+after-returning
+
+Run advice after the a method execution only if method completes successfully.
+
+4	
+after-throwing
+
+Run advice after the a method execution only if method exits by throwing an exception.
+
+5	
+around
+
+Run advice before and after the advised method is invoked.
