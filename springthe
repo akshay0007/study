@@ -1,0 +1,170 @@
+Beanfactory::
+
+This is the simplest container providing the basic support for DI and defined by the org.springframework.beans.factory.BeanFactory interface. The BeanFactory and related interfaces, such as BeanFactoryAware, InitializingBean, DisposableBean, are still present in Spring for the purpose of backward compatibility with a large number of third-party frameworks that integrate with Spring.
+
+
+
+The Application Context is Spring's advanced container. Similar to BeanFactory, it can load bean definitions, wire beans together, and dispense beans upon request. Additionally,
+
+
+Spring - Bean Definition::
+The objects that form the backbone of your application and that are managed by the Spring IoC container are called beans. 
+
+. A bean is an object that is instantiated, assembled, and otherwise managed by a Spring IoC container
+
+
+How to create a bean
+Bean's lifecycle details
+Bean's dependencies
+
+1	
+class
+
+This attribute is mandatory and specifies the bean class to be used to create the bean.
+
+2	
+name
+
+This attribute specifies the bean identifier uniquely. In XMLbased configuration metadata, you use the id and/or name attributes to specify the bean identifier(s).
+
+3	
+scope
+
+This attribute specifies the scope of the objects created from a particular bean definition and it will be discussed in bean scopes chapter.
+
+4	
+constructor-arg
+
+This is used to inject the dependencies and will be discussed in subsequent chapters.
+
+5	
+properties
+
+This is used to inject the dependencies and will be discussed in subsequent chapters.
+
+6	
+autowiring mode
+
+This is used to inject the dependencies and will be discussed in subsequent chapters.
+
+7	
+lazy-initialization mode
+
+A lazy-initialized bean tells the IoC container to create a bean instance when it is first requested, rather than at the startup.
+
+8	
+initialization method
+
+A callback to be called just after all necessary properties on the bean have been set by the container. It will be discussed in bean life cycle chapter.
+
+9	
+destruction method
+
+A callback to be used when the container containing the bean is destroyed. It will be discussed in bean life cycle chapter.
+
+
+
+Spring Configuration Metadata
+XML based configuration file.
+Annotation-based configuration
+Java-based configuration
+
+examples::
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <!-- A simple bean definition -->
+   <bean id = "..." class = "...">
+      <!-- collaborators and configuration for this bean go here -->
+   </bean>
+
+   <!-- A bean definition with lazy init set on -->
+   <bean id = "..." class = "..." lazy-init = "true">
+      <!-- collaborators and configuration for this bean go here -->
+   </bean>
+
+   <!-- A bean definition with initialization method -->
+   <bean id = "..." class = "..." init-method = "...">
+      <!-- collaborators and configuration for this bean go here -->
+   </bean>
+
+   <!-- A bean definition with destruction method -->
+   <bean id = "..." class = "..." destroy-method = "...">
+      <!-- collaborators and configuration for this bean go here -->
+   </bean>
+
+   <!-- more bean definitions go here -->
+   
+</beans>
+
+
+
+Sr.No.	Scope & Description:::::::
+1	
+singleton
+
+This scopes the bean definition to a single instance per Spring IoC container (default).
+
+2	
+prototype
+
+This scopes a single bean definition to have any number of object instances.
+
+3	
+request
+
+This scopes a bean definition to an HTTP request. Only valid in the context of a web-aware Spring ApplicationContext.
+
+4	
+session
+
+This scopes a bean definition to an HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+5	
+global-session
+
+This scopes a bean definition to a global HTTP session. Only valid in the context of a web-aware Spring ApplicationContext.
+
+
+
+Though, there are lists of the activities that take place behind the scene between the time of bean Instantiation and its destruction, this chapter will discuss only two important bean life cycle callback methods, which are required at the time of bean initialization and its destruction.
+
+
+InitializingBean interface contains afterPropertiesSet();
+
+
+public class ExampleBean implements DisposableBean {
+   public void destroy() {
+      // do some destruction work
+   }
+}
+
+
+example of 
+ AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+
+      HelloWorld obj = (HelloWorld) context.getBean("helloWorld");
+      obj.getMessage();
+      context.registerShutdownHook();
+
+
+<bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld" init-method = "init" 
+      destroy-method = "destroy">
+      <property name = "message" value = "Hello World!"/>
+   </bean>
+
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+   default-init-method = "init" 
+   default-destroy-method = "destroy">
+
+   <bean id = "..." class = "...">
+      <!-- collaborators and configuration for this bean go here -->
+   </bean>
+   
+</beans>
