@@ -242,3 +242,56 @@ roll back
 fetchStrategy=Strategy.Eager
 
 call next value of hibernate sequence(id ===some value)
+
+inheritance::
+Tables::Employee ,FullTimeEmployee,PartTimeEmployee
+
+types of inheritance::
+singel table,tableperclasss,joined.mappedSuperClass
+
+
+@Entity
+@Inheritance(strategy=InheritanceTYpe.Single_Table)
+
+
+
+
+IheritanceType{Single_table,Table_per_class,Joined}
+
+Transaction Management::
+200 300 deduct from a account
+150 300 
+150 350 deposit 50 from b account
+
+
+ACID properties:::
+A::atomicity==>either trans. should be comp succesff or all trans revert back
+C::concurrent==>it should not matter how many tras running in parellel ,but end state of trans. should be same.either they are running in parellel or sequentially
+I::isolation==>multiple level of isolation one trans effect another trans. if thery are running in parellel.suppose A doing some trans. then update value of A is provided to B or not
+D::durablity==>if trans. running and due to system crash or something wrong happend end state of transaction should be persistent.
+
+
+transactin ::A$50 to b and trans2 A$100 to C
+Dirty read::read the value of transaction by another transaction before commiting tranansaction
+non repetable read::when i am reading same values 2ys getting 2 different values
+phantom read::at different time i am getting different rows in the same transacton.
+
+
+		dirty read  non repetable phantom read
+Read uncommited ::possible  ::possible  ::possible   lock on trans value
+read commited   ::solve     ::possible  ::possible   lock on rows 
+repeatable read ::solve     ::solve     ::possible   lock the row until trans complete then run another trans on sm row
+serializable    ::solve     ::solve     ::solve      lock would be created on constraint applied on table then it create lock ,no delete update and insert perform on constraint after this opration perform
+
+
+
+@Transactional(jax,spring)
+if u are using two database changes then used spring tranasactional
+if u are using one database changes then used javax tranasactional
+//database1
+//database2
+
+@Transactoinal(isolation="")
+
+//isolation level	
+hibarnate.connection.isolation=2
