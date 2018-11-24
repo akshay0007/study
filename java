@@ -344,6 +344,146 @@ newSingleThreadExecutor()         Creates a single thread.
 
 
  
+Serialization and Deserialization in Java with Example
+Serialization is a mechanism of converting the state of an object into a byte stream. Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory. This mechanism is used to persist the object.
+
+
+
+SerialVersionUID
+The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID,which is used during Deserialization to verify that sender and reciever of a serialized object have loaded classes for that object which are compatible with respect to serialization. If the reciever has loaded a class for the object that has different UID than that of corresponding sender’s class, the Deserialization will result in an InvalidClassException. A Serializable class can declare its own UID explicitly by declaring a field name.
+It must be static, final and of type long.
+i.e- ANY-ACCESS-MODIFIER static final long serialVersionUID=42L;
+
+import java.io.*; 
+  
+class Emp implements Serializable { 
+private static final long serialversionUID = 
+                                 129348938L; 
+    transient int a; 
+    static int b; 
+    String name; 
+    int age; 
+  
+    // Default constructor 
+public Emp(String name, int age, int a, int b) 
+    { 
+        this.name = name; 
+        this.age = age; 
+        this.a = a; 
+        this.b = b; 
+    } 
+  
+} 
+  
+public class SerialExample { 
+public static void printdata(Emp object1) 
+    { 
+  
+        System.out.println("name = " + object1.name); 
+        System.out.println("age = " + object1.age); 
+        System.out.println("a = " + object1.a); 
+        System.out.println("b = " + object1.b); 
+    } 
+  
+public static void main(String[] args) 
+    { 
+        Emp object = new Emp("ab", 20, 2, 1000); 
+        String filename = "shubham.txt"; 
+  
+        // Serialization 
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(object); 
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Object has been serialized\n"
+                              + "Data before Deserialization."); 
+            printdata(object); 
+  
+            // value of static variable changed 
+            object.b = 2000; 
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught"); 
+        } 
+  
+        object = null; 
+  
+        // Deserialization 
+        try { 
+  
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            object = (Emp)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Object has been deserialized\n"
+                                + "Data after Deserialization."); 
+            printdata(object); 
+  
+            // System.out.println("z = " + object1.z); 
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught"); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); 
+        } 
+    } 
+} 
+Output:
+
+Object has been serialized
+Data before Deserialization.
+name = ab
+age = 20
+a = 2
+b = 1000
+Object has been deserialized
+Data after Deserialization.
+name = ab
+age = 20
+a = 0
+b = 2000
+
+
+
+
+difference
+JDK – Java Development Kit (in short JDK) is Kit which provides the environment to develop and execute(run) the Java program. JDK is a kit(or package
+
+) which includes two things
+Development Tools(to provide an environment to develop your java programs)
+JRE (to execute your java program).
+Note : JDK is only used by Java Developers.
+
+JRE – Java Runtime Environment (to say JRE) is an installation package which provides environment to only run(not develop) the java program(or application)onto your machine. JRE is only used by them who only wants to run the Java Programs i.e. end users of your system.
+JVM – Java Virtual machine(JVM) is a very important part of both JDK and JRE because it is contained or inbuilt in both. Whatever Java program you run using JRE or JDK goes into JVM and JVM is responsible for executing the java program line by line hence it is also known as interpreter.
+
+
+How does JVM works?
+
+JVM becomes an instance of JRE at runtime of a Java program. It is widely known as a runtime interpreter.JVM largely helps in the abstraction of inner implementation from the programmers who make use of libraries for their programmes from JDK.
+For detailed working of JVM click ->Working of JVM
 
 
 
