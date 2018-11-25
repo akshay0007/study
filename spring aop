@@ -1,0 +1,180 @@
+Spring AOP::
+
+@Service
+class Business1{
+
+@Autowired
+Dao1 dao;
+
+}
+
+
+
+@Repository
+class Dao1{
+
+}
+
+
+@SpringBootApplication
+Class Main implements CommandLineRunner{
+@Autowired
+Business1 business;
+
+Logger logger=LoggerFactory.getLogger(this.getClass());
+
+
+public static void main(String... a){
+SpringApplication.run(Main.class,a);
+}
+
+
+@Override
+public void run(){
+logger.info(business.calculateSOmething());
+}
+
+
+@Aspect
+@Configuration
+class BeforeAspect{
+
+@Before(* package.*.*(..))//return type package class.method(args)
+@Before(execution(* com.example.skil.*.*(..)))
+public void before(JoinPoint joinPoint){
+logger.log('aspect here {}',joinPoint);
+}
+
+}
+}
+
+
+Terminology:::
+@Before(execution(* com.example.skil.*.*(..)))
+@Before(execution(* com.example.skil..*.*(..)))//two dots for subpackaging also
+
+@Before(* package.*.*(..))//return type package class.method(args)
+@Before(execution(* com.example.skil.*.*(..)))//pointcut
+public void beforeMethod(JoinPoint joinPoint){
+//advice
+logger.log('aspect here {}',joinPoint);
+}
+
+}
+}
+
+pointcut::expression inside execution
+advice::inside beforeMethod block is advice
+Aspect::comb. of pointcut & advice is aspect
+joinpoint::if some methods go intercepted inside method args. joinpoint is written
+is helpful for decription of method  classs packages.specific execution intance
+specific calling interception
+Weaving::aspect execution in right time /framework does implement it is weaver
+
+framework does aspect right time is weaver.process of does this weaving
+
+
+
+class AfterAspect{
+
+@AfterReturning(
+value="execution(* com.example.skil.*.*(..))",
+returning="result"
+)
+public void afterreturn(JoinPoint joinpoint,Object result//mapping with returning){
+logger.info("{} returing value {}",joinpoint,result);
+}
+
+
+@AfterThorwing(
+value="execution("* com.ex.*.*(..)")"
+throwing="exception"
+)
+
+public void throwingexc(JoinPoint jp,Exception ex){
+
+}
+
+
+@After(value="execution("* come.ex.*.*.(..)")")
+public void after(JoinPoint jp,Exception ex){}
+
+
+
+@Around("execution("* come.ex.*.*.(..)")")
+public void after(ProceedingJoinPoint joinpoint) throws Exception{
+long stime=System.currentTimeMills();
+joinpoint.procced();
+long interval=System.currentTimeMills()-stime;
+
+}
+
+
+package com.example.pointcut
+
+@Aspect
+@Configuration
+class commonPointCut{
+
+Logger log=LoggerFactory.getLogger(this.getClass());
+
+@Before("execution("* com.example.data.*.*.(..)")")
+public void commonPointcut(JoinPoint joinpoint){
+logger.log("common happend {}",joinpoint)
+}
+
+}
+
+Aspect
+@Configuration
+class AfterPOintCut{
+@PointCut("com.example.pointcut.commonPointCut.commonPointcut() && com.example.pointcut.commonPointCut.secondMethod()")
+public void commonPointcut(JoinPoint joinpoint){
+logger.log("common happend {}",joinpoint)
+}
+
+
+@Pointcut("bean(*Dao*)")//intercept all method inside class which contains Dao in b/w methods
+public void daoIntecept(JoinPoint jp){
+
+}
+
+
+@Pointcut("within(* com.example.data..*)")
+public void daoIntecept(JoinPoint jp){
+
+}
+}
+
+
+
+byusing custom annoation::
+
+@Target(ElementType.Method)
+@Retention(RetentionPolicy.Runtime)
+public @interface TrackTime{
+
+}
+
+class DataExe{
+
+
+package com.skil.annot
+@TrackTime
+public void callData(){
+
+}
+
+}
+
+@Aspect
+@Configuraiton
+class PointCut{
+
+
+@PointCut(@annotation(com.skil.annot))
+public void callMethod(){
+
+}
+
+}
