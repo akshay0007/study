@@ -1,0 +1,148 @@
+Spring boot::
+
+
+core framework::
+spring core
+spring beans
+spring context
+
+
+what are beans::@Component used for bean definition
+what are dependency of beans::@Autowired
+where to search for::
+
+
+@SpringBootApplication::
+for finding packages/subpackages in project
+
+
+SpringApplication.run(SpringClass.class,args)//adding spring context
+
+bean managed by ApplicationContext
+
+
+ApplicationContext context=SpringApplication.run(SpringClass.class,args)//adding spring BinarySearchBean bean=context.getBean(BinarySearchBena.class)
+bean.search(11)
+
+
+Background happing::
+debug mode
+logging.level.org.springframwork=debug
+componentscanning::PathMatchingResourcePatternResolver(classname)
+
+,ClassPathBeanDefinitionScanner::
+(A bean definition scanner that detects bean candidates on the classpath,
+ * registering corresponding bean definitions with a given registry ({@code BeanFactory}
+ * or {@code ApplicationContext}).)
+
+Candidate classes are detected through configurable type filters. The
+ * default filters include classes that are annotated with Spring's
+ * {@link org.springframework.stereotype.Component @Component},
+ * {@link org.springframework.stereotype.Repository @Repository},
+ * {@link org.springframework.stereotype.Service @Service}, or
+ * {@link org.springframework.stereotype.Controller @Controller} stereotype.
+ *
+
+
+create a instance of bean:
+
+
+dynamic autowiring and troubelshooting::
+
+it Sorting interface pass into constrotror or setter method then @Autowire not understand which bean componet it pick for resolving this problem we are using @Primary Annotaion or either remove @componet annotation from bean repos
+
+
+@Component
+@Primary
+class BubbleSorting{}
+
+@Component
+class QuickSorting{}
+
+
+if no bean found gave error nosuch bean found.
+
+
+
+Constrotor and setter injection:::
+
+constrotor based
+
+class BinarySearch{
+@Autowired
+Sorting sorting;
+
+BinarySearch(Sorting sort){
+this.sorting=sort;
+}
+
+}
+
+
+setter based
+
+Sorting sort
+
+@Aotowired
+pubic void setSorting(Sorting sort){
+this.sort=sort
+}
+
+
+no setter and constrotor
+class BinarySearch{
+@Autowired
+Sorting sorting;
+
+}
+
+
+
+Spring modularity::::
+
+data access integration                        web
+jdbc orm oxm jms transaction 		websocket portlet web servlet
+||
+Aop aspects instumention messaging
+||
+core
+beans core context spel
+||
+test
+
+
+
+
+orm framework::hibenate,mybitis
+
+jms::called some app into queue
+
+oxm::object to xml
+
+transcation::all successfully or rollback
+
+
+web framwork::struts,spring mvc,portlets,websockets
+
+spring test cases
+
+spring security ,AOP(basic aop),Aspects J framework
+
+
+
+Spring batch				spring boot(autoconfig,acutator)
+spring security   ||Spring project||    spring cloud(native cloud app)
+spring hateoas				spring data(consistent data access)
+others					spring integration(appication integation)
+
+
+
+batch applications
+oauth 2.0 supports and etc
+hateoas comp service where to go from here 
+
+spring web service, spring session ,spring mobile ,spring android
+
+
+
+
