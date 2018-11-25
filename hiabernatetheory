@@ -295,3 +295,310 @@ if u are using one database changes then used javax tranasactional
 
 //isolation level	
 hibarnate.connection.isolation=2
+
+
+
+Generated with SEQUENCE strategy
+And if you use the SEQUENCE, Hibernate performs an SQL SELECT statement to retrieve the next value from the database sequence. Hibernate then delays the INSERT statement until it flushes the persistence context. In this example, the flush happens when the transaction gets committed.
+
+
+14:10:27,994  INFO TestPersistSaveMerge:237 - Save entity
+14:10:28,002 DEBUG SQL:92 - 
+    select
+        nextval ('hibernate_sequence')
+14:10:28,042  INFO TestPersistSaveMerge:240 - Commit transaction
+14:10:28,096 DEBUG SQL:92 - 
+    insert
+    into
+        Author
+        (firstName, lastName, version, id) 
+    values
+        (?, ?, ?, ?)
+
+
+Generated with TABLE strategy
+You shouldn’t use the TABLE strategy because it requires row level locks on the primary key table and doesn’t scale well. If you use this strategy anyways, Hibernate performs an SQL SELECT statement to retrieve the next primary key value from the database and writes the new value to the database table. It delays the execution of the SQL INSERT statement for the new entity until it flushes the persistence context.
+
+14:11:17,368  INFO TestPersistSaveMerge:237 - Save entity
+14:11:17,482 DEBUG SQL:92 - 
+    select
+        tbl.next_val 
+    from
+        hibernate_sequences tbl 
+    where
+        tbl.sequence_name=? for update
+            of tbl
+14:11:17,531 DEBUG SQL:92 - 
+    insert
+    into
+        hibernate_sequences
+        (sequence_name, next_val)  
+    values
+        (?,?)
+14:11:17,534 DEBUG SQL:92 - 
+    update
+        hibernate_sequences 
+    set
+        next_val=?  
+    where
+        next_val=? 
+        and sequence_name=?
+14:11:17,584  INFO TestPersistSaveMerge:240 - Commit transaction
+14:11:17,655 DEBUG SQL:92 - 
+    insert
+    into
+        Author
+        (firstName, lastName, version, id) 
+    values
+        (?, ?, ?, ?)
+
+
+ 
+
+How do you get the primary key values in your application? Do you use natural keys or do you generate technical IDs?
+
+Don’t want to read? You can watch it here!
+
+Watch this video on YouTube
+Follow me on YouTube to not miss any new videos.
+
+I prefer to generate simple, numerical, technical IDs like you can see in the following code snippet instead of using natural keys which often require the combination of multiple attributes.
+
+@Id
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawPrimaryKey.java hosted with ❤ by GitHub
+Technical IDs are easier to manage and all involved systems, mainly the database and Hibernate, can index them very efficiently. This allows you to focus on the business logic of your application and avoids performance issues.  
+ 
+
+4 options to generate primary keys
+The JPA specification supports 4 different primary key generation strategies which generate the primary key values programmatically or use database features, like auto-incremented columns or sequences. The only thing you have to do is to add the @GeneratedValue annotation to your primary key attribute and choose a generation strategy.
+@Id
+@GeneratedValue
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawGeneratedValue.java hosted with ❤ by GitHub
+
+
+Join the Thoughts on Java Library
+
+Get free access to:
+
+2 Ebooks about JPA and Hibernate
+More than 50 Cheat Sheets
+More than 60 printable Hibernate Tips
+A 3-Part Video Course about Finding and Fixing N+1 Select Issues
+Signup For Free:
+
+
+Email
+
+Password
+
+Password Confirmation
+JOIN NOW!
+
+Already a member? Login here.
+
+
+ 
+GenerationType.AUTO
+The GenerationType.AUTO is the default generation type and lets the persistence provider choose the generation strategy.
+
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawGenerationTypeAuto.java hosted with ❤ by GitHub
+If you use Hibernate as your persistence provider, it selects a generation strategy based on the database specific dialect. For most popular databases, it selects GenerationType.SEQUENCE which I will explain later.  
+
+ 
+
+Watch it on YouTube
+
+Watch this video on YouTube
+Follow me on YouTube to not miss any new videos.
+GenerationType.IDENTITY
+The GenerationType.IDENTITY is the easiest to use but not the best one from a performance point of view. It relies on an auto-incremented database column and lets the database generate a new value with each insert operation. From a database point of view, this is very efficient because the auto-increment columns are highly optimized, and it doesn’t require any additional statements.
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawGenerationTypeIdentity.java hosted with ❤ by GitHub
+This approach has a significant drawback if you use Hibernate. Hibernate requires a primary key value for each managed entity and therefore has to perform the insert statement immediately. This prevents it from using different optimization techniques like JDBC batching.
+
+ 
+
+Watch it on YouTube
+
+Watch this video on YouTube
+Follow me on YouTube to not miss any new videos.
+GenerationType.SEQUENCE
+The GenerationType.SEQUENCE is my preferred way to generate primary key values and uses a database sequence to generate unique values.
+
+It requires additional select statements to get the next value from a database sequence. But this has no performance impact for most applications. And if your application has to persist a huge number of new entities, you can use some Hibernate specific optimizations to reduce the number of statements.
+
+@Id
+@GeneratedValue(strategy = GenerationType.SEQUENCE)
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawGenerationTypeSequence.java hosted with ❤ by GitHub
+If you don’t provide any additional information, Hibernate will request the next value from its default sequence. You can change that by referencing the name of a @SequenceGenerator in the generator attribute of the @GeneratedValue annotation. The @SequenceGenerator annotation lets you define the name of the generator, the name, and schema of the database sequence and the allocation size of the sequence.
+
+@Id
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
+@SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawSequenceGenerator.java hosted with ❤ by GitHub
+ 
+
+GenerationType.TABLE
+The GenerationType.TABLE gets only rarely used nowadays. It simulates a sequence by storing and updating its current value in a database table which requires the use of pessimistic locks which put all transactions into a sequential order. This slows down your application, and you should, therefore, prefer the GenerationType.SEQUENCE, if your database supports sequences, which most popular databases do.
+
+@Id
+@GeneratedValue(strategy = GenerationType.TABLE)
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+view rawGenerationTypeTable.java hosted with ❤ by GitHub
+You can use the @TableGenerator annotation in a similar way as the already explained @SequenceGenerator annotation to specify the database table which Hibernate shall use to simulate the sequence.
+
+@Id
+@GeneratedValue(strategy = GenerationType.TABLE, generator = "book_generator")
+@TableGenerator(name="book_generator", table="id_generator", schema="bookstore")
+@Column(name = "id", updatable = false, nullable = false)
+private Long id;
+
+
+hibernate merge and update::
+You can use Hibernate’s update or JPA’s merge method to associate a detached entity with a persistence context. After you’ve done that, Hibernate will update the database based on the entity attribute values.
+
+ui web-->service-->data-->database
+
+in data caching machanism apply..
+
+
+hibenate two level canche::
+firslevel
+and second level
+Persistence context-->FirstlevelCache-->Second level cache-->Database
+
+
+
+
+t1  t2 t3 running in parellel
+||
+PersistenceContext pc1
+PersistenceContext pc2
+PersistenceContext pc3
+||
+
+second level cache
+||
+database
+
+
+first time go to db ret data and placed into persitent context::
+then all commn happend from persistenc context(first level cache)
+
+
+across multiple transsaction and multiple user use it::
+list of countries and stats cannot change for same countries
+we can stored this data into second level cache..
+
+
+
+first level cache for single transacton..
+
+second level cache which is common across the user..
+
+
+
+
+First level cache::
+
+@Transactional
+public void findById(){
+repository.findById(1000l);
+
+
+repository.findById(1001l);
+
+boundry of transaction two different transactoin hit db for retrieveing data 
+
+
+Second level cache configuration::
+manually done.
+ehcache ,redis etc..
+
+enable second level cache
+spring.jpa.properties.hibernate.cache.use_second_level_cache=true
+specifing the caching freamwor::EhCache
+(EhcacheRegionFactory class)
+spring.jpa.properties.hibernate.cache.region,factoryclass=EhcacheRegionFactory
+only cache what i tell to cache
+(sharedCacheMode enum)
+spring.jpa.properties.javax.persistence.sharedCacheMode=Enable_selective
+logging.level.net.sf.ehcache=debug
+what data to cache?
+
+
+@Cacheable
+
+L2C puts(level to cache)
+
+L2C hits
+
+L2C miss
+
+hits::when looking into cache it find out
+miss::not found into cache
+
+
+performance tuning::
+
+
+turn statics on
+spring.jpa.properties.hibernate.genrate_statics=true
+loggin.level.org.hibernate.stat=debug
+
+
+Indexes::
+good indexes.
+execution plan
+
+
+use appropriate caching::
+first level caching::within single trans
+second level caching::enable it by using second level cache diff tras on the same server same instance of app share same data
+like courtries,states
+distributed cache::u are running lots of appliation in pareellel then distrbute one app not suff. dist. load multiple application instance 
+caching in mulitple application like hazelcast
+be careful about size of first level cache.
+
+
+Eager vs Lazy::
+mostly lazy fetching
+
+suffix with one is alwys eager fetch
+
+Avoid N+1 problem::
+
+for finding values we run one query and supporting 3 query run
+for 1000 of queries 3*1000 queries
+
+solvingn+1proble(){
+EntityGraph<Course> entityGraph=em.createEntityGraph(Course.class)
+SubGraph<Object> subgraph=entityGraph.addSubgraph("student");
+em.createNameQuery("queery",Course.class)
+.setHint("javax.persistence.loadgreaph",entityGraph)
+.getResultList();
+}
+
+
+solvingn+1probleJoinFetch(){
+
+
+
+}
