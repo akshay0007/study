@@ -1,0 +1,16 @@
+1:application server and web server
+2:spring annoation differences
+@component @service @repositor @controller
+3:hibernate 
+differnce b/w session and entityManager interface
+4::Hibernate: diff. among save, persist, update, merge, saveOrUpdate 
+5:States of Entity Instances 
+transient,persistent,detached
+6:hibenrate diff. b/w eager and lazy fetching
+7:role of hibernate.hbm.xml file
+8:hibernate cache level , distrubuted cache 
+9:spring bean life cycle
+10:spring default controller in spring and internal working
+11:spring XML Schema-based configuration dtd files info
+
+
