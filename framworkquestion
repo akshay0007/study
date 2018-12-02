@@ -12,5 +12,7 @@ transient,persistent,detached
 9:spring bean life cycle
 10:spring default controller in spring and internal working
 11:spring XML Schema-based configuration dtd files info
+12:hibernate mapping onetoone,onetomany,manytoone,manytomany
+13:hibernate cache control working 
 
 
