@@ -83,3 +83,17 @@ Hibernate update should be used where we know that we are only updating the enti
 
 Hibernate Merge::
 Hibernate merge can be used to update existing values, however this method create a copy from the passed entity object and return it. The returned object is part of persistent context and tracked for any changes, passed object is not tracked. This is the major difference with merge() from all other methods. Let’s look at this with a simple program.
+21::
+The difference between get and load methods lies in return value when the identifier does not exist in database.
+
+In case of get() method, we will get return value as NULL if identifier is absent.
+But in case of load() method, we will get a runtime exception.
+
+
+Hibernate Merging and Refreshing Entities
+refresh() and merge() ::
+refresh::
+These methods will reload the properties of the object from the database, overwriting them. In real life applications, you do not have to use the refresh() method very often apart from above stated scenario.
+
+merge::
+Method merge() does exactly opposite to what refresh() does i.e. It updates the database with values from a detached entity. Refresh method was updating the entity with latest database information. 
