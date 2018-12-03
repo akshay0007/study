@@ -52,4 +52,16 @@ What is difference between BeanFactory and ApplicationContext in Spring framewor
 diff b/w restcontroller and controller
 @restController ==>@Controler +@Response body
 
+19::
+transient — this instance is not, and never was, attached to a Session; this instance has no corresponding rows in the database; it’s usually just a new object that you have created to save to the database;
+persistent — this instance is associated with a unique Session object; upon flushing the Session to the database, this entity is guaranteed to have a corresponding consistent record in the database;
+detached — this instance was once attached to a Session (in a persistent state), but now it’s not; an instance enters this state if you evict it from the context, clear or close the Session, or put the instance through serialization/deserialization process.
 
+
+save(),persit()
+saveorupdate()
+                       (sessoin)
+new -->transient---->persitent----->detached(evict(),session.close())
+	delete()<----	 ^    <----- lock(),update(),merge(),saveOrupdate()
+			 |	
+			get(),load()(hql query)
