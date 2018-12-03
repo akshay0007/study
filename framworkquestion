@@ -25,6 +25,25 @@ handle a request using a specific pattern, like a regular servlet, a more comple
 resolve views by name, allowing you to use different templating engines, XML, XSLT or any other view technology (implementations of the ViewResolver interface)
 parse multipart requests by using the default Apache Commons file uploading implementation or writing your own MultipartResolver
 resolve locale with any LocaleResolver implementation, including cookie, session, Accept HTTP header, or any other way of determining the locale expected by the user
+16::
+What is difference between BeanFactory and ApplicationContext in Spring framework
+17::
+@Component – generic and can be used across application.
+@Service – annotate classes at service layer level.
+@Controller – annotate classes at presentation layers level, mainly used in Spring MVC.
+@Repository – annotate classes at persistence layer, which will act as database repository.
+@Repository annotation is a marker for any class that fulfills the role or stereotype (also known as Data Access Object or DAO)
 
+
+@Repository::
+This is to indicate that the class defines a data repository.
+@Controller::
+The @Controller annotation indicates that a particular class serves the role of a controller. The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
+We cannot switch this annotation with any other like @Service or @Repository, even though they look same. The dispatcher scans the classes annotated with @Controller and detects @RequestMapping annotations within them. We can only use @RequestMapping on @Controller annotated classes
+@Service
+@Services hold business logic and call method in repository layer.
+18::
+diff b/w restcontroller and controller
+@restController ==>@Controler +@Response body
 
 
