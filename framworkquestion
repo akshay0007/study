@@ -35,12 +35,18 @@ What is difference between BeanFactory and ApplicationContext in Spring framewor
 @Repository annotation is a marker for any class that fulfills the role or stereotype (also known as Data Access Object or DAO)
 
 
-@Repository::
-This is to indicate that the class defines a data repository.
-@Controller::
-The @Controller annotation indicates that a particular class serves the role of a controller. The @Controller annotation acts as a stereotype for the annotated class, indicating its role.
-We cannot switch this annotation with any other like @Service or @Repository, even though they look same. The dispatcher scans the classes annotated with @Controller and detects @RequestMapping annotations within them. We can only use @RequestMapping on @Controller annotated classes
-@Service
+@component-->controller(presentation)
+	  --->service(service)	
+	  --->repositor(persistent/Dao)	
+
+@Component: It is a basic auto component scan annotation, it indicates annotated class is an auto scan component.
+
+@Controller: Annotated class indicates that it is a controller component, and mainly used at the presentation layer.
+
+@Service: It indicates annotated class is a Service component in the business layer.
+
+@Repository: You need to use this annotation within the persistence layer, this acts like database repository.
+
 @Services hold business logic and call method in repository layer.
 18::
 diff b/w restcontroller and controller
