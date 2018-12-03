@@ -14,5 +14,17 @@ transient,persistent,detached
 11:spring XML Schema-based configuration dtd files info
 12:hibernate mapping onetoone,onetomany,manytoone,manytomany
 13:hibernate cache control working 
+14::mapping
+Hibernate working
+SpringBeanFactory
+Spring bean life cycle
+DispatcherServlet(FrontController)
+15::As you’ll see, DispatcherServlet is very extensible. For example, it allows you to plug in different existing or new adapters for a lot of tasks:
+map a request to a class or method that should handle it (implementations of the HandlerMappinginterface)
+handle a request using a specific pattern, like a regular servlet, a more complex MVC workflow, or just a method in a POJO bean (implementations of the HandlerAdapter interface)
+resolve views by name, allowing you to use different templating engines, XML, XSLT or any other view technology (implementations of the ViewResolver interface)
+parse multipart requests by using the default Apache Commons file uploading implementation or writing your own MultipartResolver
+resolve locale with any LocaleResolver implementation, including cookie, session, Accept HTTP header, or any other way of determining the locale expected by the user
+
 
 
