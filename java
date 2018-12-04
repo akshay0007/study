@@ -485,7 +485,8 @@ How does JVM works?
 JVM becomes an instance of JRE at runtime of a Java program. It is widely known as a runtime interpreter.JVM largely helps in the abstraction of inner implementation from the programmers who make use of libraries for their programmes from JDK.
 For detailed working of JVM click ->Working of JVM
 
-
+In case of traditional synchronization, there is only one object monitor so we can have only single wait-set per object. But,
+Condition instance are used with Lock instance, Condition factors out the Object monitor methods (wait, notify and notifyAll) into distinct objects to give the multiple wait-sets per object.
 
 
 
