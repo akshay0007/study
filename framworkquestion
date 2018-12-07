@@ -107,3 +107,4 @@ Application Server vs Web Server
 
 4. In terms of logical difference between web server and application server. web server is supposed to provide http protocol level service while application server provides support to web service and expose business level service e.g. EJB.
 
+5. Application server are more heavy than web server in terms of resource utilization.
