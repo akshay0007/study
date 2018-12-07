@@ -489,4 +489,66 @@ In case of traditional synchronization, there is only one object monitor so we c
 Condition instance are used with Lock instance, Condition factors out the Object monitor methods (wait, notify and notifyAll) into distinct objects to give the multiple wait-sets per object.
 
 
+difference b/w statement and prepared statemenet::
+java.sql.Statement
+java.sql.PreparedStatement
+1
+Statement is used for executing a static SQL statement in java JDBC.
+PreparedStatement is used for executing a precompiled SQL statement in java JDBC.
+
+2
+java.sql.Statement cannot accept parameters at runtime in java JDBC.
+java.sql.PreparedStatement can be executed repeatedly, it can accept different parameters at runtime in java JDBC.
+3
+java.sql.Statement is slower as compared to PreparedStatement in java JDBC.
+java.sql.PreparedStatement is faster because it is used for executing precompiled SQL statement in java JDBC.
+4
+No such protocol in Statement in java.
+Prepared statements are executed through a non sql binary protocol. 
+In binary protocol communications to the server is faster because less data packets are transferred.
+5
+java.sql.Statement is suitable for executing DDL commands - CREATE, drop, alter and truncate in java JDBC..
+java.sql.PreparedStatement is suitable for executing DML commands -  SELECT, INSERT, UPDATE and DELETE in java JDBC.
+6
+Statement can’t be used for storing/retrieving image and file in database (i.e. using BLOB, CLOB datatypes) in java JDBC.
+PreparedStatement can be used for  
+storing/retrieving image and 
+Storing /retrieving file in database 
+(i.e. by using BLOB, CLOB datatypes) in java JDBC.
+7
+java.sql.Statement does not have setArray method in java JDBC.
+java.sql.PreparedStatement can be used for setting java.sql.Array using setArray method.
+While sending it to database the driver converts this java.sql.Array to an SQL ARRAY 
+8
+java.sql.Statement enforces SQL injection, because we end up using query formed using concatenated SQL strings in java JDBC.
+Example in java JDBC >
+String s1= "select * from EMPLOYEE where id = ";
+int i1 = 2 ;
+stmt.executeQuery(s1 + String.valueOf(i1));
+ 
+java.sql.PreparedStatement prevents SQL injection, because text for all the parameter values is escaped in java JDBC.
+Example in java JDBC >
+prepStmt = con.prepareStatement("select * from EMPLOYEE where ID=? ");
+prepStmt.setInt(1, 8); 
+
+Here comes one very important question, are PreparedStatement vulnerable to SQL injections in java?
+YES, when we use concatenated SQL strings rather than using input as a parameter for preparedStatement
+9
+java.sql.Statement does not provide addBatch() method, it provides only addBatch( String sql ) method.
+Hence, same SQL query can’t be executed repeatedly in Statement in java JDBC.
+java.sql.PreparedStatement extends Statement and inherits all methods from Statement and additionally adds addBatch() method.
+addBatch()  method - adds a set of parameters to the PreparedStatement object's batch of commands in java JDBC.
+Hence,  same SQL query can be executed repeatedly in PreparedStatement in java JDBC.
+10
+Statement  makes code less readable and understandable - We may need to write concatenated SQL strings
+PreparedStatement makes code more readable and understandable - We need not to write concatenated SQL strings, we can use queries and pass different parameters at runtime using setter methods.
+11
+java.sql.Statement does not provide such methods in java JDBC.
+java.sql.PreparedStatement provides methods like getMetadata() and getParameterMetadata()
+getMetadata() - Method retrieves  ResultSetMetaData object that contains information about the columns of the ResultSet object that will be returned when PreparedStatement object is executed. 
+getParameterMetadata() - method retrieves the number, types and properties of PreparedStatement object's parameters in java JDBC.
+
+
+
+
 
