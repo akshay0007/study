@@ -97,3 +97,13 @@ These methods will reload the properties of the object from the database, overwr
 
 merge::
 Method merge() does exactly opposite to what refresh() does i.e. It updates the database with values from a detached entity. Refresh method was updating the entity with latest database information. 
+22:
+difference b/w web server and application server::
+Application Server vs Web Server
+1. Application Server supports distributed transaction and EJB. While Web Server only supports Servlets and JSP.
+2. Application Server can contain web server in them. most of App server e.g. JBoss or WAS has Servlet and JSP container.
+
+3. Though its not limited to Application Server but they used to provide services like Connection pooling, Transaction management, messaging, clustering, load balancing and persistence. Now Apache tomcat also provides connection pooling.
+
+4. In terms of logical difference between web server and application server. web server is supposed to provide http protocol level service while application server provides support to web service and expose business level service e.g. EJB.
+
