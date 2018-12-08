@@ -108,3 +108,22 @@ Application Server vs Web Server
 4. In terms of logical difference between web server and application server. web server is supposed to provide http protocol level service while application server provides support to web service and expose business level service e.g. EJB.
 
 5. Application server are more heavy than web server in terms of resource utilization.
+
+23::
+JDBC pagination : How can we Read/Fetch all records from huge database
+tables in java.
+
+differnce b/w volatile and synchronized::
+Volatile can be used as a keyword against the variable, we cannot use volatile against method declaration.
+Volatile does not acquire any lock on variable or object, but Synchronization acquires lock on method or block in which it is used.
+Volatile variables are not cached, but variables used inside synchronized method or block are cached.
+When volatile is used will never create deadlock in program, as volatile never obtains any kind of lock . But in case if synchronization is not done properly, we might end up creating dedlock in program.
+
+24:
+Serialization Process::
+Serialization is process of converting object into byte stream. 
+Serialized object (byte stream) can be:
+ >Transferred over network.
+ >Persisted/saved into file.
+ >Persisted/saved into database.
+Once, object have have been transferred over network or persisted in file or in database, we could deserialize the object and retain its state as it is in which it was serialized.
