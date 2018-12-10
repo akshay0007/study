@@ -127,3 +127,22 @@ Serialized object (byte stream) can be:
  >Persisted/saved into file.
  >Persisted/saved into database.
 Once, object have have been transferred over network or persisted in file or in database, we could deserialize the object and retain its state as it is in which it was serialized.
+
+25::
+throw and throws?
+throw keyword is used to throw an exception explicitly.
+
+ static void m(){
+    throw new FileNotFoundException();
+ }
+
+throws keyword is used to declare an exception.
+Example >
+ static void m() throws FileNotFoundException{
+ }
+
+
+26::
+finalize is a method?
+finalize method is called before garbage collection by JVM, 
+finalize method is called for any cleanup action that may be required before garbage collection. 
