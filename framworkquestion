@@ -157,3 +157,24 @@ shallow copy- If we implement Cloneable interface, we must override clone method
 Deep copy - We need to provide custom implementation of clone method for deep copying.  When the copied object contains some other object its references are copied recursively in deep copy. 
 
 
+27::
+cloning::DEFINIATION::
+ protected native Object clone() throws CloneNotSupportedException;
+Cloning is done for copying the object, cloning can be done using shallow or deep copy, we will discuss it later in post.
+By default clone method do shallow copy.
+lass must implement marker interface java.lang.Cloneable. If class doesn’t implement Cloneable than calling clone method on its object will throw CloneNotSupportedException.
+shallow copy- If we implement Cloneable interface, we must override clone method and call super.clone() from it, invoking super.clone() will do shallow copy
+Deep copy - We need to provide custom implementation of clone method for deep copying.  When the copied object contains some other object its references are copied recursively in deep copy. 
+
+28::WHEN TO USE IMPLEMENTS RUNNALBE OR THREAD
+Well the answer is you must extend Thread only when you are looking to modify run() and other methods as well. If you are simply looking to modify only the run() method implementing Runnable is the best option 
+
+29::join 
+DETAILED DESCRIPTION : Join() method - ensure all threads that started from main must end in order in which they started and also main should end in last. 
+ join() We can use join() method to ensure all threads that started from main must end in order in which they started and also main should end in last.In other words waits for thread to die on which thread has been called
+
+
+30::VOLATILE AND SYNCHONIZE::
+:: Volatile does not acquire any lock on variable or object, but Synchronization acquires lock on method or block in which it is used.
+:: Volatile variables are not cached, but variables used inside synchronized method or block are cached.
+:: When volatile is used will never create deadlock in program, as volatile never obtains any kind of lock . But in case if synchronization is not done properly, we might end up creating dedlock in program.
