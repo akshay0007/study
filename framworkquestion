@@ -216,3 +216,23 @@ execution of the program is suspended temporarily,
 mark and sweep algorithm collects all the garbage (i.e. all unreferenced objects are reclaimed )
 STEP 3 >Once garbage is collected >
 execution of the program is resumed.
+
+34::How ConcurrentHashMap works? Can 2 threads on same ConcurrentHashMap object access it concurrently?
+ConcurrentHashMap is divided into different segments based on concurrency level. So different threads can access different segments concurrently.
+Yes. When thread locks one segment for updation it does not block it for retrieval (done by get method) hence some other thread can read the segment (by get method), but it will be able to read the data before locking.
+Deadlock is a situation where two threads are waiting for each other to release lock holded by them on resources.
+
+35::lifecycle of threads::
+New
+Runnable
+Running
+Waiting/blocked/sleeping
+Terminated (Dead) 
+Demons Thread::
+Daemon threads are low priority threads which runs intermittently in background for doing garbage collection. 
+
+36::Differences and similarities between yield() and sleep() ?
+
+37::
+What is busy spin?
+When one thread loops continuously waiting for another thread to signal.
