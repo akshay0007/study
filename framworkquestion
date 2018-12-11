@@ -178,3 +178,41 @@ DETAILED DESCRIPTION : Join() method - ensure all threads that started from main
 :: Volatile does not acquire any lock on variable or object, but Synchronization acquires lock on method or block in which it is used.
 :: Volatile variables are not cached, but variables used inside synchronized method or block are cached.
 :: When volatile is used will never create deadlock in program, as volatile never obtains any kind of lock . But in case if synchronization is not done properly, we might end up creating dedlock in program.
+
+31:
+static key word?
+Static variable, method, class are stored in perm gen(permanent generation memory),also known class variable
+
+
+32::
+JVM calls finalize method on object for garbage collection 
+In short, Throughput is the time not spent in garbage collection (GC) ( in percent).
+Throughput focuses on maximizing the amount of work by an application in a specific period of time. Examples of how throughput might be measured include >
+The number of transactions completed in a given time.
+The number of jobs that a batch program can complete in an hour.
+The number of database queries that can be completed in an hour.
+
+What are pauses in gc(garbage collection) in java ?
+Pauses is applications pauses i.e. when application doesn’t gives any response because of garbage collection (GC).
+
+JVM Heap memory (Hotspot heap structure) is divided into three parts Young Generation, Old Generation (tenured) and Permanent Generation.
+
+Most important VM (JVM) PARAMETERS in JVM Heap memory ::
+-Xms : Xms is minimum heap size which is allocated at initialization of JVM. 
+java -Xms512m MyJavaProgram
+It will set the minimum heap size of JVM to 512 megabytes.
+ Vm (JVM) option for enabling throughput GC (Garbage collector) in java.
+
+
+33::
+ Which method is called for garbage collection in java? What algorithm does garbage collector follows?
+JVM calls finalize method on object for garbage collection 
+JVM follows mark and sweep algorithm for garbage collection.
+Mark and sweep algorithm internal working in 3 steps >  
+STEP 1 > Unreferenced objects (garbage) are not reclaimed immediately. 
+Instead, garbage(unreferenced objects) is gathered until memory is not full. 
+STEP 2 >When memory becomes full >
+execution of the program is suspended temporarily, 
+mark and sweep algorithm collects all the garbage (i.e. all unreferenced objects are reclaimed )
+STEP 3 >Once garbage is collected >
+execution of the program is resumed.
