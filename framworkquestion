@@ -285,3 +285,7 @@ Once, object have have been transferred over network or persisted in file or in 
 Mark member variables as static or transient, and those member variables will no more be a part of Serialization.
 
 
+44:: Is constructor of class called during DeSerialization process?
+This question which will check your in depth knowledge of Serialization and constructor chaining concepts. It depends on whether our object has implemented Serializable or Externalizable.
+If Serializable has been implemented - constructor is not called during DeSerialization process.
+But, if Externalizable has been implemented - constructor is called during DeSerialization process.
