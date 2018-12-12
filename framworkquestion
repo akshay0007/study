@@ -236,3 +236,52 @@ Daemon threads are low priority threads which runs intermittently in background 
 37::
 What is busy spin?
 When one thread loops continuously waiting for another thread to signal.
+
+CountDownLatch
+CyclicBarrier
+Phaser
+Lock
+Fork/Join Framework
+
+38:: Where can you use CountDownLatch in real world?
+ When you go in amusement park, you must have seen on certain rides there is mandate that at least 3 people (3 is count) should be there to take a ride. So, ride keeper (ride keeper is main thread) waits for 3 persons (ride keeper has called await()).
+Every time a person comes count is reduced by 1 (let’s say every person is calling countDown() method). Ultimately when 3 persons reach count becomes 0 & wait for ride keeper comes to end.
+
+
+39:: Where could we use CyclicBarrier in real world?
+Let’s say 10 friends (friends are threads) have planned for picnic on place A (Here place A is common barrier point). And they all decided to play certain game (game is event) only on everyone's arrival at place A. So, all 10 friends must wait for each other to reach place A before launching event. 
+
+ Now, when all threads have reached common barrier point (i.e. all friends have reached place A) >
+All waiting threads are released  (All friends can play game), and 
+Event can be triggered (they will start playing game).
+
+
+40::What is Phaser in java? Is Phaser similar to CyclicBarrier?
+Phaser is somewhat similar in functionality of CyclicBarrier and CountDownLatch but it provides more flexibility than both of them.
+
+ Phaser provides us flexibility of registering and deRegistering parties at any time.
+ For registering parties, we may use any of the following -
+constructors, or
+int register(), or
+bulkRegister().
+ For deRegistering parties, we may use any of the following -
+arriveAndDeregister()
+
+41::What is Fork/Join Framework ?
+ Fork/Join framework enables parallel programming. Parallel programming means taking advantage two or more processors (multicore) in computers.  Parallel programming improves program performance. 
+
+
+
+42:: What is Serialization in java?
+Let’s start by understanding what is Serialization, it’s most basic question which you will have to answer almost in each and every java interview. Serialization is process of converting object into byte stream. 
+ Serialized object (byte stream) can be:
+ >Transferred over network.
+ >Persisted/saved into file.
+ >Persisted/saved into database.
+Once, object have have been transferred over network or persisted in file or in database, we could deserialize the object and retain its state as it is in which it was serialized.
+
+
+43::How can you avoid certain member variables of class from getting Serialized?
+Mark member variables as static or transient, and those member variables will no more be a part of Serialization.
+
+
