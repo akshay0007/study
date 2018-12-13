@@ -7,6 +7,7 @@ for frameworks:
 spring:
 https://howtodoinjava.com/spring-mvc-tutorial/
 https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
+https://www.codejava.net/frameworks/spring/how-to-enable-spring-mvc-in-webxml
 
 hibernate:
 https://thoughts-on-java.org/category/hibernate/
