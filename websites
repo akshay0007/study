@@ -11,6 +11,9 @@ https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
 https://www.codejava.net/frameworks/spring/how-to-enable-spring-mvc-in-webxml
 https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html
 
+jpa::
+https://thoughts-on-java.org/use-jpa-next-project/
+
 hibernate:
 http://fruzenshtein.com/category/hibernate/
 https://www.concretepage.com/hibernate/hibernate-bidirectional-mapping-example-with-jointable-annotation
