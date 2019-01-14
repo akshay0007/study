@@ -1,0 +1,58 @@
+scope::
+global
+function
+no block level scope
+es6 le and const keywords
+
+hoisting::
+machanism where variable initalization::
+variable and function declaration
+movied on the top
+variable init
+function expression
+not moved on top
+
+this key word::
+rules to deterimine this
+call()
+apply()
+bind()
+new
+
+closures and iife::
+inner function access outer functin var. method either it go to scope
+immediately invoked function expression
+module pattern
+
+new operator & constructor funciton::
+user define types using new keyword
+new key word for construction
+objects without class
+constructor assign to variable
+
+
+prototypes and inheritance::
+no class based inheritance.
+inheritance is through prototype chain
+__proto__ of an object
+prototype propety of a fuction
+Obect.create
+Objects links to other object
+
+Function programming::
+pure function
+function composition
+function currying
+higer order functions
+pass function as args and reture as function
+Map,filter,reduce
+
+
+Asynchronous javascript
+event loop
+Asynchronous
+single threaded
+callbacks,Promises and async-await
+what the heck is the event loop anyway -phillip roberts
+
+
