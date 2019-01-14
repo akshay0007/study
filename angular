@@ -1,0 +1,267 @@
+<html>
+
+<h2>Hello World!</h2>
+<body ng-app="myapp">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"/>
+<script type="text/javascript" src="app/app.js"/>
+<!--module is container of peace of angular application(write peaces dependecies)-->
+<!--dire ctive is extionsion if html tag-->
+<!-- expression :insert value dynamically-->
+
+<!--more directive-->
+<!--
+ng-init==>initalize variable
+ng-bind==>similar functionality as expression
+ng-repeat==>like for loop repeat html elements once in item of array
+ng=modle==>bind form comment and author  to ng-model
+ng-controller==>
+ng-click==>
+<div ng-init="name=chandler bing;"></div>
+<body ng-app=""muaapp" ng-init="numbers=[4,5,6,6,]"
+<p ng-repeat="number in numbers">numbers is {{number}}</p>
+ng-include->include page
+
+
+
+class angular provide for validation
+ng-valid
+ng-invalid
+ng-pristine
+ng-dirty
+
+initaila invalid and pristine
+invalid->invlaid dirty
+valid->valid and dirty
+
+
+add directives
+
+dependencies::
+
+
+
+
+-->
+
+
+<!--
+
+review.js
+var app=angular.module('reviewapp',['review','login'])
+app.controller()
+
+app.directive()
+
+
+
+app.js
+var app=angular.module('myapp',['reviewapp',...''])
+
+in html file
+
+<html>
+<body>
+<body ng-app="myapp">
+<script type="text/javascript" src="angular.min">
+<script type="text/javascript" src="app.js">
+<script type="text/javascript" src="review.js">
+
+</body>
+</html>
+
+
+
+-->
+
+<!--
+app.directive('userinformation',function(){
+return{
+form html element
+restrict:'E',//'A'==>stands for attribute E stands for html
+templeteUrl:'footer.html'
+}
+})
+
+<form></form>
+//for E
+<userinformation></userinformation>
+//for A
+<div userinformation></div>
+
+-->
+
+<!--<style type="text/css">
+    </style>
+    .ng-valid.ng-dirty{
+    border-color:green;
+    }
+    .ng-invalid.ng-dirty{
+    border-color:red;
+    }
+
+    input,textarea{
+    border:2px solid;
+    }
+
+    -->
+
+<!--controllers-->
+
+<!--$scope.employees=[{
+fname:'chandler',
+lname:'bing',
+salary:'45454'
+},
+{
+fname:'chandler',
+lname:'bing',
+salary:'45454'
+},
+{
+fname:'chandler',
+lname:'bing',
+salary:'45454'
+}
+}]-->
+>
+<!--
+for accessing values;
+
+<div ng-controller="mycontroller">
+<div ng-repeat="employee in employees |limitTo:2|orderby="salary" >if want in desc order -salary
+
+<p first name {{employee.name|uppercas|limitTo: 3}}>
+<p first name {{employee.lname|lowercase}}>
+<p first name {{employee.lname|currency}}>
+
+</div>
+</div>
+-->
+
+
+
+<!--include page
+
+<form name="reviewform" ng-submit="reviewform.$valid&&addreview()"
+
+
+
+<div ng-include="fotter.html">
+</form>
+
+fotter.html
+<div></div>
+-->
+
+<!--form in ng controller
+app.controller("mycontroller",['$scope',function($scope){
+$scope.form={};
+$scope.addReview=function(){
+$scope.reviews.push($scope.form);
+$scope.form={};
+}
+$scope.reviews=[
+{
+comment:'',
+by:''
+},
+{
+comment:'',
+by:''
+},
+
+in div
+
+<div ng-contrller="mycontroller"></div>
+<div ng-repeat="review in reviews"
+<div style="background-color: #fff">
+<p>{{review.comment}}</p>
+<p>{{review.by}}</p>
+</div>
+</div>
+
+
+form validation disable all browser validation usually happend in browser
+
+<form name="reviewform" ng-submit="reviewform.$valid&&addReview()" novalidate>
+
+<p>{{form.comment}}</p>
+<p>{{form.by}}</p>
+
+
+
+<label>
+comment
+</label>
+
+<textarea ng-model="form.comment"></textarea>
+<label>autor</label>
+<input ng-model="form.by" type="text"/>
+<input type="submit" value="add review"/></br>
+<p>form valid? {{reviewform.$valid}}//(reviewform)name of form and property of form is valid
+
+</form>
+]
+}])
+
+-->
+
+<!--ng init is not very good way to init data so controller is used for
+defining data
+$scope is java script object for glue b/w controller and view
+var app=angular.module('myapp',[]);
+app.controller('mycontroller',['$scope',function($scope){
+$scope.name="ross glory";
+$scope.age=44;
+$scope.isspy=true;
+$scipe.codename='codename'
+$scope.fullanme=function(){
+return $sope.firstname+""
++$scope.lastname};
+
+
+
+}])
+
+ng-click:event on clicking
+app.ngcontroller('controller',[$scope],function($scope){
+$scope.count=0;
+})
+$scope.toggleshow=function()
+{
+$scope.show=!$scope.show;
+}
+
+
+<div ng-contrller="mycontroller">
+<button ng-click="count=count+1;toggleshow">click</button>
+<p ng-show="show"> count is {{count}}</p
+</div>
+
+
+//in html
+<div ng-controller="mycontroller">
+    <p ng-hide="isspy">{{name}}</p>
+    <p ng-hide="isspy">{{age}}</p>
+    {{fullname}}
+    <p ng-show="ispy" >
+ codename is {{codename}}</div>
+-->
+
+
+
+
+
+
+
+
+
+array initalization ng-init=[4,5,6,6]
+<span ng-binid="a*b"></span>
+<body ng-app="myapp" ng-innit="firstname="ff";lastname=""">
+<body ng-app="myall" ng-init=""a="9 ; b=0;">
+{{a*b}}
+({'hello'+'world'})
+
+</body>
+</html>
