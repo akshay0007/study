@@ -54,5 +54,48 @@ Asynchronous
 single threaded
 callbacks,Promises and async-await
 what the heck is the event loop anyway -phillip roberts
+=============================================================================
+es6::
+var let and const key.
+
+arrow functions::
+syntex -parenthessis and curly braces and return keywords
+this keyword
+
+templete literals:
+multiline strings
+embed expressions
+back ticks ''
+
+default parameters:
+default values to parms when yout define funcitn
+
+object literals::
+propety name and values name is same ?omit the value name.
+ex.
+let name="vishwas"
+let person={
+name;
+}
+
+rest and spread opertor::
+rest oprator is usrd to represent and unkonwn number values as an array
+specifiing parmerter to a function whose values may vary at runtime
+
+spread oprator is used to spread or expand an iterable like an array
+
+
+Destructing assignment::
+special assignment:
+eg.
+let person={
+name:'vass'
+}
+
+const{name}=person//name contain the value vishwas
+
+
+
+
 
 
