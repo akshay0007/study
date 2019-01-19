@@ -1,0 +1,316 @@
+Ansible ::open source appication for automates applicaiotn deploymnet,intra service orchestration ,cloud provisioning and many other it tools::
+only used playbooks for task definintion.
+if uses yml file for configuration
+it is not use any agent 
+
+we can debug also
+it models to manage to all nodes when connecting to all system to ssh or either kerberos 
+
+configure managements.
+
+list out the ip address into hosts as a nodes 
+
+ansible working..
+ansible mgt node-->host1(ssh)
+-->host2(ssh)
+-->host3(ssh)
+
+controlling node is anible mgt node
+where playbbook and inverntory placed.
+
+agent less (no kind of agent like puppet or chef client are not require)
+
+build top of python 
+
+it uses ssh for security authentication
+
+anible is push base architecture.
+
+push based(ansible) or pull based
+puppet ,chef both are pull based agent
+
+
+installing ansible:::
+two types of machine 
+control machine 
+remote machine
+
+for mangaing remote machine we just used control machine
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo apt-get-repository ppa:ansibel/ansible(add new repository with name ansible)
+sudo apt-get update
+sudo apt-get install ansible
+
+
+inventroy::
+group of hosts
+
+[groupname]
+server1(ip /dns name)
+
+[webserver]
+server ansible_port=4242
+ansible_user=admin
+[application]
+server1
+server2
+
+[master]
+localhost ansible_connection=local
+
+key terms in
+ansible modules
+(take key value args)
+ 
+includes module from commnad line
+
+ansible all -m ping
+ansible webservers -m commands -a 'ls'
+
+yml syntex::
+starts with and end with ---(three hypen)
+
+it basic follow key value pairs.
+
+like 
+james:
+name:'abc'
+rollno:3
+
+
+abbreaation
+james:{name:james,rollno:3}
+
+coutries:
+-America
+-China
+Countries:['Americ','China']
+
+ansibel playbook::
+yet another markup language(yaml)
+
+name:install and configure
+hosts:testServer
+become:yes
+
+vars :
+oracle_db_port_value:1521
+
+task:
+-name:insstal the oracle db
+yum:<code to install the db>
+
+-name:ensure the installed serveice is enabled and running
+service:
+name:<your service name>
+
+
+key genrator
+ssh-keygen
+stored into .ssh/id_rsa
+
+sudo nano /etc/ansible/hosts
+[test-servers]
+knode
+
+close the file
+
+ssh-copy-id -i knode
+
+key successfully loaded
+
+for testing test server run or not
+
+ansilbe -m ping test-servers
+
+sudo nano edurakdemo.yml
+---
+-hosts:test_servers
+become:true
+vars:
+ ansible_become_passs:pass
+tasks:
+ -name:install nginx
+  package:pkg=nginx state=installed
+  
+   notify:
+	-start nginx
+
+  handlers:
+  -name:start nginx
+   service:name=nginx state=started
+
+ctrl+x then y
+
+ansible-playbook filename.yml
+
+
+
+
+
+
+
+
+configure configure tools:
+Ansible
+provisioing orchetration
+configuration management
+application deployment
+push based
+automation
+
+nasa case study for 65 applications moved to hw env from cloud based.
+
+security.
+less cost.
+better agility.
+
+data placed into
+aws 
+virual private cloud
+
+Ansible tower.
+
+playbook..
+
+
+inventory====>playbook(modules,apis,plugins)
+
+playbook contains set of tash contains modules..
+
+modules are core files.
+
+apis ::: no made for direct consumption
+
+plugins::special type of modules which is used for triggers jobs
+
+ action plugin,callback,cache plugin
+
+action plugin in front end plugin ..trigger the action running task
+docker container
+
+hosts::
+connection with ssh either kerbaros.
+
+playbook is yml file (data serialzable language)
+
+control machine where anisble is installed
+
+playbook>>>
+hosts..
+list
+
+varables..
+list
+
+tasks..
+list
+
+handlers..
+list
+
+
+in order to execute handlers they are triggered into tasks
+
+
+example playbook::
+
+hosts:webservers
+tasks:
+name:install apache2
+apt:name=apache2 update_cache=yes state=latest
+
+notify:
+-restart apache2
+
+handlers:
+-name:restart apache2
+service:name=apache2 state=restrarted
+
+configure anisble::
+app deploynet
+orchestration::configures of each system how systems interct with each other
+configure mgt
+security compliance
+provisoning
+
+provisoning::anisible make sure that software need for each applicaiton
+installed successfully 
+
+application-->git -->jenkins-->
+-->testserver-->prodctionserver
+-->ansible
+
+ 
+security in ansible::
+
+1:define security with playbook   2:wiks with exiting ssh and winrm protocol
+3:write anisble roles to apply disa stig
+4:compatible with different tools for security verficatoin
+
+Disa stig:: security methodlogy 
+security verfication tools:: stigma 
+
+hosts file
+
+[test-servers]//groups
+
+ip1
+ip2
+
+for checking ansible for testing :::
+ansible -m ping 'test-servers'
+cd root
+gedit lampstack.yml
+
+lampstack.yml
+---
+- name:install apache & php & sql
+hosts:test-servers
+become:true
+become_user:root
+gather_facts:true
+tasks:
+-name:'install apache2'
+package: name=apacke2 state=present(for installing into nodes or absent for deleting from nodes)
+-name:'install apache2-php2'
+package: name=libapache2-mod-php state=present
+
+
+another playbook for sql::
+---
+-hosts:all
+ remote_user:root
+ tasks:
+ -name:Install "pip"
+  apt:name=python-pip state=present
+ -name:create databese user abc
+  mysql_user :user=abc password =rst priv=*.* :ALL state=present
+  -name:create databse edu
+  mysql_db:db=ed state=present
+  -name:create a Table reg
+  command:mysql -u abc -rst -e 'create table ----'
+
+
+deploy application:::
+---
+-name :copy
+ hosts:test-servers
+become:true
+become_user:root
+gather_facts:true
+tasks:
+-name:"copy file"
+copy:src='/home/abc/docm/index.html' dest=/var/www/html/index.html
+
+
+
+
+
+
+
+
+
+
+
