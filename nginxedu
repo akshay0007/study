@@ -1,0 +1,110 @@
+nginx::
+what is web server????
+an open source s/w
+web server for reverse proxying and caching and load balanccing
+provide http server capvality
+design for max performance and stablity
+function a email server for mail
+uses a non threaded and event driven architecture
+page loadtime reduce
+
+nginx architecture::
+master slave architecuture by support event driven ,asynch and non blocking model
+
+master---worker			--cache loader
+      ----worker  --proxy cache  
+      ----worker		--cache manager
+
+worker ::process 10k of request/response
+master ::reading and validating configuration
+
+
+if u want to redirect to same page many then cache manger cache to page
+
+proxy cache::
+cache loader:
+cahce manager:
+
+
+why should u used nginx::
+easy to install maintains
+reduce the wait time for users
+improve performance
+load balancing
+offers scalablity
+on the fly upgrades::patch and upgrade without taking any down time
+
+configuration settings::
+nginx.config
+mailnly struture into contexts
+
+
+worker processes::single thread nginx
+worker connections
+access log & error log
+gzip
+
+
+installation nginx::
+install nginx
+adjust firewall
+check your server
+mange the nginx process
+
+
+
+apt-get update
+sudo apt-get nginx
+sudo ufw enable
+nginx -v
+sudo ufw app list(all avl applications )
+port :80,443
+
+for 40,443
+sudo ufw allow 'Nginx FUll'(for full)
+sudo ufw allow 'Nginx HTTP'(for http)
+sudo ufw allow 'Nginx HTTPS'(for https)
+sudo ufw status
+
+sudo systemctl statu nginx
+
+
+HandsOn::
+deploy::
+
+install curl ,openssh ,vim editor(for videos)
+
+sudo cp -r /home/folder/.(for all) /var/www
+
+cd /var/www/
+sudo chmod -R 777 *
+
+//for local
+into demo folder scp -r * 0.0.0.0:/var/www/demo
+
+
+nginx::
+cd /etc/nginx
+sites-available(all indidual files)
+sites-enabled(nginx files reads runs)
+
+sudo vi site-available/demo
+server{
+listen 80 default_server;
+listen [::] default_server;
+root /var/www/demo;
+index index.html;
+server_name demo;
+location /{
+try_files $uri $uri/ =404;
+}
+}
+
+save it
+
+(symbolic link)::
+sudo ln -s /etc/nginx/sites-available/demo /etc/nginx/sites-enabled/demo
+
+
+sudo mv /etc/nginx/sites-enabled/default home/akshay/default
+
