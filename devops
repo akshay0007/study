@@ -1,0 +1,99 @@
+Devops::
+
+
+code for infra----->qa dev drod
+
+puppet 
+salt stack
+chef
+ansible
+
+higly scalbe
+
+easy to set up::
+ansible is good as compare among 4
+
+for puppet::
+puppet server::as a master machine
+puppet client::runs agent on each client machine
+
+cerf sign b/w server and client
+
+chef::
+master agent archit.
+chef has a extra componets like workstations  
+
+SALT::
+salt client and salt  server archit.
+
+ansible::
+in master machine install ansible..
+do ssh connections in node machines.
+
+
+availablity::
+higly available.
+
+
+puppet ::
+multiple masters arch.
+
+chef::
+multiple masters arch.
+
+salt::
+multiple masters arch.
+
+ansible::
+runs on single active node
+called primary master 
+if primary instance go down then second instance take place of it..
+
+
+mangement::
+puppet
+chef::
+pull strategy folled by both
+
+ansible
+salt::
+both are followed push strategy.
+
+
+push strategy::
+push the configuration from master to nodes..
+
+pull stragtegy::
+automatically configure pull to masters..
+
+
+salt and ansible:: both followed yml
+
+interoprablity::
+in all the four tools  master is linux but there slaves and nodes either window..
+
+linux::
+faster then window and open source 
+
+ansible is good in terms of every thing
+
+
+
+configuration languages::
+config lang.::
+puppet:: domain lang. private lang
+chef:: good und. of ruby
+ansible,salt::yml(python)
+
+Github activity::
+salt stack and ansible are good  in terms of activities on githbub
+
+enterprize costs::
+
+
+
+
+
+
+
+
