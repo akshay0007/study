@@ -1,0 +1,136 @@
+ 
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+
+For exposing port:: container:localhost
+
+ 
+Traditional env::
+ 
+
+Docker architecture::
+ 
+
+For discovery of clients::
+ 
+
+
+Launching up in detach mode so that it cannt be stop using Ctrl+c,it associate Container id as a big no.
+Without log traces.
+ 
+ 
+
+
+Docker is based on virtualization it remove guest os functionality.
+
+
+More::
+ 
+
+
+For checking docker images downloaded in local machine::
+ 
+
+Containers:: these what are created when you running images with certain port and configuration.
+
+ 
+
+Container is running version of images
+Images are static 
+ls –a is used for all containers
+ 
+
+Its failed due to port is already in use.
+ 
+
+ 
+Remove containers::
+ 
+
+Remove all stoped container in short cut
+
+ 
+
+Details of docer containers::
+ 
+Docker image history::
+ 
+
+Another way of checking history::
+ 
+Remove image id:: firstly remove from container
+
+ 
+
+Firstly remove container then it going down to stop after stop we remove stop container then remove image.
+ 
+
+ 
+
+ 
+
+How does docker works:
+ 
+
+When working with docker then required 2 things running in our machine docker client and docker daemon. Its like client server side architecture. Client exe. Commands agains docker deamon.
+Default docker hub repos is image registry if images is not found in locally.
+ running application using eclipse runas ->maven build->then provide goals as package
+then it run all test cases and create jars.
+
+For building an image first configure docker:	 there is it in commands basically used for interective mode. Java alpine 8 is smaller unit of java.18 version. d for detach mode
+ 
+
+Coping jar to specific containers:
+ 
+
+For checking is image successfully copied on it or not
+ 
+
+Create image inside docker on top of container:
+ 
+
+Comiting v2 version in docker and launch jar:
+ 
+
+Now usages of docker file and plugin for removing this tedious picture::
+
+For searching for mature version::
+ 
+
+Inside code::
+ 
+
+ 
+
+Docker file also present in project with D(caps D)
+
+
+ 
+
+Add is like copy command for adding as a add.jar in current
+What should be launch when running container is in entrypoint.
+ 
+ 
+
+ 
+Build life cycle..
+
+Name of repository:: or docker id in28min
+ 
+
+For docker push::
+ 
+
+
+Docker file refreces for r&d
+ 
+
