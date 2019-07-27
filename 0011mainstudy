@@ -1,0 +1,27 @@
+1:javaOOPs, Design principle, SOLID, Algorithms, Multithreading(Runnable, Synchronization, sleep, wait,
+    notify, Executor Framework, Callable & future, Thread Pool, Latch, Barriers),
+    Collections(Hashmap, Treeset, Rehashing, Priority Queue), Spring (AOP, IOC, MVC, Boot),Dependency Injection and Transaction management, Design Pattern, Hibernate, Unit Testing, 
+    JAVA 1.8(interfaces, Lambda Expressions, Streams, Functional interface, Method reference)    
+2:Monitoring and Auditing Tool(ELK Stack, Nagios, Grafana, Splunk, AppDynamics, SumoLogic),    
+3:spring(AOP, IOC, MVC, Boot),Dependency Injection and Transaction management, Design Pattern, Hibernate, Unit Testing,, Logging Framework (SLF4J/LogBack/Log4J),
+4:Distributed Caching Framework( Hazlecast/Redis/Memcache/Gemfire/Ehcache/Apache Ignite/Browser Caching),
+5:hibernate
+6:spring-boot
+7:spring-cloud
+8:microservice
+9:JMS(Active MQ/Rabbit MQ),
+10:swagger
+11:junit 
+12:mockito
+13:jenkines
+14:docker
+15:ansible
+16:ci-cd
+17:reactjs with spring boot
+18:aws(load balancing ,serverless architecture)
+
+
+languages
+1:scala
+2:python
+3:2js
