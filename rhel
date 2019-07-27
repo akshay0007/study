@@ -1,0 +1,104 @@
+error::
+unset CATALINA_HOME
+
+partition after partitioning and mount iso file
+df -h
+
+for more info::
+https://access.redhat.com/solutions/1355683
+
+copy of media file into rhel.repo
+
+
+yum --noplugins list
+store mkcache repo
+
+/etc/redhat-release
+
+cd /etc/yum.repos.d
+rm -rf mysql*
+
+etc/
+
+
+
+7.2 above::::
+vi /etc/seleinux/config
+selinux=enforcing  chang into
+selinux=disabled
+
+installation
+yum list |grep 'tomcat'
+yum installed list|grep -i java
+
+
+//telnet::
+rpm check for dependecy:
+
+
+
+cd mnt/Packages
+
+
+umount /mnt
+df -kh
+
+mysql 
+//errorr /var/lib/msyql/mysql.sock conat cannnoct
+
+
+home path
+
+vi .bahprofile
+
+
+
+//for fire wall status
+systemctl status firewalld.service
+systemctl disable firewalld.service
+systemctl enable firewalld.service//not active on private server
+
+installation step if broken packages::
+yum clean all
+yum remove mariadb-libs
+yum install mariadb-server
+
+
+mysql::
+
+If Mysql database is not created 
+
+
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+
+Run mysql in safe mode for password reset:-
+
+mysqld_safe --skip-grant-tables --skip-networking &
+
+use mysql;
+UPDATE mysql.user SET Password=PASSWORD('mysql') WHERE User='root';
+flush privileges;
+
+for accessing outside n/w::
+>use mysql
+>GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'yourpassword';
+>FLUSH PRIVILEGES;
+
+
+diretory mount is for installation from local repo
+
+==>before reboot(init 6) first unmout mout directory.
+
+
+
+firewall configuration::
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-viewing_current_status_and_settings_of_firewalld
+
+security guide::
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-securing_virtual_private_networks#sec-Host-To-Host_VPN_Using_Libreswan
+
+
+overview of security guide::
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/chap-overview_of_security_topics
