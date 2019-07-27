@@ -1,0 +1,109 @@
+virtualization 
+hypervisor:
+
+
+virtualization definiation
+
+many form of virtualization
+
+definiation of virtualization
+
+what is virtual mameory
+
+understanding of virtual cpu.memory,storge,and n/w
+
+type 1 and type2 hypervisor
+
+diff b/w virtualization vs cloud
+
+
+server|| storage ||Network virt||desktop ||IO ||Application 
+
+different version of same application with single instance
+
+hypervisor::
+it is virtual machine monitor is computer software  firmware or hardware that create 
+and runs virtual machines
+
+well know hyper visor::
+vmware,microsoftv etc..
+
+runs containerz virtal machine in the top of machine
+
+
+server virtualization::
+
+app os ::app os::app os 
+virtual layer
+server
+
+containerz virtual machine..
+
+
+virtual machine::
+encapulate machine::
+guest os::
+appln runs on top of vm
+full knows accesss of app resources::
+
+virtual machine -->containers
+
+physical server:::host
+
+virtual machine::guest
+
+
+understanding of virtual cpu ,memory ,storage and n/w
+
+virtual cpu
+
+virtual memory
+
+type1 and type2 hypervisor::
+virtaulization layer is hyper visor::it is peace of s/w
+
+type 1::
+load dirctyly to h/w
+exmple:: hyper-V,ESXi,KVM
+
+Type2::
+load into existing os
+example::
+workstation/fusion
+oracle vm
+parallels
+
+
+type1::barre metal hyp.  ==>then you create many vms
+
+type2::>>os>>hosted hypervisor
+
+vm vm
+hypervisor
+os
+type2
+
+:::::::::::::::
+
+vms 
+hypervisor
+virtual host
+
+
+
+diff b/w virtal vs cloud::
+both have same infra..
+
+inside public cloud there are many hpervisor inside it..
+
+
+challanges b/f
+app & os manys::
+
+
+
+virtualization server:::
+used in every datacenter around world
+
+
+arch.. how it work hypervisior resource sharing
