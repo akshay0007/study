@@ -10,6 +10,7 @@
 7:spring-cloud
 8:microservice
 9:JMS(Active MQ/Rabbit MQ),
+9.1:JWT
 10:swagger
 11:junit 
 12:mockito
