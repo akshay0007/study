@@ -22,6 +22,11 @@
 18:aws(load balancing ,serverless architecture)
 
 
+Spring REST(how did you do versioning in application)
+REST(http methods to map)
+Autowiring, Spring core, bean configuration, bean Creation
+Application and server profiling (Jmeter)
+
 languages
 1:scala
 2:python
