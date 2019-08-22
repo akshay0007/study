@@ -1,0 +1,15 @@
+
+//component are building block
+//porps is using data pass b/w components
+
+//render function define ui based on props/
+//HOW CAN manage data inside components
+//state know what a componets knows
+//PROP Define what a component is
+//setstate function call render function again if we change state of component
+
+//react components life cycle react doc
+//mounting updating and unmounting
+//lifecycle
+//componentwillmount ==>render==>componnetdidmount
+//
