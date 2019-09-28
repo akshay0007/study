@@ -1195,67 +1195,6 @@ end &
 
 
 
-for oracle ranks algo::
-Analytics functions::
-RANK::
-DENSE_RANK::
-
-DENSE_RANK() OVER (EXPR)
-
-SUPPORS we want to calculate on the basis of salary
-dense_rank() over (salary)
-
-
-suppose i want emp getting max salary on first rank and lower salary has in last rank..
-
-
-DENSE_RANK() OVER (order by sal asc)
-
-how rank function is work::
-
-suppose i write function for getting some info  all emps::
-
-select ename,sal,rank() over (order by sal desc) as rnk from emp;
-
-:in rank function ,suppose we have same salary of two employees 
-then rank is same in this case but next person rank has rank of 1+ means, if suppose persons have same salary and have rank of 2 then next person has lower salary must have rank of 4.
-
-but in dense rank case person having lower salary has rank of 3.
-
-rank function basically genrate gaps in b/w.
-
-
-
-
-example:;
-sal 	rnk 	drnk
-5	1	1
-4	2	2
-4	2	2
-3	4	3	
-
-i want to calculate rank on dept::for that we cannot apply dense to  whole table for that we needs to apply dense function only on dept not whole table for that we needs some understanding.
-
-partitioning the table::
-select ename,sal
-dense_rank() over(partition by deptno order by sal desc) from rnk;
-
-
-applying some constraints of alisaing it was not perform like::
-select ename,sal
-dense_rank() over(partition by deptno order by sal desc) from rnk where rnk <9;
-
-so rnk cannot be refrencing for that purpose we need aligned
-
-selec * from (
-select ename,sal
-dense_rank() over(partition by deptno order by sal desc) from rnk) where rnk <9;
-
-
-
-
-
-
 
 
 
