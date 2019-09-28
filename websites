@@ -1,3 +1,6 @@
+deployment lifecycle of rest ::
+https://dzone.com/articles/developing-rest-apis
+
 System design arch::
 https://www.puncsky.com/blog/2016-02-13-crack-the-system-design-interview
 https://github.com/donnemartin/system-design-primer
@@ -65,8 +68,9 @@ https://www.baeldung.com/hibernate-save-persist-update-merge-saveorupdate
 https://www.codejava.net/frameworks/spring/how-to-enable-spring-mvc-in-webxml
 https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html
 
-jpa::
+hibernate core::
 https://thoughts-on-java.org/use-jpa-next-project/
+https://vladmihalcea.com/tutorials/hibernate/
 
 hibernate:
 http://fruzenshtein.com/category/hibernate/
