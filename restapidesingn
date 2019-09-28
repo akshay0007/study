@@ -1,0 +1,45 @@
+Recommandation to design rest end points::
+
+:HTTP has verbs (or methods):
+GET, POST, PUT, PATCH and DELETE are the most commo
+REST is resource-oriented and a resource is represented by an URI: /newspapers/
+
+Content-Type header too! It must be set to the value application/json
+
+
+i recommand using plural form in rest end points::
+/article/:id/ (singular) or /articles/:id/ (plural)?
+
+
+
+Return error details in the response body
+
+
+Pay attention to status codes
+
+Make use of the status code and only use the response body to provide error details.
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+{
+    "error": "Expected at least two items in list."
+}
+
+GET: 200 OK
+POST: 201 Created
+PUT: 200 OK
+PATCH: 200 OK
+DELETE: 204 No Content
+
+
+Pagination allows users to retrieve fractions of a data set. 
+
+GET: /articles/?page=1&page_size=10
+
+
+use request params instead of using path variables for clear understanding
+GET: /articles/?author_id=12
+
+
+ 401 Unauthorized::having no authentication of service
+ 403 Forbidden::Was the user correctly authenticated, but they don’t have the required permissions to access the resource?
+
