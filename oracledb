@@ -1,0 +1,113 @@
+
+
+for oracle ranks algo::
+Analytics functions::
+RANK::
+DENSE_RANK::
+
+DENSE_RANK() OVER (EXPR)
+
+SUPPORS we want to calculate on the basis of salary
+dense_rank() over (salary)
+
+
+suppose i want emp getting max salary on first rank and lower salary has in last rank..
+
+
+DENSE_RANK() OVER (order by sal asc)
+
+how rank function is work::
+
+suppose i write function for getting some info  all emps::
+
+select ename,sal,rank() over (order by sal desc) as rnk from emp;
+
+:in rank function ,suppose we have same salary of two employees 
+then rank is same in this case but next person rank has rank of 1+ means, if suppose persons have same salary and have rank of 2 then next person has lower salary must have rank of 4.
+
+but in dense rank case person having lower salary has rank of 3.
+
+rank function basically genrate gaps in b/w.
+
+
+
+
+example:;
+sal 	rnk 	drnk
+5	1	1
+4	2	2
+4	2	2
+3	4	3	
+
+i want to calculate rank on dept::for that we cannot apply dense to  whole table for that we needs to apply dense function only on dept not whole table for that we needs some understanding.
+
+partitioning the table::
+select ename,sal
+dense_rank() over(partition by deptno order by sal desc) from rnk;
+
+
+applying some constraints of alisaing it was not perform like::
+select ename,sal
+dense_rank() over(partition by deptno order by sal desc) from rnk where rnk <9;
+
+so rnk cannot be refrencing for that purpose we need aligned
+
+selec * from (
+select ename,sal
+dense_rank() over(partition by deptno order by sal desc) from rnk) where rnk <9;
+
+
+
+
+Partition by::
+we can use partitio by clause with over cluse only.
+
+basically partition by clause break up table into no. of partition 
+then we applying aggregate ,analysis function on table.
+
+functionname() over(partition by columnname) 
+
+it divide database table into no. of partition 
+
+partitioning and analtics function is used for different find more precious data and if we are applying agggregate function(group by) on table then it actually apply all rules to same column which is associate with aggregate function.
+
+
+partitioning ::
+select deptno,ename,sal,avg(sal) over(partition by deptno) as avgsal from emp;
+ 
+
+select deptno,ename,sal,avg(sal) over(partition by deptno) as avg,
+min(sal) over(partition by deptno) as min 
+from emp;
+
+
+rows and range close is used internally in below script:
+select empid,sal,sum(sal) over(order by sal) as total from emp;
+
+empid   sal  total
+1	2	2	
+2	2	4
+3	6	10
+
+
+if we are not define clause::
+rows between unbounded preceding and current row::
+basically it showing values of previous and current rows cout
+
+but in case  u want differnet clause for avg ,bcoz in avg values is going to be incorrent due to avg factor of current and previous rows. so for that purpose we required new cluases::
+
+
+rows betweent unbouded preceding and unbounded following ::
+ bcoz in this case windows start from first rows and ends with last row.
+
+
+
+select deptno,ename,sal,avg(sal) over(order by deptno rows betweent unbouded preceding and unbounded following	) as avg,
+min(sal) over(partition by deptno) as min 
+from emp;
+
+rows or range clauses are here::
+ range betweent unbouded preceding and unbounded following
+ range betweent unbouded preceding and unbounded following
+ rows betweent unbouded preceding and unbounded following
+ rows betweent unbouded preceding and unbounded following
