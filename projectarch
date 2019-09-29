@@ -1,0 +1,26 @@
+project architecuture::
+This Project is developed to monitor live critical
+NMS/EMS application processes for all partners and sending them the notification after
+monitoring if critical alerts are generated.
+
+NBI::client-Server. Project developed for Live Monitoring of optical
+s across all regions within Network.
+
+
+Technology stack::Corba protocol,JMS,Spring boot, hibernate,jsp
+
+project arch::All configuration of project via spring boot.
+for database we used hibernate,jpa
+Divide project into different layers 
+like configuration,components,service,controllers,Repository
+
+Database structure::
+NmsTable:: for storing all the vendors ip.
+live updates:: for storing all the critical alerts.
+history data:: if some alerts having different saverity
+
+
+database nbi::
+nms tables:storing all nms ems info.
+neelements:for storing all the elements.
+ptplists:storing all the ptps of neelements.
