@@ -1,3 +1,49 @@
+Api gateways::
+1:security
+2:authentication
+3:authorization
+
+now coming to divide service to multiple microservice
+consolidate all cutting concern to single
+
+
+customize api gateway for microservices::
+ basically adding adapter into microservice,purpose of it consolidate all apis into one and server following data.
+1:serving static content
+2:caching response.
+
+
+now more customization on api gateway like some service are called more frequently then for that purpose we need router & load balancer
+
+load balancing 
+A/B testing
+canary release.
+
+next feature protocols::
+like websocket,https.
+
+Api gateway::
+Security
+static content
+cache
+router & load balancer
+Adapter
+
+self managed::
+Apache
+Haproxy
+Nginx
+Spring cloud gatway
+
+Cloud Service::
+Aws api
+azure api
+google cloud end point
+Apigee
+
+====================================================================================
+
+
 Recommandation to design rest end points::
 
 :HTTP has verbs (or methods):
@@ -43,3 +89,4 @@ GET: /articles/?author_id=12
  401 Unauthorized::having no authentication of service
  403 Forbidden::Was the user correctly authenticated, but they don’t have the required permissions to access the resource?
 
+====================================================================================
