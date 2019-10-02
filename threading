@@ -309,6 +309,47 @@ ph.bulkregister(4);//bulk register
 
 ==========================================================================================
 
+====================================================================================
+
+on seat chart booking example only one thread allow to acquire lock via using reentread lock macanism, only one thread has access to acquire lock
+
+ReentrantLock lock=new ReentrantLock();
+
+suppose one thread write lock then it block seat chart and no one can access that chart now if another thread only wants to access read this chart for some purpose then they provide some sort of solution
+
+ReadWriteLock ::
+
+only one writer thread acquire lock at a same time,and mulitple read thread acquire lock.
+
+ReentrantReadWriteLock lock=new ReentrantReadWriteLock();
+ReentrantReadWriteLock.ReadLock readLock=lock.readLock();
+ReentrantReadWriteLock.WriteLock writeLock=lock.writeLock();
+
+
+Write lock has more prority compare to read lock suppose three threads has doing some work and read data now fourth thread comes which has permission of read but at same time new writer thread also come.but now writer thread has more priority compare to read lock , now writer wait for another 3 locks to wait for unlock opration 
+====================================================================================
+Exchanger in java::
+
+Synchronous queue::
+ extends of blocking queue its thread safe
+ same behavious as blocking  it has no size doesn't hold the prod. bcoz of direct hand off b/w prod and cons.
+ no peek
+ no iterator
+ perfect of handoff
+
+
+exchanger is same as synQueue but handoff in both direction
+
+suppose we have two thread then we exchange A to B and B to A
+
+use case in buffers
+
+producer has full buffer and consumer has empty buffer
+if we exchange then prod. has empty and cons. has full buffer
+
+====================================================================================
+
+
 
 
 
