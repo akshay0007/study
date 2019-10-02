@@ -7,3 +7,64 @@ server monitoring tools:: New Relicsecurity test::fortify (paid) , zap test(ope
 :tomcat  tunning 
 
 :aws warming 
+
+
+volatile:
+it is placed in java main memory instead of using cpu memory, so it is cost effective
+operation, then rather used into simple enviroment used into multithreaded env.
+
+ As volatile keyword is not cached in CPU, it is always read from main memory, 
+so in terms of performance it’s always expensive to use volatile keyword. 
+
+
+Thread Local::
+Every thread has its own ThreadLocal value that makes ThreadLocal value threadsafe as well
+
+in web application for multiple request different thrread is assigned to each one so ,they have
+differrent thread local as per request.
+
+
+================================================================
+microservicess::
+filebeat ::log collector
+logstash ::filtering and transformation
+FluentD
+herverstar::file watcher
+
+software::
+1:Filebeat
+
+Fluent D is less in performance of h/w
+so we are creating hybide of logstace and FluentD
+
+================================================================
+server pipeline::
+reverse proxy in nginx
+server tuning(max size ,etc)
+production framwork for checking application details.
+================================================================
+Securing web application ::
+Arch implementation.
+
+owascp zap
+wpscan :: wordpress
+burp suite:
+w3af:
+snyk:: finding and fixing the depenedencies
+
+SAST & DAST (Static and dynamic application testing)
+
+coding perspective::
+use strict in java script
+access control allow origin
+==================================================================
+java tools:
+Mbean
+jconsole/Jmax : prod log level change
+Jmap : read huge amout of log files
+jstack : for heap dump
+    heap dump:
+       find dead lock
+       memory leak     			
+performanc tools:
+jmeter.
