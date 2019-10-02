@@ -1,0 +1,327 @@
+jstack dump::
+cd C:\Program Files\Java\jdk1.7.0_51\bin 
+jstack.exe -l 245408
+
+PID of PID generated, select PID of javaw.exe ::245408
+jstack.exe -l 245408 > ThreadDump.txt
+
+https://www.javamadesoeasy.com/2015/03/jstack-thread-dumps-generating-and.html
+==================================================================================================================
+==================================================================================================================
+Garbage collection::
+Algos::
+serial
+parellel
+compareandmarksweap
+G1
+
+in java 1.8 perm gen is allowed
+
+
+==================================================================================================================
+==================================================================================================================
+
+thrading::
+fail fast and fail safe::
+when we are using enumaration with combn of vector it gave fail-safe oprn.
+https://www.javamadesoeasy.com/2015/04/vector-fail-safe-or-fail-fast-iteration.html
+
+multiple ways to schedule a task in Java.
+
+ java.util.TimerTask 
+ java.util.concurrent.ScheduledExecutorService
+ Quartz Scheduler
+ org.springframework.scheduling.TaskScheduler
+
+scheduling algos::
+https://www.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.base.doc/scheduler/concepts/csch_schedulerdaemon.html
+
+==================================================================================================================
+==================================================================================================================
+Adders:
+atomic opration is shared among thread.
+Atomic:: first flush value then share in memory cache so another thread read it.
+
+
+
+Long Adder::
+Adder has sum method instead of get like in atomic.
+
+multiple thrad have there own seprate variables.
+
+in all atomic variable they are synch but in adder each thrad has its own variable
+
+
+Accumalator ::
+ genric variable of Adder.
+
+syntex::
+LongAccumulator acc = new LongAccumulator((a, b) -> a + b, 0);
+where 0 is default value a is init and b is expected
+
+like pass
+acc.accumalte(1);
+then 1=>b
+0=>a
+
+it accumalte data.
+
+==================================================================================================================
+==================================================================================================================
+Executor Services::
+run a peace of code seprately:
+
+suppose in main thread looping of 100 threads in main:
+then it create 100 of new threads 
+
+for that we needs threadpools.
+
+when execute method is called of executor service then it perform 2 opration
+
+internally usages blocking queue for performing non blocking opn
+
+it also use DefaultThreadFactory where groups are assign to threads.
+
+ideal pool size?
+depends upon time to task execute
+
+lets u have cpu intesive oprn.
+then uses time split algo
+
+now suppose we have task of io intesive(like db call,network call size of pool keep large)
+
+1:cpu intensive task
+2:io intesive task(higer pool size)
+
+==================================================================================================================
+
+Thread pools:
+Fixed thread pool
+cache thread pool :: checking for already created thread it not then create new one for res. allocation
+kill those threads if they have more then 60 sec. idle time
+schedule thread pool ::  schedule ,scheduleatfixedrate,scheduleatfixeddelay
+schedule :: using delealyedQueue if suppose having 3 threads one having delay of 10sec another has
+ 10 min then first 10sec execute first
+
+
+ScheduledExecutorService service=Executrors.newScheduleThreadPool(10);
+service.schedule(null,10,Seconds);
+service.scheduleAtFixedDelay(null,10,15,Seconds);//every 10 sec
+service.scheduleAtFixedRate(null,10,15,Seconds);//after compeleting of null task then wait for 10 sec
+
+singel thread pool::
+
+==================================================================================================================
+
+constructor and life cycle::
+
+corepoolsize,maxpoolsize:max and base pool size
+workqueue:blockingqueue
+threadfactory:use to create new thread
+handler: callback to use when tasks submitted rejected
+
+
+current size::
+core pool size + current pool size(threads are added and deleted on pool type and keep alive time)  + max pool size
+
+
+
+allowcorethreadtime(boolean) :: TRUE by default
+
+now types of queue used
+FixedThreadPool :: linkedblockingqueue  ::unbounded queue storing all task
+Single threaded :: linkedblockingqueue
+CachedThreadPool :: SynchronousQueue   ::threads are unbounded ,short of queue only single storage area
+ScheduledThreadPool :: DelayedWorkingQueue  :: delals with schedules /times delays
+Custom :: ArrayBlockingQUeue  :: bounded queue to store the task
+
+
+Rejectionhandler::
+10 tasks are busy in pools working , another thread in waiting
+now it has no area to run it has to reject the task
+
+now rejection is based on some policies::
+abort polices :: throw RejectionExecutionEx
+Discardpolicies :: submitting task are deleted silently
+DiscardOldestPolicies ::  old task are deleted 
+CallerRunsPolicy :: 
+
+
+life cycle methods::
+shutdown(just initiated shutdown)==> after this method if we exe new thread throws RejectionExecutrionException
+isshutdown :: check if shut down is initiated
+isTerminated :: if all the tasks are completed
+awaittermination(10,Second)==>block until all task are completed or if timout occur
+
+shutdownnow()==> return all queued thread, and shutdown init for for working threads
+
+==================================================================================================================
+Callable and futures::
+
+submit callable task::
+Future<T> future=service.submit(callable);
+future is placeholder. arrive some times in futures
+
+T return=future.get();//blocking opration
+
+get method blocks suppose if thread of size 10 and first is not compelted but other are completed
+in that case it's going in block
+
+now get method of time out
+get(1,Timeunit.second)
+
+
+future.cancel(false);==>cancel this task  //may interrupt if running in boolean:: false
+future.iscancelled();
+future.isDone();
+================================================================================================
+===============================================================================================
+ForkJoin Pool::
+ForkJoinPool is an advanced version of ThreadPoolExecutor with concepts like work-stealing which enable faster and efficient solving of divide and conquer algorithms
+
+differrent then exector service
+
+task divided into subtask t1,t2,t3
+
+two opratoins::
+spliting task
+joing the results
+
+
+concepts follows::
+per thread queue
+work stealing
+
+each of thread has its own queue called dequeue
+
+dequeue put all subtasks into it
+
+suppose thread1 produces more tasks compare to thread0
+
+now thrad1 consume task from front and another thread means thread0 consume from back
+
+ways to submit tasks::
+execute(runnable)
+submit(runnable)
+submit(callabe)
+
+it we are using spcial type of tasks forkjointask::
+ then used
+execute
+invoke 
+submit
+
+fork join tasks::
+recursive task return in compute method:
+recursive action return void
+
+
+fork()==> new submit task create
+join()==>wait for finishing sub task
+
+
+
+used in completely isolated evniroment
+
+
+
+==========================================================================================
+
+synchronized queue::
+it is very much related to blocking queue.
+
+in case of empty blocking queue and full queue at that time it is blocked
+
+
+synchornized queue is size of 1
+
+direct hand off of all consumers 
+
+==========================================================================================
+Thread local::
+memeory effi. performance via using thread pool
+
+
+web server example::
+
+spring using this concept ::
+RequestContextHolder
+SecurityContextHolder
+TransactionContextHolder
+
+
+clean up must 
+
+==========================================================================================
+count down latch::
+
+latch.countdown();
+{business rules}
+
+
+{ends}
+latch.await();//in final 
+
+
+Cyclic barrier::
+
+{business rules}
+barrier.awit();
+
+
+{ends}
+nothing
+reuse also to cycle barrier
+
+
+Phaser :: acts as countdown and cyclic and many more
+
+
+//act as countdown
+Phaser ph=new Phaser(3);
+{business rules}
+ph.arrive()
+
+
+{end}
+ph.awaitAdvance(1)
+
+//act as cyclic
+Phaser ph=new Phaser(3);
+
+ph.arriveAndAwaitAdvance()
+{business rules}
+
+{end}
+nothing 
+
+now phase can change like phase 1 to 2
+
+extra addition ::
+phaser ph=new Phaser(1);
+ph.register();//allow threads to register themselves
+ph.arriveAndDeregister();
+ph.arrive();
+
+
+ph.arriveAndAwaitAdvance();
+ph.bulkregister(4);//bulk register
+
+==========================================================================================
+
+
+
+
+
+
+
+
+==========================================================================================
+==========================================================================================
+
+
+
+stackify::
+https://stackify.com/java-thread-pools/
+https://stackify.com/performance-tuning-in-sql-server-find-slow-queries/ 
+
