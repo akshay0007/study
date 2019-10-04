@@ -182,4 +182,12 @@ OVER() is a mandatory key word,it defines the scope of that function, here  '
 View	Materialized Views(Snapshots)
 1.View is nothing but the logical structure of the table which will retrieve data from 1 or more table.	1.Materialized views(Snapshots) are also logical structure but data is physically stored in database.
 =====================================================================================================================
+========================================================================================================
+oracle::
+partitioning::
+Partitioning allows tables, indexes, and index-organized tables to be subdivided into smaller pieces, enabling these database objects to be managed and accessed at a finer level of granularity.
 
+1     Range partitions:: A table that is partitioned by range is partitioned in such a way that each partition contains rows for which the partitioning expression value lies within a given range.
+2     List partitions:: List partitioning enables you to explicitly control how rows map to partitions by specifying a list of discrete values for the partitioning key in the description for each partition.
+3     Hash partitions:: Hash partitioning maps data to partitions based on a hashing algorithm that Oracle applies to the partitioning key that you identify.
+4     Sub partitions
