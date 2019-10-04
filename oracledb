@@ -111,3 +111,75 @@ rows or range clauses are here::
  range betweent unbouded preceding and unbounded following
  rows betweent unbouded preceding and unbounded following
  rows betweent unbouded preceding and unbounded following
+ 
+ =====================================================================================================================
+oracle::
+1:select case when null=null then ‘Amit’ Else ‘Pradnya’ from dual;
+Answer:
+
+In SQL null value is not equal to itself.So null=null is false and the output of above query is ‘Pradnya’.
+
+2:Following are Set Operators in SQL:
+
+Union
+Unionall
+Intersect
+Minus
+
+3:substring find out
+Select Substr(First_name,0,5) from Employee;
+
+4:
+
+Union	Union ALL
+1.Union Set operator is used to fetch the records from 2 different tables which eliminates the duplicate records	1.Union all Set operator is used to fetch the records from 2 different tables which does not eliminates the duplicate records
+
+
+5:
+correlated subqueries
+Correlated Query is nothing but the subquery whose output is depending on the inner query used in that query.Correlated query is the query which is executed after the outer query is executed.The outer query is always dependent on inner query
+Correlated Queries are also called as Synchronized queries…
+
+6:
+What is difference between NVL,NVL2 and Nullif?
+
+Answer:
+
+1.NVL :
+
+NVL function substitutes a value when a null value is encountered.
+
+2.NVL2 :
+
+NVL2 substitutes a value when a null value is encountered as well as when a non-null value is encountered.
+
+3.NULLIF:
+
+NULLIF function compares expr1 and expr2. If expr1 and expr2 are equal, the NULLIF function returns NULL. Otherwise, it returns expr1.
+
+7:
+What is Index?What is use of index in SQL?
+Indexes are used to improve the performance of the query.
+n simple words suppose we want to search the topic in to book we go to index page of that book and search the topic which we want.
+
+8::
+rank functions::
+Dense_rank
+Listagg
+Lead and Lag
+First_Value
+Rank
+Cube
+Rollup
+Connect by Prior
+
+
+over clause::
+OVER() is a mandatory key word,it defines the scope of that function, here  '
+
+ means it will look into specifically deptno and partition by clause will do group by on deptno column. I will give some example below ,which will clear your doubt about this.
+
+View	Materialized Views(Snapshots)
+1.View is nothing but the logical structure of the table which will retrieve data from 1 or more table.	1.Materialized views(Snapshots) are also logical structure but data is physically stored in database.
+=====================================================================================================================
+
