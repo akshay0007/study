@@ -1,0 +1,86 @@
+=====================================================================================================================
+difference b/w comparable and comparator::
+public class Employee implements Comparable<Employee> {
+@Override
+    public int compareTo(Employee emp) {
+        //let's sort the employee based on an id in ascending order
+        //returns a negative integer, zero, or a positive integer as this employee id
+        //is less than, equal to, or greater than the specified object.
+        return (this.id - emp.id);
+    }
+}
+
+As you can see that Employees array is sorted by id in ascending order.
+
+
+But, in most real-life scenarios, we want sorting based on different parameters. For example, as a CEO, I would like to sort the employees based on Salary, an HR would like to sort them based on age.
+
+his is the situation where we need to use Java Comparator interface because Comparable.compareTo(Object o) method implementation can provide default sorting and we can’t change it dynamically. 
+
+Java Comparator
+
+difference b/w comparable and comparator::
+now sorting on two types::
+public static Comparator<Employee> SalaryComparator = new Comparator<Employee>() {
+
+        @Override
+        public int compare(Employee e1, Employee e2) {
+            return (int) (e1.getSalary() - e2.getSalary());
+        }
+    };
+
+    /**
+     * Comparator to sort employees list or array in order of Age
+     */
+    public static Comparator<Employee> AgeComparator = new Comparator<Employee>() {
+
+        @Override
+        public int compare(Employee e1, Employee e2) {
+            return e1.getAge() - e2.getAge();
+        }
+    };
+
+Arrays.sort(empArr, Employee.SalaryComparator);
+System.out.println("Employees list sorted by Salary:\n"+Arrays.toString(empArr));
+
+//sort employees array using Comparator by Age
+Arrays.sort(empArr, Employee.AgeComparator);
+System.out.println("Employees list sorted by Age:\n"+Arrays.toString(empArr));
+
+Comparable vs Comparator
+Comparable interface can be used to provide single way of sorting whereas Comparator interface is used to provide different ways of sorting.
+================================================================================================================================================
+
+java 1.8::
+	List<StudentClass> list = new ArrayList();
+			list.stream().filter(t -> t.getName().equals("res"))
+					.map(StudentClass::getName).collect(Collectors.toList());
+
+
+AOT vs JIT::
+javac ==>convet javacode into byte code
+now byte code run across different architecture.(this step is called byte code to machine code)
+
+
+INTERPRETER::
+Converting byte code into machine code and make it compatible.
+
+c1 compiler::
+some times code calling going to thresold now c1 compiler save the 
+compiled instructions.
+next time if instruction called happened it pickup from code cache
+then provide to cpu 
+
+suppose some instruction are more called in prog. then c2 compiler comes 
+in picture which is more optimize compare to c1 , and replace code cache 
+of c1 to c2. it means jvm also manage code profiling also.
+ c1 ==>fast
+ c2==> slower(but more optimize)
+
+so now concept of hot vm given by oracle for more optimize and removel of unused instruction 
+
+
+AOT compilation ==> basciall convert your java file into so binaries
+which only support x86 binaries for execution , due to this reason
+it remove c1 compilation time
+==================================================================================================================
