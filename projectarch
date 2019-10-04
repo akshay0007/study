@@ -3,6 +3,17 @@ This Project is developed to monitor live critical
 NMS/EMS application processes for all partners and sending them the notification after
 monitoring if critical alerts are generated.
 
+NBI::
+Project developed for Live Monitoring of optical
+s across all regions within Network. Aimed to calculate the power within the network for
+different NMS/EMS with the implementation provided for the optical and Ethernet network
+elements.
+
+AMS::
+This Project is developed developed to monitor live critical
+NMS/EMS application processes for all partners and sending them the notification after
+monitoring if critical alerts are generated.
+
 NBI::client-Server. Project developed for Live Monitoring of optical
 s across all regions within Network.
 
