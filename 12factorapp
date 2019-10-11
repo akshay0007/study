@@ -1,0 +1,46 @@
+1::scm to revision control
+2::managed dependencies
+ define manifest for application dev
+
+app runing in on linux windows docker cloud foundry etc
+3:: application configure::
+basic configure for different db and env
+ getting configure application
+   external service
+   env. variable
+   user provided service
+4:: backing service
+ data base connection,cache provide, file shareing sftp amazon s3, (remote services)
+build database
+stop and switch services
+start services
+binding your service at runtime rather in compile time make flexible system(cloud computing)
+5::ci-cd::
+now life cycle
+code ->review->build(it is process by framework)->deploy->test
+->demo->create stories
+
+build->release->configure
+build ->config
+  ->releae
+run stage
+6:: run process
+memory specific single threaded
+converting lagacy code into it
+7:: port binding
+in dev we are doing binding manually
+enable port binding
+8:: scale with process
+concurrency in design
+increase scalability
+service break into different application
+horizontal scaleing of process to acheive concu. instead of vertical
+9::dispose it all
+reasons::: security scalablity crashes happens
+enviroment uniformallity
+10:use your logs
+log as stream
+log converter into json is benefical
+logging framweork also provide many facilities
+12::Adminstration
+next steps::
