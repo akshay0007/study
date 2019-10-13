@@ -330,3 +330,222 @@ class SystemDetails{
 }
 }
 
+coding::
+================================================================================
+================================================================================
+handling create api in post method::
+needs::
+in any post create method just needs to define these lines of code..
+ URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(entity.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+
+
+
+================================================================================
+================================================================================
+for handling exception::
+class CustomExc extends RuntimeException{
+CustomExc(ex){
+super(ex);
+}
+
+}
+
+
+class ExceptionResponse{
+String response;
+Date response;
+String details;
+
+ResponseHandleExc(String message,Date date,String detils){
+}
+
+}
+
+
+@ControllerAdvice
+@RestController
+class CusomizeHandling extends ResponseEntityExceptionHandler{
+
+	@ExceptionHandler(Exception.class)	
+       public final ResponseEntity<Object> handlingAllEx(Exception ex,WebRequest request){
+
+new ResponseEntity(res,HttpStatus.INternalSysError);
+}
+}
+
+================================================================================
+================================================================================
+java validation for validating request::
+public ResponseEntity<Void> saveData(@Valid @RequestBody TodoEntity todoEntity) {
+
+
+for handling method args parms then override method of class ResponseEntityExceptionHandler
+protected ResponseEntity<Object> handleMethodArgumentNotValid(
+			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		return handleExceptionInternal(ex, null, headers, status, request);
+	}
+
+
+
+protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+
+================================================================================
+================================================================================
+
+hateoas also give functionality for adding links with data when we produce certain resources..
+
+
+================================================================================
+================================================================================
+
+internationalize::
+internalionalize 
+
+configure
+local resolver
+default locale
+resource bnudle message::
+
+================================================================================
+================================================================================
+
+swagger configure::
+Needs to configure Docket Bean
+@COnfigureation
+@EnableSwagger2
+class SwaggerConfigre{
+
+bean docket
+all the paths
+all the apis
+
+
+@Bean
+public Docket api(){
+return new Docket(DocumentType.Swagger_2);
+}
+
+then run into local host 8080
+localhost:8080/v2/api-docs
+}
+
+
+then config::
+info
+tag 
+description
+
+
+ApiModel and ApiModelProperty annotation are used for describing details about particular object in docs of swag
+
+================================================================================
+================================================================================
+
+api monitoring via spring
+using 
+spring-data-rest-hal-browser
+
+hal==>hyper text application lang.
+
+then click
+localhost:8080/actuator
+localhost:8080/application (new release)
+
+in app property define something so that info filed in actuator is showing something on it.
+management.endpoints.web.exposure.include=*
+================================================================================
+================================================================================
+
+filtering the data::
+class FileteringController{
+
+@GetMapping
+ResponseEntity<Object> getEntity(){
+return new BeanClasss("ab","bc","cd");
+
+}
+
+i dont want to send cd on response then i can use either @jsonIgnore 
+
+but its configured in all request but don't want to common amongs all request::
+then for that purpose i can used ::
+@JsonIgnoreProperties(value={"filed1","filed2"})
+
+its all called static field configuration 
+now changes to dynamic filed configuration
+
+now dynamic filtering::
+for that purpose i needs MappingJacksonValue class
+MappingJacksonValue
+FilterProvider
+and simpleFilterProvider for configuration of all fields..
+
+
+mapping.setFilter(fileters);
+
+
+now also configure filter annoation in entity as well..
+@JsonFilter("someFilter")
+
+}
+
+================================================================================
+================================================================================
+
+versioning of apis::
+1::
+implementation::
+@GetMapping("/person/v1")
+@GetMapping("/person/v2")
+
+
+2::another implementation
+@GetMapping(value="/persion/param",params="version=2")
+
+@GetMapping(value="/persion/param",params="version=2")
+
+now calling from url::
+url/person/param?version=1
+
+3::impementation:::
+@GetMapping(value="/person/header",params="X-API-VERSION=2")
+@GetMapping(value="/person/header",params="X-API-VERSION=1")
+
+calling from postman::
+url/person/header
+
+headers::
+X-API-VERSION:1
+
+
+4::using produces::
+getMapping(value=person/produces,produces="application/vnd.company.app-v1+json"
+
+
+======================================================
+======================================================
+
+mapping relationship::
+//user is owening side of relationship contain,it means column would  created in posts class.
+class User{
+OneToMany(mappedBy="user")
+List<Posts> listPost;
+}
+
+class Posts{
+ManyToOne(fetch=FetchType.Lazy)
+List<Posts> listPost;
+}
+
+======================================================
+======================================================
+JPA
+
+
+83
+
+
