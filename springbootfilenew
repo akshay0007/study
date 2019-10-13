@@ -1,0 +1,332 @@
+application properties and yml file for configures
+env variable
+common config(config server,valut,consul)(cloud config)
+
+modify config
+ bean config as part of apps config(serveral ways of adding beans)
+ also can added beans in seprate config classes
+ xml based config also
+ component scan also can do
+
+profiling::
+real worlds and multi stage env.we can config deployed
+if we are runnig multiple stage config in prod.
+
+also provide native yml support
+
+
+porfiling files::
+ spring.profiles
+ other ways to triggger configs based on profile
+ 
+basic config file :::
+spring:
+ profiles:dev
+server:
+ port:8080
+---
+spring:
+ profile:test
+server:
+ port:9090
+
+
+commands::
+mvn clean package
+java -jar -Dspring.profile.active=dev target/package.jar
+
+
+now real world example for lavaraging::
+third party library::
+ also power full in log level (debug vs warn)
+
+like service deployement::
+
+other resource dependecy 
+
+
+web starter::
+management of dependecy.
+it also has embedded tomcat server inside
+it can also be relaced via undertow or jetty
+default configuration may not be best in real world example.
+
+json marshalling.
+it is actully usefully in restfull api impln
+
+
+default logging framwork alreay provided by spring boot
+logback and jboss loging
+
+spring boot libraries::
+spring boot auto configure
+
+starts for tomcat,logging and boot
+ sprng lib include core,aop,bean, context,expr
+
+other libraries::
+snake yaml (running at a runtime)
+
+validators(javax and hibernate)
+
+
+config embedded tomcat::
+additional servletcontext can only be loaded through serveletContextInitializer interface
+
+configure embedded server via property::
+server.address
+.port
+.contextpath
+
+
+org.springframework.boot.autoconfigure.web
+
+ServerProperties is place holder for all spring porterties in boot server
+ 
+compression::
+server.compressoin.enabled=true
+
+
+TLS/SSL  configures::
+
+requres a java keystore for it
+
+properties used to configure
+like apps ::vault
+
+now for keygen::
+cd src/main/resources/ keytool -genkey -keyalg RSA -alias linkedin -keystore keystore.jsk -storepass password -validity 4000 -keysize 2048
+
+
+now adding keygen keystore into yml file::
+
+management:
+ security:
+  enabled:false
+server:
+ ssl:
+  key-store:classpath:keystore.jks
+  key-store-password:password
+  key-store-type:JKS
+  key-alias:linkdin
+  key-password:password
+---
+spring:
+ profiles:dev
+server:
+ port:8080
+
+
+now using self signed certificate::
+for that --verify=no
+http --verify=no http://localhost:8080/api/greeting
+
+
+now in spring mvc::
+using model view controller
+templetes engine also there
+
+
+deployement tools::devtools
+reload application context.
+allows reloading of the apps context while apps is running
+trigger from class path changes
+only for developement purpose
+
+does not impact class loading.
+
+packaging in spring boot::
+
+jar files::
+ default beh. is jar packaging.
+
+it is executable jar files.(fat jar)
+or it can be registered init.d
+
+if we are using different apps server
+then execlude spring-boot-tomcat
+
+cloud ecosystem 
+
+command line runnable interface
+
+spring boot data
+
+rich support of rdbms and no sql
+
+configuring in database for project 
+basically we are populate properties in different env
+
+certain db are auto configure
+
+implementing spring data in boot::
+
+spring data jpa configure
+
+
+security extending::
+basically can do by property based
+
+moving beyond basic::
+full support of form based.
+create context of WebSecurityConfigurerAdapter
+@EnableWebSecurity
+
+in memory security for basic demo purpose
+
+oauth support also provided by spring
+@EnableOAuth2Client
+@EnableResourceServer
+
+WebSecurityConfigurerAdapter overide
+ config
+ configureGlobal
+
+
+AMQP with spring boot:
+
+Asynch messageing.
+seldom is real time processing requirement
+
+rabbit mq is efficent system for sending and rec. asynch message
+
+producing message:
+
+provide the exchage and queue name.
+
+consuming message:
+it provide listener implementation
+
+configures via property based
+
+implementing consumer:
+
+
+AutoConfiguration a deeper look::
+
+it is actually based on 2 main annoation
+@EnableAutoConfigure
+@Conditional
+
+@ConditionalHistory::
+
+
+spring 3 introduce profiles::multiple same bean type of different profile
+
+
+spring 4 added @Conditional anno. loaded bean of some arbitrary condition
+and not only properties
+
+
+example of conditional ::
+
+now look into jpa configure::
+JpaBasedConfiguration 
+
+naming configuration::
+{name}-spring-boot-autoconfigure
+
+
+aspect configure::
+
+
+adding module::
+groupid=>com.exmple.logg
+artificatee=>logggin-spring-boot-autoconfigure
+
+
+<scope>import</>
+<type>pom</>
+
+
+
+create custom props::
+@ConfiguratoionProperties("landon.logging")
+class LandonLogginProperties{
+String loggerName="LandonAutditLogger"
+
+public String getLoggerName(){
+return loggerName;
+}
+public void setLoggerName(String loggername){
+this.loggerName=loggerName
+}
+}
+
+@COnfiguration
+@COnditionalOnClass(LoggableAspect.class)
+@EnableConfigurationProperties(LandonLogginProperties.class)
+class LandonLoggingAutoConfigure{
+
+@Autowired
+LandonLoggingProperties properties;
+
+@Bean
+public LoggableAspect loggableAspect(){
+return new LoggableAspect(properties.getLoggerName());
+}
+
+}
+
+in resource -->meta-inf folder create
+then spring.factories file  create inside this file put some entries
+
+spring boot actuator::
+privide config setting usually tthroug jmx
+allow u to monitor your running apps
+
+big changes::
+
+
+helth endpoint provide:;
+provide status of app
+provide status of dep.
+
+info endpoint :
+provide customizable point for info.
+
+out of box jmx functionality::
+list of beans in the app conftext
+listing of the state of env.
+heapdump and memory dumps.
+
+mapping of web url::
+metrics ==>micrometer metrics
+
+define exposures::
+
+
+securing acutuator::
+
+
+productionalizing actuator::
+
+
+needs to block actuators::
+
+infoend points::
+
+helth endpoints::
+
+matrics endpoint::
+micro meter.
+
+
+management.matrics.we.server.auto.time.request
+
+endpoint hitting check can also be checked::
+@Timed(io.micrometer.core.annoatation package)
+
+
+customend point::
+ 
+
+@Component
+@Endpoint(id="system-details")
+class SystemEvalEndopoint{
+@Data
+class SystemDetails{
+
+}
+}
+
