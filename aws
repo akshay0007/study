@@ -1,0 +1,363 @@
+
+
+elastic avl.
+
+ 
+
+RTO(recovery time objective)
+
+RPO(recovery point objective)
+
+ 
+
+serveless:: working on services instead of server
+
+ 
+
+servel based==>ec2 ,rds,ebs
+
+servel less==>lambda,dyanmo db,s3 glacier,efs
+
+ 
+
+ 
+
+containers and high avil.
+
+docker not a serveless
+
+ 
+
+lambda==>regular,edge etc
+
+ 
+
+API gateway::
+
+ 
+
+AWS batch
+
+Athene (s3 sql)
+
+ 
+
+these inculudes::
+
+Route S3
+
+ELB/ALB
+
+internet gateway
+
+direct connect
+
+ 
+
+serverless::
+
+SNS
+
+SQS
+
+ 
+
+location zones:: its for elasticity of system
+
+services::
+
+Cloud Front(CDN)
+
+Route53(for dns)
+
+Shield(for security)
+
+WAF(for security)
+
+Lambda
+
+ 
+
+AWS Edge location::
+
+EC2==>for cpu utilization
+
+S3==> versioning
+
+ 
+
+ 
+
+::Tools for monitoring::
+
+AWS console
+
+AWS ClI tools
+
+AWS cloud watch or cloud trail logs
+
+ 
+
+::AWS appl level tool
+
+app. level tracing
+
+ 
+
+::level of monitoring
+
+by ec2 server
+
+ 
+
+::app. utilization patterns.
+
+ 
+
+::blue green dep.
+
+ 
+
+ 
+
+horizontal scaling pattern::
+
+out and in::
+
+ 
+
+vertical scaling up and down of server::
+
+ 
+
+//must know
+
+settting up aws services ::
+
+AWS conole
+
+AWS CLI
+
+AWS cloudformation==>int. scripting tools with multiple scripts
+
+env.
+
+Aws sdk::
+
+ 
+
+HA for S3::
+
+multiple s3 bucket instance copies behind nothing
+
+ 
+
+S3 costs::
+
+ 
+
+storage classes::
+
+ 
+
+ 
+
+HA for EC2::
+
+EIP==>n/w
+
+AMI ==>OS
+
+boot time/boot scripting
+
+snapshot /EBS for data
+
+Multiple instance behind ELB/ALB(classic and app. load balancer)
+
+ 
+
+Multi AZ first and multi region second
+
+ 
+
+how to conn. within VPC
+
+conn. region
+
+conn. acc.
+
+ 
+
+elastic ip dynamically change dns ::
+
+ 
+
+:::loadbalancing algo::
+
+weighted round robin
+
+latency based
+
+geobased location
+
+ 
+
+ 
+
+Loading balance service::
+
+ALB(appl. load balancer)
+
+ELB (classic load balancer)
+
+ 
+
+ 
+
+ECS registry or elastic bean stalk
+
+ 
+
+ECS Cluster
+
+ 
+
+cloud front cdn
+
+ 
+
+elastic cache::
+
+redis ,memcache, elastic
+
+ 
+
+ 
+
+amazon kinesis:: stream,firehose,analytics
+
+ 
+
+its actually based on shard
+
+ 
+
+create stream based on shard
+
+ 
+
+::amazon no sql dynamoc db
+
+can create scalble table.
+
+ 
+
+high avl. senerio::
+
+aws ec2 describe
+
+ 
+
+ 
+
+topics::
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/sample-templates-services-us-west-2.html#w1ab2c21c45c15c15
+
+Auto Scaling
+
+AWS Batch
+
+AWS Config
+
+Amazon DocumentDB
+
+Amazon DynamoDB
+
+Amazon EC2
+
+Amazon ElastiCache
+
+AWS Elastic Beanstalk
+
+Elastic Load Balancing
+
+AWS Identity and Access Management
+
+AWS OpsWorks
+
+Amazon Relational Database Service
+
+Amazon Redshift
+
+Amazon Route 53
+
+Amazon Simple Storage Service
+
+Amazon Simple Queue Service
+
+Amazon Virtual Private Cloud
+
+ 
+
+aws security::
+
+https://aws.amazon.com/security/security-resources/
+
+ 
+
+ 
+
+ 
+
+ 
+
+Route 53::
+
+domain name service registry.
+
+kind of helth check up for different servers
+
+ 
+
+cloud watch monitoring levels
+
+ 
+
+comparing HA(High availablity)/Elasticity tool::
+
+ 
+
+tools:
+
+terraform::alernative of aws cli
+
+serverless framwork
+
+ 
+
+server based arch=>EC2,S3,RDS,redshift,EMR(elastic map reduce)=>past
+
+serverl less=>lambda,s3,dynam do,kinesis=>future
+
+mixed==>docker,labda,s3,rds,kinesis,firehouse,redshift==>present
+
+ 
+
+learning resources::
+
+https://github.com/open-guides/og-aws
+
+https://aws.amazon.com/developer/community/heroes/?community-heroes-all.sort-by=item.additionalFields.sortPosition&community-heroes-all.sort-order=asc
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
