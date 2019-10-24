@@ -1,0 +1,123 @@
+
+
+reporting in maven::
+
+<reporting>
+
+surefire
+
+</>
+
+ 
+
+mvn clean package site//genrate doc for us
+
+ 
+
+default life cycle::
+
+validate,compile,test,package,verfiy,install,and deploy
+
+ 
+
+ 
+
+goals::
+
+goals are bounded on phase
+
+ 
+
+build plugins::
+
+ 
+
+installation:: installing into m2 dir
+
+ 
+
+deploy:: pushing   into remote for other to use
+
+ 
+
+validation: for validation
+
+ 
+
+packaging::taking byte code packaging them in structure
+
+ 
+
+jar:: produces jar file
+
+ 
+
+war:: consume by app server
+
+ 
+
+ear:: consist multiple jar ejbs
+
+ 
+
+shade:: special jar file contains ur code and 3rd party code
+
+ 
+
+tools:: veriety of uses
+
+ 
+
+release::
+
+ 
+
+signing::
+
+ 
+
+dependency::
+
+ 
+
+ 
+
+core plugin::
+
+ 
+
+ 
+
+release plugin imp::
+
+enforce::
+
+ 
+
+dependency plugin goals:
+
+ 
+
+ 
+
+mvn dependency:tree
+
+ 
+
+uber jar::
+
+run outside of container.
+
+contains all source code
+
+contains all lib
+
+can be executable
+
+ 
+
+reporting plugins::
+
+changlog plugin
+
+ 
