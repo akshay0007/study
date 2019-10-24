@@ -1,0 +1,347 @@
+
+
+gitops instead of taking about devops
+
+job and item same in jenkins
+
+ 
+
+jenkins and source repo intergation
+
+ 
+
+webhook reponsible for polling request
+
+ 
+
+github robertstarmer
+
+ 
+
+ 
+
+in top corner
+
+jenkins(dashboard)=>manage jenkins link=>manage plugins
+
+==>available one=>search of any
+
+ 
+
+dashboard=>configure global security
+
+ 
+
+ 
+
+for jenkins setup::
+
+jenkins=>new item(enter name)=>pipeline=>
+
+=>pipelinescript=>
+
+ 
+
+pipeline{
+
+agent any
+
+stage('build'){
+
+    steps{
+
+                sh ...
+
+                echo This>app.sh
+
+                echo That>>app.sh
+
+                ...
+
+    }                         
+
+}
+
+ 
+
+}
+
+ 
+
+ 
+
+trigger build::
+
+automatic trigger like in github webhook for source build
+
+ 
+
+ 
+
+like for manageing for webhook or trigger needs token for it.
+
+ 
+
+for communicating jenkins via codeing::
+
+(on right top)Admin=>configure=>show api token
+
+ 
+
+ 
+
+ 
+
+securing jenkins::
+
+ 
+
+jenkins==>manage jenkins=>configure global security=>
+
+jenkins own user database and etc for anonmouys accessing
+
+ 
+
+Authorization==>
+
+matrix based security=>
+
+ 
+
+ 
+
+controlling cloud resource ,source  code mgt::
+
+pipeline{
+
+agent any
+
+enviroment{
+
+  secreat=credentials('jenkins-secret=text')
+
+}
+
+stages{
+
+   stage{
+
+               
+
+   }          
+
+}
+
+}
+
+ 
+
+ 
+
+jenkins=>manage jenkins=>configure system
+
+ 
+
+manageing arch type from fingerprinting::
+
+ 
+
+multistage pipeline::
+
+ 
+
+long running pipelines::
+
+ 
+
+ 
+
+multipbranch pipeline:
+
+item=>mulitibranch=>add source==>from githubf
+
+ 
+
+ 
+
+provide lots of automation::
+
+ 
+
+ 
+
+java application build include in jenkins via maven and all..
+
+ 
+
+ 
+
+best solution provide docker container for installing all tools
+
+ 
+
+pipeline language::
+
+ 
+
+jenkins has lot of automation for dev.
+
+ 
+
+bucketinzing and filter
+
+ 
+
+ 
+
+new item=> then multiple options==>
+
+like github and maven
+
+ 
+
+ 
+
+multibranch pipeline ==>like in multiple proj.. in same folder
+
+ 
+
+name==>
+
+jenkins-project
+
+maven project (ok)
+
+ 
+
+now set up github proj
+
+ 
+
+source code git
+
+ 
+
+url::
+
+creaditials::
+
+branch::
+
+ 
+
+build triggers::
+
+can be configure
+
+ 
+
+build env.
+
+delete my workspace
+
+ 
+
+maven goals
+
+clean deploy
+
+ 
+
+post step::
+
+  -------------
+
+ 
+
+ 
+
+ 
+
+now set up in project id::
+
+ 
+
+now central repo::
+
+<repositories>
+
+<repository>
+
+    <id></id>
+
+    <url></url>
+
+</repository>
+
+</repositories>
+
+ 
+
+if u want to change build timeing then in jenkins=>configure
+
+and customize it.
+
+ 
+
+now can see console options.
+
+ 
+
+for configuration go to::
+
+jenkins:: global tech config::
+
+maven configuration : maven name=$maven_name:
+
+ 
+
+pipelines::
+
+ 
+
+ 
+
+pipeline{
+
+agent any{
+
+      stage('compile stage'){
+
+                  withMaven(maven : '$maven_name') {
+
+                    steps{
+
+                                   sh 'mvn clean compile'
+
+                                }             
+
+         }
+
+     }
+
+}
+
+ 
+
+now when u create jenkins file inside project then select
+
+scm Git
+
+creditials :
+
+ 
+
+ 
+
+extra resources::
+
+https://devops4solutions.com/
+
+https://www.guru99.com/jenkins-tutorial.html
+
+ 
+
+ 
+
+ 
