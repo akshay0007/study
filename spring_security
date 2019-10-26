@@ -1,0 +1,373 @@
+Security::
+
+Intro. of Spring security::
+
+ 
+
+Good Security layer::
+
+ 
+
+Authentication and Authorization
+
+ 
+
+Authentication Support
+
+http basic,digest,x509,form based
+
+ 
+
+LDAP and active directory
+
+security of AD using ldap
+
+ 
+
+openid,oauth,jasig cas(centeral auth service)
+
+kerberos and saml
+
+ 
+
+Authorization::
+
+access control
+
+ 
+
+Auth. support::
+
+web based request auth.
+
+method level
+
+domain object instace control
+
+ 
+
+ 
+
+brokeing packages::
+
+spring data=>mongo jpa
+
+ 
+
+spring security
+
+spring secu. core
+
+spring secu. config
+
+spring secu. web
+
+spring secu. test
+
+ 
+
+specific projects::
+
+spring secu. ldap
+
+spring secu. oauth2-core
+
+spring secu. oauth2-client
+
+spring secu. openid
+
+ 
+
+less common proj.
+
+spring secu. oauth2-jose
+
+spring secu. remoting
+
+spring secu. cas
+
+spring secu. acl
+
+ 
+
+ 
+
+implementation::
+
+Landon hotel guest sys::
+
+mvc
+
+micro service arch.
+
+ 
+
+ 
+
+run dashboard::
+
+ 
+
+form based auth :: default impl.
+
+ 
+
+ 
+
+ 
+
+ 
+
+in memeory Auth:
+
+this is not for prod. system.
+
+progression of learning.
+
+ 
+
+ 
+
+JDBC authentication based::
+
+add data-jpa ,h2-database
+
+ 
+
+ 
+
+never store plan text password
+
+used hashing in auth
+
+encrypting a pass
+
+ 
+
+sha-256 password
+
+best option for password
+
+ 
+
+new BCryptPassword(11);//for 11 times rotation
+
+ 
+
+replace password encoder change..
+
+ 
+
+LDAP authentication::
+
+build in many os.
+
+interoprablity
+
+ 
+
+spring security ldap:: support all ldap opration
+
+ 
+
+password auth.
+
+ 
+
+ldap internal::
+
+embedded
+
+open ldap
+
+AD (active dir) is not ldap,but can use for authentication
+
+ 
+
+ 
+
+configure ldap server::
+
+ 
+
+ 
+
+implementing ldap authentication::
+
+ 
+
+query ldap filter
+
+dynamic dn creation
+
+binding (creation),updation & deletion
+
+repository pattern
+
+ 
+
+ 
+
+ 
+
+usages::
+
+onboarding system
+
+HRM
+
+ 
+
+ 
+
+Active directory for authentication::
+
+AD implements an LDAP API
+
+ 
+
+AD provide many services.
+
+ 
+
+features of LDAP::
+
+nested group.
+
+LDAP is tedious to configure
+
+ 
+
+ 
+
+OAuth2 ::
+
+protocol and framwork for providing to http services.
+
+ 
+
+used in third party access
+
+ 
+
+can be used for system to sytem to access.
+
+ 
+
+parts::
+
+resource owner -often the user
+
+client - appl. requesting access
+
+resource server - hosts protected data and accounts
+
+Auth. server- service that grant token
+
+ 
+
+ 
+
+token types::
+
+Access token-> short live token that identify user
+
+refresh token -> long lived token renew token when it expires
+
+ 
+
+scopes provide for rights asso. with the acc. token
+
+ 
+
+OAuth2 in spring
+
+CommonOAuth2Provider
+
+provide native support for okta,google github,facebool
+
+property based configure
+
+client side oath int.
+
+ 
+
+Authorization server::
+
+@EnableAuthorizationServer
+
+Resource server::
+
+@EnableResourServer
+
+ 
+
+combination of both provide accessiblity
+
+ 
+
+to enable client
+
+@EnableOauth2Cient
+
+ 
+
+rest templetes::
+
+OAuth2RestTemplate
+
+ 
+
+ 
+
+third party oauth logins::
+
+just needs auth.
+
+ 
+
+config example::
+
+spring:
+
+security:
+
+  oauth2:
+
+   client:
+
+     registration:
+
+         github:
+
+            client-id:
+
+                    client-secret:
+
+ 
+
+ 
+
+webflux security::
+
+Basic config map
+
+SecuirtyWebFilterChain
+
+MapReactiveUserDetailsService
+
+ 
+
+Principal::
+
+Inject Mono<?>
+
+ 
+
+imple::
+
+MapReactiveUserDetailsService
+
+ 
+
+fpmoles:password
