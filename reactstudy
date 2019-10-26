@@ -13,3 +13,7 @@
 //lifecycle
 //componentwillmount ==>render==>componnetdidmount
 //
+
+react ::
+hooks
+redux
