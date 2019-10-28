@@ -1,0 +1,281 @@
+jenkins on linux
+
+for vm installation::
+http://go.tertranoodle.com/virtualbox
+
+ip a (for ip getting)
+for installation guide refer::
+wikijenkins-ci.org/display/JENKINS/installing
+
+jenkins installation dir::
+/usr/lib/jvm
+
+now set up java home::
+vi ~/.bash_profile
+
+export JAVA_HOME=PATH OF JAVA TILL java1.8 like abc/java1.8
+
+PATH=$PATH:#HOME/bin:$JAVA_HOME/bin
+
+echo $JAVA_HOME
+
+wget -O downloadpath(for docs)
+
+configure jenkins::
+
+it manually start
+service jenkins start
+
+at time of boot time start automatically when system open
+chkconfig jenkins on
+
+
+now accessing gui from centos 
+bcoz no gui in remote host we wants to access jenkin dash board in our system for 
+that we navigate jenkin instace to window host machine USING web browser mode
+
+
+now go to host of windows::
+in Windows\System32\drivers\etc\
+
+notpad hosts::
+
+linux
+ip a::
+get ip of linux
+
+place ip into windows hosts::
+192.168.0.111
+
+now linux::
+hostname(command)
+op=> jenkins.noodle.tetra
+
+place 
+192.168.0.111 jenkins.noodle.tetra
+
+
+now open into browser
+jenkins.noodle.tetra:8080
+
+now password location::
+open file loc::
+copy pass::
+now continue::
+
+now go to select plugin install
+
+dashboard view
+
+pipeline
+build pipeline plugin
+copy artificat plugin
+
+scm(source code mgt)::
+git
+gitlab plugin
+github
+
+notificatin
+ssh plugin
+publish over ssh
+
+
+start using jenkins::
+
+
+now create new item or jobs::
+
+select freestyle project
+
+
+now genral::points
+
+this project is parameterized::
+
+source code management::
+
+build trigger::
+
+  build after other project build
+  build periodically on the basis of crone
+  build when a change is pushed to github
+  poll scm  we define crone and whenever new source code push it automatically check it 
+  and ping after every crone time if not found go to sleep(best(poll scm))
+  etc
+
+build environement::
+delete workspace before start
+
+
+build::
+add build step:
+
+execute shell 
+
+post build action::
+ email notif..
+ build other projects
+
+
+plugins::
+go to manage jenkins=>manage plugins=>search email 
+add email extension plugin
+install and download
+
+now go to add item edit and configure it==>
+then post build section mail is added into drop down
+
+
+now comes to smtp for configure mail service
+
+now go to manage jenkins==>configure system==>
+
+jenkins job helth:
+
+poll scm is best option to solve problem.
+
+
+delete workspace before build
+
+JENKINS PIPELINE::
+build pipeline in plugins::
+
+project configure one to another::
+
+
+
+custom configure::
+lets in you are in  test free project now in 
+in post build action
+
+build other project
+projects to build::test1,
+
+artificate shines::
+
+
+now artificate server ::now needs new vm::
+
+
+linux version::
+cat /proc/version
+
+
+vi ~/.bashprofile
+now needs to export java home
+
+
+now jfrog for artificate::
+
+jfrog installation guide line::
+
+now install artificate oss
+
+www.jfrog.com/ + installing artifactory
+
+
+
+now create instace of artifactory ::
+via using service artifactory start
+
+
+
+server.noodle.tetra:8081/artifactory/webapp
+
+
+now config file ::
+
+
+artificatory has an avaliblity to intergate with ci cd and jenkins
+
+ci cd with maven::
+
+
+now comes to pom which is important file to configure jenkins setup
+
+
+packageing type in pom
+<packaging>pom</>
+
+by default it is jar
+
+com.example:test:version-1.5
+
+example::
+keep the build
+and max last build
+
+source code mgt
+now find git url:
+now in creditials ==>none==>add creaditials for differnt org.
+
+
+build environment::
+
+
+build:
+
+invoke top level artificate
+
+configure jenkins=>global top configuration=>
+
+find the section on maven then add maven into it
+
+
+post build pipeline
+select=> archieve the artificats
+
+now also archieve the artifacts..
+ 
+
+now save it
+
+now install some of the plugin 
+one for copy build artificate
+and another war deploymnet plugin
+
+now spencify in second plugin ::
+war/ear file **/*
+context path:: were your tomcat installed (like loclhost:8080)
+
+
+now db tool set up via using jenkins::
+
+mvn life cycle:
+validate - compile -test -package -verifiy -install -deploy
+
+
+
+manage jenkins-> global tool configuration 
+set up all maven jdk and git
+
+job change::
+
+
+jenkins:cofiguration
+
+configurations::
+manage plugin -> audit to database plugin search inside plugins.
+
+
+now new section is added into configuratoin section ::
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
