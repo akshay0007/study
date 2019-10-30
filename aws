@@ -1,5 +1,311 @@
 
+compute ,storage ,database , and various other service
 
+ 
+
+ 
+
+Elastic beanstalk:
+
+deployment
+
+monitoring
+
+scaling
+
+ 
+
+creating new app ::
+
+and set up some small data
+
+ 
+
+web server enviromement select
+
+ 
+
+now select env. type
+
+ 
+
+predefined config. java
+
+now env. type : load  balancing ,auto scaling
+
+ 
+
+source : upload your project
+
+  
+
+AWS EC2(elastic configure cloud) configure:
+
+ 
+
+setting up an elastic beanstalk app
+
+setting up env. variable
+
+setting up amazon ec2 instance
+
+setting up RDS
+
+setting up VPC
+
+ 
+
+go to elaticbeanstalk home
+
+ 
+
+ 
+
+now env.
+
+java
+
+single instance
+
+ 
+
+setting up env. variable::
+
+additonal resource select both
+
+ 
+
+now go to configure details:
+
+ 
+
+instance ::
+
+t1.micro
+
+ 
+
+select key pair when we wants to login from remote
+
+ 
+
+email address:
+
+ 
+
+helth reporting::
+
+choose basic
+
+ 
+
+root volumn:ssd also
+
+ 
+
+env. tags
+
+ 
+
+RDS configure::(relational database services)
+
+ 
+
+instance class:
+
+ 
+
+relational setting : delete
+
+availablity zone :
+
+ 
+
+setting up VPC::()
+
+vpc drop down:keep default
+
+ 
+
+permission:
+
+ 
+
+AWS deployment and launching ::
+
+review the configuration
+
+fine tuning
+
+launching app and gtting to helth ok status
+
+reflecting without restart
+
+ 
+
+allapplicaition=>myapp =>configuration
+
+ 
+
+instance type=>t2.micro(in free tire)
+
+ 
+
+fine tuning env. variables:
+
+ 
+
+configuraiton overview
+
+software
+
+server_port :8080
+
+ 
+
+database::
+
+ 
+
+ 
+
+launch app check for helth ok status
+
+ 
+
+ 
+
+testing our depolyed app::
+
+ 
+
+dns service also helpfull for providing domain name
+
+ 
+
+now checking put method::
+
+security scalablity and docker:
+
+ 
+
+log monitoring for security
+
+docker:: as a containers
+
+ 
+
+ 
+
+AWS security::
+
+ 
+
+ 
+
+AWS security::
+
+awsstatic whitepapers compl
+
+aws auditing security checklist pdf
+
+ 
+
+ 
+
+VPC (virtual private cloud):provide newtwork isolation
+
+quite similater to virtual env.
+
+ 
+
+remote access via VPN:
+
+ 
+
+identity and access mgt.
+
+ 
+
+scalablity::
+
+ 
+
+ 
+
+handle increasing load
+
+EC2 auto scaling
+
+app auto scaling
+
+aws auto scaling
+
+ 
+
+add remove ec2 capcity
+
+scale based on condition
+
+ 
+
+AWS auto scaling
+
+ 
+
+creating auto scaleing=>launch configure
+
+=>free tier eligible=>t2.micro
+
+ 
+
+deploy user app to scale b/w 3 to 10
+
+configure noti.
+
+exp. with various auto scaling types and test
+
+ 
+
+docker::
+
+Software platform for containing application
+
+ 
+
+it's similar to vm
+
+provide os for running application
+
+ 
+
+scalablity in docker is easily define
+
+ 
+
+ship isolated service fast
+
+ 
+
+continous intergation and delivery
+
+ 
+
+data processing
+
+ 
+
+AWS fargate - run docker container without deploying or mangaging infra
+
+ 
+
+Amazon EKS -run kubernetes on aws without installing kubernates
+
+ 
+
+Amazon ECR -secure private container repo to store docer images
+
+ 
 elastic avl.
 
  
