@@ -2,7 +2,21 @@ AWS::
 
 compute ,storage ,database , and various other service
 
+aws sdk docs::
+
+https://docs.aws.amazon.com/code-samples/latest/catalog/java-s3control-src-main-java-aws-example-s3control-CreateJob.java.html
  
+https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/java
+
+https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/java/example_code/sqs/src/main/java/aws/example/sqs/LongPolling.java
+
+https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/hello.html
+
+ 
+
+open guide::
+
+https://github.com/open-guides/og-aws
 
  
 
@@ -310,20 +324,6 @@ AWS sysops::
  
 
  
-
-AWS opration using sdk::
-
-https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/java
-
-https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/java/example_code/sqs/src/main/java/aws/example/sqs/LongPolling.java
-
-https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/hello.html
-
- 
-
-open guide::
-
-https://github.com/open-guides/og-aws
 
  
 
