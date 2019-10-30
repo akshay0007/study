@@ -263,7 +263,231 @@ now new section is added into configuratoin section ::
 
    
 
+database management using sqitch::
 
+ 
+
+guide of database migration using ci cd:
+
+ 
+
+sqitch file contain some of important files:
+
+deploy(dir)
+
+revert(dir)
+
+verify(dir)
+
+sqtch.conf(file)
+
+sqtch.plan(file)
+
+ 
+
+ 
+
+sqitch helpfull in case of deployment ,failure ,verify etc
+
+in persistent layering
+
+ 
+
+working with jenkins for ci cd::
+
+ 
+
+ 
+
+now create freestyle project for same
+
+now configure logging ,version repo,build enviroment,build triggers
+
+ 
+
+now polling to scm
+
+ 
+
+build steps also needs to configure:
+
+ 
+
+we can also check build enviroment variables also.
+
+ 
+
+now configure repositories and all.
+
+ 
+
+some commands for deployement using sqitch
+
+sqitch deploy db:pg:deploy:deploy@192.168.122.15:5435/tetranoodle
+
+ 
+
+we can also provide all info in sqitchconfig file
+
+ 
+
+now needs of build pipe line plugin
+
+ 
+
+in post grep server go to ::
+
+ 
+
+var/lib/pgsql/3.5/data/pg_hba.conf (host based authentication)
+
+ 
+
+for non secure system go to ::
+
+vi etc/sysconfig/selinux(for disableing selinux disable its only for testing purpose)
+
+ 
+
+ 
+
+jenkins security::
+
+ 
+
+ 
+
+manage jenkins ->configure global security->
+
+ 
+
+JNLP(java network layer protocol)==>used for connecting slave to master
+
+ 
+
+matrix based security is most used security paradigm.
+
+ 
+
+ 
+
+ 
+
+scaling jenkins::
+
+ 
+
+one is added in ubuntu another in windows:
+
+jenkins node adding support:
+
+ 
+
+go to jenkins website==>donwload jenkins for windows->
+
+ 
+
+now in windows: password
+
+ 
+
+now in one localhost another in remote location:
+
+ 
+
+now connect local with remote host
+
+ 
+
+now go to manage jenkins->manage node->now click new node mode
+
+now add permanant connect agent
+
+ 
+
+now another windows open::
+
+ 
+
+some time jnlp has a problem then we configure for troubleshooting
+
+ 
+
+maven
+
+ 
+
+global security
+
+global tools configure
+
+ 
+
+DSL jobs::
+
+Job dsl plugin
+
+configure plugin
+
+implementing job
+
+run configure job
+
+ 
+
+ 
+
+variable define::
+
+def var
+
+ 
+
+for(0...5)
+
+ 
+
+branch looping
+
+when running serveral job parellel
+
+function
+
+ 
+
+job('job-name')
+
+ 
+
+xml structure
+
+ 
+
+ 
+
+plugins::
+
+job dsl search
+
+ 
+
+creating maven job using dsl
+
+ 
+
+jenkins dsl best practice::
+
+create jobs for mulitple branch
+
+ 
+
+dsl script::
+
+https://github.com/jenkinsci/job-dsl-plugin/wiki/Real-World-Examples
+
+https://github.com/tetradev01/jenkinsdsl
+
+ 
 
 
 
