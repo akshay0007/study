@@ -1,0 +1,638 @@
+AWS::
+
+compute ,storage ,database , and various other service
+
+ 
+
+ 
+
+Elastic beanstalk:
+
+deployment
+
+monitoring
+
+scaling
+
+ 
+
+creating new app ::
+
+and set up some small data
+
+ 
+
+web server enviromement select
+
+ 
+
+now select env. type
+
+ 
+
+predefined config. java
+
+now env. type : load  balancing ,auto scaling
+
+ 
+
+source : upload your project
+
+  
+
+AWS EC2(elastic configure cloud) configure:
+
+ 
+
+setting up an elastic beanstalk app
+
+setting up env. variable
+
+setting up amazon ec2 instance
+
+setting up RDS
+
+setting up VPC
+
+ 
+
+go to elaticbeanstalk home
+
+ 
+
+ 
+
+now env.
+
+java
+
+single instance
+
+ 
+
+setting up env. variable::
+
+additonal resource select both
+
+ 
+
+now go to configure details:
+
+ 
+
+instance ::
+
+t1.micro
+
+ 
+
+select key pair when we wants to login from remote
+
+ 
+
+email address:
+
+ 
+
+helth reporting::
+
+choose basic
+
+ 
+
+root volumn:ssd also
+
+ 
+
+env. tags
+
+ 
+
+RDS configure::(relational database services)
+
+ 
+
+instance class:
+
+ 
+
+relational setting : delete
+
+availablity zone :
+
+ 
+
+setting up VPC::()
+
+vpc drop down:keep default
+
+ 
+
+permission:
+
+ 
+
+AWS deployment and launching ::
+
+review the configuration
+
+fine tuning
+
+launching app and gtting to helth ok status
+
+reflecting without restart
+
+ 
+
+allapplicaition=>myapp =>configuration
+
+ 
+
+instance type=>t2.micro(in free tire)
+
+ 
+
+fine tuning env. variables:
+
+ 
+
+configuraiton overview
+
+software
+
+server_port :8080
+
+ 
+
+database::
+
+ 
+
+ 
+
+launch app check for helth ok status
+
+ 
+
+ 
+
+testing our depolyed app::
+
+ 
+
+dns service also helpfull for providing domain name
+
+ 
+
+now checking put method::
+
+security scalablity and docker:
+
+ 
+
+log monitoring for security
+
+docker:: as a containers
+
+ 
+
+ 
+
+AWS security::
+
+ 
+
+ 
+
+AWS security::
+
+awsstatic whitepapers compl
+
+aws auditing security checklist pdf
+
+ 
+
+ 
+
+VPC (virtual private cloud):provide newtwork isolation
+
+quite similater to virtual env.
+
+ 
+
+remote access via VPN:
+
+ 
+
+identity and access mgt.
+
+ 
+
+scalablity::
+
+ 
+
+ 
+
+handle increasing load
+
+EC2 auto scaling
+
+app auto scaling
+
+aws auto scaling
+
+ 
+
+add remove ec2 capcity
+
+scale based on condition
+
+ 
+
+AWS auto scaling
+
+ 
+
+creating auto scaleing=>launch configure
+
+=>free tier eligible=>t2.micro
+
+ 
+
+deploy user app to scale b/w 3 to 10
+
+configure noti.
+
+exp. with various auto scaling types and test
+
+ 
+
+docker::
+
+Software platform for containing application
+
+ 
+
+it's similar to vm
+
+provide os for running application
+
+ 
+
+scalablity in docker is easily define
+
+ 
+
+ship isolated service fast
+
+ 
+
+continous intergation and delivery
+
+ 
+
+data processing
+
+ 
+
+AWS fargate - run docker container without deploying or mangaging infra
+
+ 
+
+Amazon EKS -run kubernetes on aws without installing kubernates
+
+ 
+
+Amazon ECR -secure private container repo to store docer images
+AWS sysops::
+
+ 
+
+ 
+
+AWS opration using sdk::
+
+https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/java
+
+https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/java/example_code/sqs/src/main/java/aws/example/sqs/LongPolling.java
+
+https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/hello.html
+
+ 
+
+open guide::
+
+https://github.com/open-guides/og-aws
+
+ 
+
+AWS looking for
+
+deploy manage operate
+
+scalablity HA fault taul.
+
+ 
+
+ 
+
+==========================================================
+
+implement and control the flow of data to and from AWS::
+
+ 
+
+learn well arch. framwork
+
+ 
+
+ 
+
+ 
+
+amazon web service linux ops:;
+
+https://github.com/talentedmrjones/amazon-web-services-linux-operations
+
+ 
+
+experiment with cli and sdk
+
+ 
+
+cli written in python.
+
+ 
+
+create infrastructure diagrams.
+
+ 
+
+knoweldge of arch. is absolutely require.
+
+ 
+
+Graph db,
+
+ 
+
+remove single point failure
+
+ 
+
+ 
+
+caching ::
+
+  content caching
+
+  in memory caching (for db)
+
+ 
+
+security::
+
+  
+
+serveice and resource scope::
+
+avaiablity:: IAAS ,PAAS (infromation, Platform)
+
+Region :: IAAS ,PAAS,SAAS
+
+GLOBAL:: CDN,DNS
+
+ 
+
+cli introduction:
+
+ 
+
+AWS provide rest end point
+
+also checking backdoors of access
+
+ 
+
+ 
+
+rest end point surrounded by aws console ,cli, sdk
+
+ 
+
+ 
+
+aws cli concepts::
+
+ 
+
+needs of pip for  installing aws cli if you don't have python then can use standalone standards
+
+ 
+
+in windows there are msi installation for it
+
+ 
+
+ 
+
+cli configuration:
+
+mfa used for security
+
+ 
+
+aws cli command format
+
+--profile
+
+--region
+
+--output ==>json ,text
+
+ 
+
+--endpoint-url
+
+--generate-cli-skeleton
+
+ 
+
+ 
+
+--query:restrict o/p to specific properties
+
+JMESPath query support
+
+ 
+
+--filter: rest. o/p to specific object
+
+ 
+
+aws ec2 describe-instance --output text \
+
+ 
+
+--query ''
+
+--filter Name=group-Name,Value-..
+
+ 
+
+ 
+
+AWS sdk options ::
+
+more usages:: go, python ,node.js
+
+ 
+
+ 
+
+case study cli and sdk::
+
+ 
+
+ 
+
+boto3 library for delete volumn in aws
+
+ 
+
+EFS:: block storage service.
+
+ 
+
+EBS isnot a service
+
+ 
+
+ 
+
+monitoring and performance::
+
+create ,manintain and alarm utilization
+
+ 
+
+cloud watch::(push based service)
+
+metric collection
+
+log collection
+
+alarm
+
+event
+
+ 
+
+ 
+
+EC2::
+
+cpu util
+
+n/w in ,out
+
+cpu credit balance
+
+ 
+
+ 
+
+========================================================
+
+Elastic loading balance server strategy::
+
+classic load balacer(layer 4 and 7 mixture)
+
+Application load balancer
+
+Network load balancer(layer 4 works on tcp protocol)
+
+ 
+
+ 
+
+Databases::
+
+RDS::Aurora
+
+ 
+
+Cloud watch custom matrix::
+
+ 
+
+custom metrics options::
+
+cloud watch agent
+
+use scripts or sdk to post metrics
+
+ 
+
+cloud watch agent install via ssm::
+
+launch ec2 instance
+
+ensure ssm compatiblity
+
+ensure agent must me installed and running
+
+create IAM role
+
+ 
+
+create config file from instace os shell
+
+ 
+
+ 
+
+cloud watch alarms::
+
+insuff. data
+
+ok
+
+alarm
+
+ 
+
+ec2==>stop ,reboot, terminate, recovery
+
+autoscaling:exe. scaling policis
+
+sns==>notifiy
+
+sns==>trigger lambda function
+
+ 
+
+trigger lambda fun.
+
+ 
+
+ec2 has two diff. type of status check::
+
+n/w connect.
+
+phy. host  pow.
+
+oom
+
+corrupt vol.
+
+kenal issue.
+
+ 
+
+ 
+
+
+ 
+ 
