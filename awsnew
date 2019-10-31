@@ -630,6 +630,119 @@ corrupt vol.
 kenal issue.
 
  
+aws
+ec2 status checks
+
+EBS volumn::
+
+
+RDS check::
+
+undersized NAT instance
+undersized RDS instance
+undersized EC2 instance
+
+
+monitoring logs::
+
+
+cloud watch event::
+
+events->rules->target
+
+not all services supp.->match event-> labda,ec2 run commnand,kinessis firehose
+
+
+Amazon ec2 instance
+aws labda funtion
+streams in amzon kinesis data
+amzon ecs tasks
+aws batch jobs
+aws manger automation
+
+
+pipe line aws code pipeline
+aws codebuild projects
+amazon inspector assements templetes
+amazon sns topics
+amazon sqs queues
+built targets
+default event bus of another aws account
+
+
+cloud watch logs::
+aggregate the logs from multiple services.
+aggregate-->multiple source
+store-->durable And reliable
+access-->console cli,sdk
+monitors-->metrics filter
+
+
+best practices::
+no single point failure
+inte. with aws eco system
+aggregation point for custom logs
+cost based on data ingestion rate and storage
+
+cloudwatch logs built in sources::
+route53,cloud trail,labda,api gateways
+
+custom sources for cloud watch:;
+ec2 application,other cloud resource,on premicess server
+
+requires configuration file(via s3 etc)
+great for os and application logs
+
+automate install(similar to cloud watch)::
+ ami
+ ec2 user data
+ configuration mgt software
+ ssm run command
+
+genrate acccess logs for different service
+s3==> can be in same bucket but for best practice needs to store in differnt bucket
+cloud front==>s3()
+elb==s3
+api gateway==>cw log(cloud watch logs)
+
+permission::
+s3==>has is three diff. ways to greant acc(iam ,bucket,access control)
+bucket ecl
+cloudfront==>bucket ecl
+elb==>bucket policies
+api gateway==>iam role
+
+case study on monitoring logs::
+log monitoring and storage::
+requ. of access and security logs.
+and also place logs cloud watch and s3
+
+now comes to place logs::
+like api gateways==>place cloud watch
+ALB ==>if in s3 place into it
+ec2==>cw
+
+vpc flow logs-->into cloud watch
+
+now intergate s3 and cloud watch using cloud trail (bcoz it pushes all logs b/w both)
+
+solution
+cloud watch ==lambda==s3
+
+also create kinesis fire house subscription filter 
+
+cli gives u on demeand sevice but automaion is harder
+
+High availablity::
+
+
+
+
+
+
+
+
+
 
  
 
