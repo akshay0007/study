@@ -1,6 +1,7 @@
 hadoop::
 http://www.professionalcipher.com/2018/01/how-to-install-hadoop-on-ubuntu-1604.html
 
+
 devops::
 https://betsol.com/2018/11/devops-using-jenkins-docker-and-kubernetes/
 https://devops4solutions.com/
@@ -35,6 +36,7 @@ jmeter::or testing tools
 https://www.softwaretestinghelp.com/jmeter-tutorials/
 
 microservice::
+http://javaonfly.blogspot.com/2016/08/docker-basics-understanding.html
 https://dzone.com/articles/this-week-in-spring-garbage-collection-cloud-rest?fromrel=true
 https://piotrminkowski.wordpress.com/tag/ribbon/
 https://microservices.io/patterns/microservices.html
