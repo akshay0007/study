@@ -1,0 +1,89 @@
+devops::
+
+goals:: 
+automation of process
+
+toolchain::
+code
+build
+test
+package
+release
+configue
+monitoring
+
+now having
+sdlc,scm,elk,gitflow
+
+
+needs ::
+tomcat
+maven
+artifactory::jfrog
+jenkins
+elastic searh
+logstash
+kibana
+
+
+
+Tomcat security::
+configure tomcat_user.xml file
+
+MAVEN SECUIRTY::
+now create two files inside m2 dir
+setting.xml
+setting-security.xml
+now using 
+mvn -emp password  ((master encrypted passowd) FOR maven)
+
+
+mvn -ep password
+paste  encrypted password in settings.xml 
+
+mvn help:describe
+
+github setup::
+
+
+place artifact.zip into /opt folder 
+and then go inside bin and run install.sh
+
+
+by default user cred.
+admin 
+password
+
+
+<distributionManagement>
+<repositiory>
+<id> </>
+<name> </>
+<url> </>
+</>
+
+<snapshotRepository>
+<id> </>
+<name> </>
+<url> </>
+</>
+
+</>
+
+
+<scm>
+<connection></>
+<developerconnection></>
+<url></>
+<tag></>
+</>
+
+<plugin>
+
+maven release plugin
+<configuration>
+</>
+
+
+</>
+
