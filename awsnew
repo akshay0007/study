@@ -12,6 +12,28 @@ https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/java/example_code/sq
 
 https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/hello.html
 
+
+servicess::
+
+
+ECS (elastic container service)
+
+ 
+
+IAM(identity and access mgt)
+
+ 
+
+EC2(elastic compute cloud)
+
+ 
+
+S3(simple storage service)
+
+ 
+
+RDS(relation databse service)
+
  
 
 open guide::
@@ -737,6 +759,665 @@ High availablity::
 
 
 
+ 
+
+ 
+
+ 
+
+High avaliablity::
+
+ 
+
+fault tolerance::
+
+ 
+
+VPC::
+
+NAT GW:: save from single point failure.
+
+ 
+
+egress point are all HA/FT==>handle via internet gateway
+
+ 
+
+ 
+
+ELB::(HA percepective)
+
+ 
+
+classic load balancer:: layer 4 and 7
+
+support EC2 classic
+
+ 
+
+ALB::(application load balancer)
+
+  layer 7
+
+  path based routing
+
+ 
+
+ 
+
+NLB ::(n/w layer balancer)
+
+layer 4
+
+static ip entry point
+
+ 
+
+ELB high avl.::
+
+ 
+
+zone availablity:
+
+ 
+
+Auto scaling::
+
+flag ship service:
+
+high availablity
+
+optimize cost
+
+temp. resource
+
+ 
+
+regional service scope::
+
+ 
+
+read all docs on auto scaling operation
+
+learn auto scaling service
+
+ 
+
+ 
+
+Auto scaling elementes
+
+launch config=>auto scaling group=>auto scaling policies==>schedueld actions
+
+instance        location          event driven scaling    time drive scaling
+
+details                   limit,assocaitn
+
+ 
+
+association of one more Load balancer
+
+event drive via cloud watch
+
+ 
+
+ 
+
+manage auto scale policies::
+
+scaling large and small group
+
+min and max no. of instance manage
+
+roll out launch config
+
+manual task for lifecycle hooks
+
+manage cool down periods
+
+ 
+
+auto scaling scenerio::
+
+state less webapp
+
+app. with unpredictable traffic
+
+steady state group
+
+message queue consu. app.
+
+ 
+
+ 
+
+Anti scenrio
+
+appl. with session stickiness
+
+monolathic app.
+
+app. with fixed ip address.
+
+app. with many manual deploy steps
+
+app. with short large ,random  trafic spikes
+
+ 
+
+HA component:: behind load balancer and vpc::
+
+suppose in case of one instance is not working then new instance create
+
+if entire infra. down then vpc handle
+
+automatic elastic: it launched new instance for that
+
+ 
+
+ 
+
+HA. DNS::
+
+route s3 basic
+
+register domains and serve dns records.
+
+100% time sla
+
+serveral routing options
+
+health checks
+
+failover
+
+intergation points with aws resource
+
+ 
+
+routing s3 support multiple end point for HA
+
+routing ::
+
+   latency based
+
+   weighted round roubin
+
+  
+
+ALIAS records::(new dns )
+
+  pointer to aws resource
+
+  avoid using ip addressing as spof
+
+ 
+
+EC2 autorecovery::
+
+  maintain istance id
+
+  migrate in new hardware
+
+ 
+
+RDS::(relational database)
+
+remove all os installation ,backup ,patch and updates,handle failover
+
+it reduce risks
+
+ 
+
+elastic beanstalk:
+
+service contribute high HA
+
+manageging entire app
+
+region scoped service
+
+can be configured with no single points of failure
+
+platform deploys choice of the following::
+
+elastic load balancer
+
+EC2
+
+auto scaling
+
+RDS
+
+ 
+
+not really infra. as a serveice or plat. as a service
+
+no single point of failure
+
+it can take care of of all above four
+
+ 
+
+further reading::
+
+support web server s/w
+
+support languages
+
+appl. cloning workflow
+
+appl. dep. options
+
+deployment rollback options
+
+ 
+
+Tradeoff::
+
+block storage volumn.
+
+tradeoff container services::
+
+ 
+
+infra. as service==>ec2
+
+platform as sevcie==>beanstalk
+
+ 
+
+ 
+
+deployment and provisioning::
+
+infra as code provisioning
+
+containers and code deployment
+
+ 
+
+ 
+
+Infra as a code::
+
+manual provisoning::
+
+from console we cannnot automate
+
+then work in cli
+
+sdk for automation
+
+api can be automated
+
+ 
+
+ 
+
+bootstrapping building block
+
+user data
+
+cloudformation cfn update
+
+configuration mgt s/w
+
+ 
+
+ 
+
+all three are container based deployed
+
+ops works
+
+elstic bean
+
+ecs/eks
+
+ 
+
+cloud formation::
+
+flagship service as part of resource deployment
+
+infra as a code
+
+inter. with all aws
+
+deploy infra. and chages
+
+does not operate on data
+
+ 
+
+cloud formation templete::
+
+description
+
+metadata
+
+parameter
+
+mapping
+
+condtion
+
+transfrom
+
+resource
+
+output
+
+ 
+
+network templete::
+
+vpc
+
+subnetes,route templete,internete gateways
+
+ 
+
+load balancer templete::
+
+ 
+
+ops works:
+
+hybrid ::
+
+configure mgt+infra as code
+
+chef automate
+
+puppet ent.
+
+stacks consist of layer
+
+ec2 (mulitple layers)
+
+elb
+
+rds
+
+ecs
+
+custom
+
+ 
+
+manage service=higher avai.
+
+ 
+
+many intergation points with aws eco.
+
+ 
+
+ 
+
+elastic beanstalk::(now for depoly resources)
+
+kinds works in b/w infra and platform as service
+
+ 
+
+application (top level)
+
+enviroment (dev,stage etc)
+
+  tier ,config ,config templete
+
+    version
+
+ 
+
+mge platform::
+
+elb
+
+ec2
+
+auto scaling
+
+rds
+
+resource creat,del,updae opr
+
+still requ. os mgt
+
+does not address mult. regional
+
+ 
+
+deployment options:
+
+rolling update
+
+  new ec2 instance req.
+
+rolling depl.
+
+ 
+
+blue green deployment::
+
+when u have ext. res. that is curr. dep. in prod. its blue deply
+
+now want to update something on it then this called greenn deply
+
+it can be implement via elastic benastalk
+
+now user move blue to green now if it goes to 0 100 then compl. restore traffic
+
+ 
+
+cloud formation templetes can also be used for that purpose
+
+ 
+
+ 
+
+many other possiblities also in there::
+
+ecs(contianer verion rather instance)
+
+opsworks
+
+codedeploy
+
+multiple options for cloud fromation
+
+multiple opt. for autoscaling
+
+and others
+
+ 
+
+infra as a code service::
+
+ 
+
+container code deployement::
+
+ 
+
+services:: ecs ,eks,code deployment
+
+system manager run commands
+
+system manager run commands
+
+previously ec2 run commnads
+
+ 
+
+ec2 instance            on premisess
+
+access to ssm                     access to ssm
+
+vpc only                               iam service role
+
+os version restr. mgd inst. act. cret.
+
+IAM role                               ssm agent
+
+ssm agent                          
+
+instance tags created    
+
+  
+
+ECS and EKS::
+
+ecs::
+
+depl. container without managing infra.
+
+support docker and window cont.
+
+choice of ec2(platfrom as a serv.) or fargate to host cont.
+
+ 
+
+ 
+
+cluster
+
+  sevice:: auto sca. target group. def.
+
+ 
+
+task def.
+
+  cont. img. ,comp. res.
+
+ 
+
+EKS(kubernates)::
+
+not supp. windows container
+
+supp. of docker
+
+ 
+
+  
+
+code deploy::
+
+deploy to ec2 ,lambda,
+
+file and command bas fram
+
+rolling update
+
+blue green dep.
+
+stop and rollback
+
+its not package repository
+
+ 
+
+centralized control
+
+ 
+
+aws labda::server less
+
+elastic map reduce::hadoop
+
+aws system manager:: inverntory ,patch and parms
+
+ 
+
+ 
+
+storage and data mgt::
+
+backup in aws::
+
+ 
+
+EBS snapshot
+
+ incrase durablity
+
+option to share across acc.
+
+option to copy to diff. region
+
+ 
+
+ephemeral volumn::
+
+no native backup fun.
+
+can do file level synch
+
+daily snapshot
+
+ 
+
+ 
+
+backup dynmodb::
+
+ 
+
+back up in s3::
+
+bucket versioning
+
+increase cost
+
+lifecycle policies for version
+
+ 
+
+cross region replication::
+
+cli based copy or sync
+
+ 
+
+vm import /export
+
+aws connector for vcenter(VMware)
+
+ 
+
+file gateway:
+
+ share s3 buckets
+
+ run on remises or in ec2
+
+ 
+
+volumn gateway::
+
+cached mode
+
+stored mode
+
+ 
+
+ 
+
+tape gateway::
+
+ssm run command:: charges money
+
+lambda function:: charges money
+
+ 
+
+Disaster recovery::
+
+ 
 
 
 
