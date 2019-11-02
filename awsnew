@@ -1416,6 +1416,84 @@ lambda function:: charges money
  
 
 Disaster recovery::
+learn the 4 DR scenarios::
+backup and restore
+pilot light
+warm standby
+multi site solution
+
+backup and restore preparation::
+		    backupdata into s3	
+corporate data center --------------->aws cloud(create ami and n/w infra)
+					create elb launch ec2 /RDS restore data
+
+   perform dns cutover configure monitoring configure ci./cd
+
+backup and resore strategies(4 is bad 1 is good)
+RTO-4
+RPO-4
+cost-1
+time to imp-1
+complexcity to mge-1
+
+provision ec2 scale db
+
+promote db replica
+promote dns custover
+confiugre monitore
+configure ci/cd
+
+scale ec2 horizontally
+scale db2 vertically
+dns cutover if needed
+
+multi site preparation::
+ 
+
+
+pilot light::(const. replica)
+RTO-3 recovery time object
+RPO-3 recovery point object 
+cost-2
+time to imp-2
+complexcity to mge-2
+
+warm standby ::cofigure 2 way db replication
+RTO-3 recovery time object
+RPO-3 recovery point object 
+cost-2
+time to imp-2
+complexcity to mge-2
+
+warm standby ::cofigure 2 way db replication
+RTO-2 recovery time object
+RPO-2 recovery point object 
+cost-3
+time to imp-3
+complexcity to mge-3
+
+
+
+multi site::
+RTO-1 recovery time object
+RPO-1 recovery point object 
+cost-4
+time to imp-4
+complexcity to mge-4
+
+data retention compliance::
+passive::
+ configureation change or periodic triggers
+ evealute changes through aws config
+ apply build in rule or custom (labda fun)
+
+service catalog:
+ active service:
+ createing non compliance templetes
+ can create constraints
+ users access service catalog
+ 
+
 
  
 
