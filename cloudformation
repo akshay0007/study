@@ -1,0 +1,98 @@
+aws cloud formation provide helper scirpt for deployment into ec2
+
+amazon ec2==>
+ cfn-init==>installaiton and service start up
+ cfn-get-metadata->retreive all metadata .paths etc
+ cfn-signal->synch resource
+ cfn-hup->custom hup
+
+
+Resources:{
+ WebServer:{
+ Type:AWS::EC2::Instance,
+ MetaData:{}
+ AWS::CloudFormation::Init:{
+   config:{
+	yum:{
+	  mysql:{}
+	  php:{}
+		}
+
+	}
+}
+}
+sources:{
+ /var/www/html:""
+}
+}
+
+
+httpd==>httpDemon
+ 
+like 
+mysqlId:{
+enabled:true,//start at time of boot system
+ensureRunning:true//running at the time of cloudformation init
+}
+etc..
+
+code in yaml and json=>deployed local or from s3 =>create stack 	using console cli=>stack and resources are provisioned 
+
+continous intergation=>delivery=>deployment
+source
+build
+test
+promote
+
+validate syntex::
+cfn-lint
+cfn_nag
+
+TestCat test your intergation tests
+
+WebSg:{(websecurity)
+Type:AWS::EC2::SecuirtyGroup,
+properties:{
+
+}
+
+}
+
+automation of cloud.
+networking,
+infra(load balancer,instance),
+IAM(user acc.,permission group,and prrivilages),
+custom(it is possible to custom resources)
+
+
+Taxonomy :Nouns::
+templetes:: json/yaml(content and description)
+stacks:: instance of cloud formation templete
+
+
+{
+
+AWSTempleteFormationVersion:""
+Description:""
+Resources:{}
+Outputs:{}
+}
+
+S3Bucket:{
+Type:AWS::S3:Bucket,
+Properties:{}
+parameters:{}
+mapping:{}
+DeletionPolicy:""
+}
+
+searching in google
+awscloudformation userguide cfn bootstrapping (search in google)
+aws cloudformation articles and tutorials
+cloudformation getting started
+aws-cloudformation templetes
+github awslabs cfncluster
+
+
+
+
