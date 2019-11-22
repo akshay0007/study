@@ -12,9 +12,11 @@ https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/java/example_code/sq
 
 https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/hello.html
 
-
+https://aws.amazon.com/developer/community/heroes/?community-heroes-all.sort-by=item.additionalFields.sortPosition&community-heroes-all.sort-order=asc
 servicess::
+open guide::
 
+https://github.com/open-guides/og-aws
 
 ECS (elastic container service)
 
@@ -36,9 +38,7 @@ RDS(relation databse service)
 
  
 
-open guide::
 
-https://github.com/open-guides/og-aws
 
  
 
