@@ -1495,6 +1495,34 @@ service catalog:
  
 
 
+Troposphere to template creation in python.
+github/cloudtools/troposphere
+
+deletion policiy::
+delete and retains: of resources(like db and s3)
+
+searching:
+custom resources with aws lambda::custom proviosing 
+
+awscloudformation walkthorugh custom resources lambda lookup
+
+
+best practiciess::
+
+best practices::
+horizontal and (services)vertical layers
+use cross stack refrecences to ref of vpc and subnets
+templetes are env. agonistics so you can do dev/test/prod and across region /accout
+no embed cred
+
+use specific parms and cosntrinats
+use cfn init
+validate templete
+dont do anything manually
+
+cost estimation::
+github awslabs
+
  
 
 
