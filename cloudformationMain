@@ -1,0 +1,241 @@
+aws cloud formation provide helper scirpt for deployment into ec2
+
+amazon ec2==>
+ cfn-init==>installaiton and service start up
+ cfn-get-metadata->retreive all metadata .paths etc
+ cfn-signal->synch resource
+ cfn-hup->custom hup
+
+
+Resources:{
+ WebServer:{
+ Type:AWS::EC2::Instance,
+ MetaData:{}
+ AWS::CloudFormation::Init:{
+   config:{
+	yum:{
+	  mysql:{}
+	  php:{}
+		}
+
+	}
+}
+}
+sources:{
+ /var/www/html:""
+}
+}
+
+
+httpd==>httpDemon
+ 
+like 
+mysqlId:{
+enabled:true,//start at time of boot system
+ensureRunning:true//running at the time of cloudformation init
+}
+etc..
+
+code in yaml and json=>deployed local or from s3 =>create stack 	using console cli=>stack and resources are provisioned 
+
+continous intergation=>delivery=>deployment
+source
+build
+test
+promote
+
+validate syntex::
+cfn-lint
+cfn_nag
+
+TestCat test your intergation tests
+
+WebSg:{(websecurity)
+Type:AWS::EC2::SecuirtyGroup,
+properties:{
+
+}
+
+}
+
+automation of cloud.
+networking,
+infra(load balancer,instance),
+IAM(user acc.,permission group,and prrivilages),
+custom(it is possible to custom resources)
+
+
+Taxonomy :Nouns::
+templetes:: json/yaml(content and description)
+stacks:: instance of cloud formation templete
+
+
+{
+
+AWSTempleteFormationVersion:""
+Description:""
+Resources:{}
+Outputs:{}
+}
+
+S3Bucket:{
+Type:AWS::S3:Bucket,
+Properties:{}
+parameters:{}
+mapping:{}
+DeletionPolicy:""
+}
+
+searching in google
+awscloudformation userguide cfn bootstrapping (search in google)
+aws cloudformation articles and tutorials
+cloudformation getting started
+aws-cloudformation templetes
+github awslabs cfncluster
+
+
+
+update stack  so we cannot edit update to same one with different temp.
+
+Resource:
+ MyInstance:
+  Type:AWS::EC2
+  Properties:
+   AvailabityZone:
+
+
+
+updateing s3 bucket::
+without replacement
+or with replacement
+AccessControl in aws
+
+
+go to cloud formation then ->select Action ->update sstack then update in cloud formation file
+
+lets learn about tha parms that are common to cloudformation::
+tags
+permisssion
+notification
+timeout
+rollback or failure
+
+
+designing of cloud fromation::
+cloudformation ->design templete
+
+building blocks::
+ Resources:your aws resource declared in templete
+ paramerters::dynmic parms in your temp
+ mappings:: stataic varible in your temp
+ outputs:ref to what you have been created
+ conditional:list of condition to perform res
+ metadata:
+
+parameters::
+type
+string,number,	commo delimiter list,List<Type>	,AWS parameter
+description
+constraints
+constraint description(string)
+
+
+searh aws parameters in cloud formation
+
+if you want to use parameters then use !Ref variablename
+
+
+ref. parms.
+Fn::Ref==>short in yml !Ref
+
+AWS::productname::data type name
+
+optional attribute resources::
+depends on::
+deletion policies::
+metadata::
+
+
+
+CLOUD FORMATION MAPPINGS:;
+
+RegionMap:
+ us-east-01:
+  "44":"ami"
+  "45":"ami"
+ us-east-02:
+  "44":"ami"
+  "45":"ami"
+
+
+accessing value in Fn::FindInMap
+
+Fn::ImportValue
+
+conditionals
+Enviroment(dev/test/prod)
+
+conditions:
+ logicalId:
+  instrinsic function
+
+Fn::And
+Fn::If
+Fn::Equal
+etc
+
+Fn:GetAll
+
+Fn::GetAtt:[logicalNameOfResource,attributeName]
+!GetAtt logicalNameOfResource.attributeName
+
+
+cloudformation metadata::
+optional data import and attached to any resource
+
+
+cloud formation init::
+
+scripts::
+cfn-init
+cfn-signal
+cfn-get-metadata
+cfn-hup
+ 
+
+!Sub (method replacing subsititutation)
+
+cfn-hub.config file
+
+
+Advance cloud formation stuff::
+
+
+
+Troposphere to template creation in python.
+github/cloudtools/troposphere
+
+deletion policiy::
+delete and retains: of resources(like db and s3)
+
+searching:
+custom resources with aws lambda::custom proviosing 
+
+awscloudformation walkthorugh custom resources lambda lookup
+
+
+best practiciess::
+
+best practices::
+horizontal and (services)vertical layers
+use cross stack refrecences to ref of vpc and subnets
+templetes are env. agonistics so you can do dev/test/prod and across region /accout
+no embed cred
+
+use specific parms and cosntrinats
+use cfn init
+validate templete
+dont do anything manually
+
+cost estimation::
+github awslabs
