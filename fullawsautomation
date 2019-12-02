@@ -166,6 +166,40 @@ enable and attaching user
 configure aws cli to use this device when assuming roles
 
 
+aws --profile dev configure set ...
+
+password reset with the help of cli::
+
+crate login profile
+aws --profile admin iam create-login-profile --user-name s.cooper --password passwod --password-reset-required 
+
+change your password::
+aws --profile admin iam change-password --old-password 
+
+getting access key::
+aws --profile admin configure get aws_access_key_id
+
+create new creadintials::
+aws --profile admin iam create-access-key --user-name s.cooper
+
+set new keyss::
+aws --profile admin configure set aws_access_key_id <new key id>
+aws --profile admin configure set aws_secret_access_key <new key id>
+
+manageing network resources::
+
+
+Amazon vpc::
+using vpc
+
+vpc span the region
+and subnet per availablity zone
+
+amazon virtual private clouding defence::::
+routing::
+	route table by default local
+network access control list:: state less
+security groups:: it applied to instances state full
 
 
 
