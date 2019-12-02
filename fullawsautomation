@@ -1,0 +1,172 @@
+auto discover creditials::
+env variable
+~/.aws
+ec2 roles
+
+
+controlling ::
+limit
+uses jmespath
+ use jmespath.org
+ 
+output in json/text or table
+
+
+aws service(ec2) command(describe-instance) 
+ --filters Name=image-id, Values=ami-12345678
+ query 'Reservations[*],instances[*],[InstanceId]
+ --output 
+
+manage infra as servcie
+
+AWS automate with aws cloudformation::
+
+aws cloudformation engine
+ process ,templete creation and update 
+
+stack::
+collection of resources created by templete
+
+cloud formation::
+type of resources.
+
+
+export:
+  name:!Sub ${AWS::StackName}-VpcId
+
+import:
+ etc
+
+
+we export some value then import into another one
+
+sdk called boto3
+
+email address + password=>master acc
+username+pass=>aws web console
+accesskey+secret key=>cli sdk
+
+
+service control policy is for provide what should provide one to another accounts
+
+
+roles and eleveted privilages::
+IAM(identity and access management)
+
+
+group of developer and lead developer
+
+sts(security token service)
+
+arn=>amazon resource name
+
+cross account admin role::
+
+
+not login with IAM account, login with root access
+
+fina iam(identity and access mgt) service
+
+go to groups =>create new group=> name(admin)=>filter by policy type(aws mgted)=>attached amdmin access
+=>click next=> click on admin =>then go to permission=> check in policy tab (admin access)=>
+(not allow to billing actiion)=>
+now in user=>username (s.cooper)=> then in access type click on programatic access=>
+lets add into group admin =>now review=>create user
+download access key (via csv )
+
+now log back from dev account useing creaditalials::
+
+now user able to login from different roles::
+
+go to iam then roles=>create (role for cross acc. access(click))=> if we have both acc (admin and dev)=> then use provide access b/w aws acc. you own
+=>select=>accout id(go to creaditials tab http://accId.signin.aws.amazon.com/console)=>then insert into this
+=>then click on administrator access(next step)=>role name(devAdmin)=>then click on DevAdmin=>trust relationships
+=>there is showing trusted enttities the account account id ,in summary also there is role arn also present
+now paste role arn to like arn:aws:iam::accid1:role/devadmin
+
+now have another accid
+development accid ==>accid1
+
+now login back to admin==>IAM=>find group (admin)=>go to permission=> click on inline policies
+=>click polie genrator then select=> now 
+effect:allow
+aws service: aws security token service
+action: Assume Role
+amazon resource name: copy role(arn:aws:iam::accid1:role/devadmin)
+add statment
+now next::
+
+policy doc
+action:[
+ sts:AssumeRole
+]
+
+apply policies:
+now logout from admin go to dev::
+now have full access to cross admin
+
+now go back to cli::
+~/.aws/credentials==>creaditals file(by default it is default but further perhaps u can create custom)
+~/.aws/config==>configuration files
+
+configure aws cli tools::
+
+aws configure list
+access and access key inside csv file which we previously download
+
+now configure admin ::
+aws --profile admin  configure
+
+we can set all regisions and all
+
+aws --profile admin configure set region us-west-2
+
+
+now we will create cloud fomration templete which have some policies access, some group and some dev
+which have limited access.
+
+example::
+AWSempleteFormationVerions:
+Description:
+
+Resource:
+ DevelopersGroup:
+   Type:
+   Properties:
+  	GroupName:
+
+EC2LimitedAccessPolices:
+ Type:
+ Properties: 
+   ManagedPolicyName:''
+   PolicyDocument:
+     Version:
+
+
+now validate templete::
+aws cloudformation validate-templete --templete-body file://location
+
+now create the stack specify templete file and 	the ness. iam capblities
+aws --profile admin cloudformation create-stack --stack-name users-group-developers --templete-body file
+
+now wait for completion::
+aws --profile admin cloudformation wait stack-create-templete-complete --stack-name users-group-developers
+aws --profile admin cloudformation describe-stacks --stack-name users-group-developers
+aws --profile admin cloudformation describe-stacks --stack-name users-group-developers --query 'Stack[].[StackName,StakeStatus]' --output text
+
+
+enforcing mfa::
+
+enable multifactor authentication::
+iam service 
+aws --profile admin iam create-virtual-mfa-device --virtual-mfa-device-name SCooperMFAD --outfile ./QRCode.png --bootstrap-method QRCodePNG
+
+enable and attaching user
+
+configure aws cli to use this device when assuming roles
+
+
+
+
+
+
