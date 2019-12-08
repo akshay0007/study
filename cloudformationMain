@@ -281,3 +281,148 @@ security groups:: it applied to instances state full
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+preview of changes::
+will show 
+resource to be change
+scope of change
+replacment
+
+network acls:network access control list
+
+review of amazon route 53:
+register domain
+transfer domain
+different of routing methods::
+ 
+DNS::
+A record:: alias server 
+MX::mail server 
+NS:: name server
+
+route 53 is global
+
+managing object storgae::
+storing static web content
+centralizing log files
+
+amzon simple storgae service::(S3) key value storage
+s3 for host static web site
+no bucket size
+
+standarize::
+dns_endpoint/nameofbucket/key
+
+one way to access s3 bucket via resource based policies::
+s2
+asqs
+ec2 container registry
+etc.
+
+enforcing encryption for s3::
+
+cross accout sharing and policy::we are allowed policies to account
+
+suppose:
+owning accounts of s3:admin
+now create bucket policies for allowed to write log files in this s3
+now dev account grant access to allowed for writing
+
+
+create several s3 in admin accounts::
+1:operation 2:config 3:backups
+
+aws --profile admin s3 sync source/ s3://aws-linux-ops/ --exclude "configure/**" --delete
+
+
+
+Managing compute resource::
+
+in ec2 virtual machine called an instance
+
+launch 1 to thousands
+
+Diffeernt billing models::
+on demand::MSRP 
+reserved::
+spot::price fluctuate according to demand
+
+key pairs import into ec2 for accessing
+
+manage ec2 roles and profiles
+
+machine name amzon can have unique ids
+
+finding amazon machine using cli
+
+launch instance with aws cli
+ capture ami id as env variable
+ 
+
+suppose we are not passing subnet at the time loading instace(ec2) so amazon assign vpc for it by default an vpc attached with network gateway
+
+open port 22 for our ip address
+
+
+instance mata data service::
+http://169.254.169.254/latest/meta-data
+can retreive ::
+AMI id
+hostname
+insatance id
+instance type
+private ip address
+
+getting instance meta data with curl::
+
+capture ip address of ec2
+
+
+creating amzon machine image python
+
+ 
+share one image from one accout to another::
+ like we create a image in dev and needs replica on production
+
+
+
+creating autoscling group::
+
+autoscaling group resopensible for creating ec2 instances
+also there is security group with each ec2.
+
+AWS lambda review::
+enviroment clean up with lambda python
+
+Elastic load balancing::
+having more then one ec2 and each ec2 inside another vpc
+we having higer availablity zone for each so that if one is fail another is open
+n/w footprint for load balancer
+
+load balancer listerners::
+now having two types of load balancer::
+classic(fixed port mapping)::layer 4
+applicatoin load balnacer::
+layer 7
+host name and path based routing
+dynamic port mapping
+
+
+now create load balancer using aws cli::
+n/w footprint in each instance also needs of secuirty group
+DMZ subnet
+
+managing block storage::
+analyzing elastic block store.
+
+ec2 comes with data storage but what when instace is terminating all storeage goes down so for that purpose we used
+EBS (elastic block storage)
+data indent from instance
+only attach one volumn per instance
+
+now have serverl types of volumn ::SSD and HDD
+
+
+creating ebs volumn:
+
+mounting with aws cli
+
