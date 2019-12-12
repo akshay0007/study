@@ -426,3 +426,76 @@ creating ebs volumn:
 
 mounting with aws cli
 
+now attached volumn to ec2
+
+now attached into different file system
+like mount var/xvda var/mongo
+
+Manageing database::
+
+review of amzon database services::
+amazon aurora ,mysql ,oracle etc
+
+Multi AZ deployment.
+automatic failover :: secondary rds provide  by it 
+
+automated backup and manual snapshot
+
+RDS subnet groups::
+
+Amazon Rds db instance with cloud formation
+
+snapshot and cross region copy
+
+Dynamo db::
+ no sql data
+ ssd backed
+ it can also autoscale thorougput
+
+partitioning of table 
+shrding of table
+indexing
+no join
+
+create dynamo db table::
+
+
+sevic time env url
+
+service partition key
+
+
+monitoring and logging::
+cloud watch and cloud trails for alerm cration
+
+Cloud watch::
+ collect matrix
+ stored for 2 weeks
+ 
+EC2::
+ default 5 min interval
+ default 1 min
+
+ELB::
+ default 1 min interval
+
+RDS::
+ memory,connction,disk
+
+Dynamo DB:
+ throughput provisioning
+
+Triggered on breach of threshold
+ possible states:: 1:ok 2:alarm 3:insufficent_data
+
+Third party service for trigger alarm:: pagerDuty
+
+
+Cloud watch logs::
+centralizing logging.
+configure agent on instance
+
+
+creating amzon sns topics::
+
+
