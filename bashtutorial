@@ -1,3 +1,29 @@
 https://unix.stackexchange.com/questions/129391/passing-named-arguments-to-shell-scripts
 https://dzone.com/articles/bash-snippet-parsing-command-line-arguments-and-as
 https://devhints.io/bash
+
+
+
+#!/bin/bash
+
+for ARGUMENT in "$@"
+do
+
+    KEY=$(echo $ARGUMENT | cut -f1 -d=)
+    VALUE=$(echo $ARGUMENT | cut -f2 -d=)
+
+    case "$KEY" in
+            FIRST)              a=${VALUE} ;;
+            SECOND)    b=${VALUE} ;;
+            THIRD)    c=${VALUE} ;;
+            FOR)    c=${VALUE} ;;
+            *)
+    esac
+
+
+done
+
+echo "a = $a"
+echo "b = $b"
+echo "c = $c"
+echo "d = $d"
