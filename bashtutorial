@@ -3,7 +3,7 @@ https://dzone.com/articles/bash-snippet-parsing-command-line-arguments-and-as
 https://devhints.io/bash
 
 
-
+./next.sh FIRST="FIR" SECOND="SEC" THIRD="THR
 #!/bin/bash
 
 for ARGUMENT in "$@"
