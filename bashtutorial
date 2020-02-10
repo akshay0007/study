@@ -27,3 +27,6 @@ echo "a = $a"
 echo "b = $b"
 echo "c = $c"
 echo "d = $d"
+
+
+https://stackoverflow.com/questions/14254118/waiting-for-background-processes-to-finish-before-exiting-script
