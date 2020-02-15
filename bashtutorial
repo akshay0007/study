@@ -30,3 +30,4 @@ echo "d = $d"
 
 
 https://stackoverflow.com/questions/14254118/waiting-for-background-processes-to-finish-before-exiting-script
+https://stackoverflow.com/questions/392022/whats-the-best-way-to-send-a-signal-to-all-members-of-a-process-group
