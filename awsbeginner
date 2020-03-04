@@ -1,0 +1,885 @@
+IAM ==under iam go to user then assing name and access type
+
+aws mgt console access then password.
+
+now it has no access to access s3 bucket so we attach policies with user 
+now go to existing policies or custom policies 
+
+now go ahead and create user.
+
+now suppose we have many user : in aws iam so now 
+
+IAM commonly used with ::
+users
+groups
+iam access policies 
+roles
+
+NOW assigning policies to muliple users is quite complex so instead of attaching the policiy we could attached with groups.
+
+now first remove policies from users via go to iam ,user and polices
+
+now create group dev and add users into this.
+
+now in iam ==>groups =>name =>skip attaching policies ==>create group
+
+now go to group ==>
+go user==>add users==>add click 
+now go to permission tabs ==>search for policies (lis amazon full access).
+
+case:: now one of user wants to access different resource of aws 
+
+IAM role:: 
+
+Ec2 :: virtual server
+
+ec2 :now in same group connot give permission of ec2 
+now we provide roles for accessing files
+
+(ec2 needs access of s3)
+go to iam =>roles=>aws services=>
+ec2 =>next =>attached policy (for s3 full policiy)=>ec2 role=>create role
+
+now go to group provide policies of ec2 ,s3, rds
+
+ec2 role for accessing s3 bucket
+
+======================================================
+======================================================
+AWS network services
+N/w configuration :: aws like vpc::
+
+aws global infra:
+laltency :: transfering data from one location to another
+
+aws has a region in within region there are availablity zone
+
+vpc basic:: virtual private cloud
+
+private subesection of aws so that you can control resources and control who can access
+complete control of n/w
+
+
+inside n/w : go vpc
+subents
+route table 
+n/w acls
+internet gateway
+
+created along with def. vpc
+
+place ec2 instance in one subent ==>like device in your home
+network access control list==>acts like a firewall
+route table ==>responsible for where to send data
+internet gatway==>like as a modern in home n/w public access point for internet
+
+nacl communicate with subnets.
+
+
+VPC:: private n/w zone 
+
+IGW(ineternet gateways)::
+like a modern comm. out side of n/w
+combination of s//w and h/w provide access to local to public n/w
+
+without internet gatway vpc having no connectivity with outside world
+
+internet gateway:: IT is horizontally scaled,redundant highly avl vpc component that allow comm. b/w instance in your vpc and the internet
+
+
+aval. zone inside vpc and internet gateway on above of vpc for comm. purpose
+
+vpc can be attached only on internet gateway at a time
+
+if rds and ec2 instance in same vpc you cannt detach this with internet gateway
+
+Route table::
+set of rules called route used to deterimine where n/w traffic is directed
+
+route table associate with vpc
+
+
+if internet gateway detach with vpc then it show status blackhole
+
+suppose we have detach internet gatway detach then go to route table
+routes ::
+edit table ::
+put entry
+dest.ip and target(internet gateway)
+suppose we have route table and subnet attached with it so we cannt delete this table
+
+
+Network Access Control list::
+is optional level of security it is used for firewall configureation
+
+go to network acls with in vpc::
+go to inbound rules:: into subnets
+go to outbound rules:: outside of subenets
+
+rules have numbers
+100:: allow
+- :: denied
+
+edit rules::
+suppose we have two rules with same configures::
+then it process rules 
+
+ephirmal ports:: range 1024-65535
+
+now in subnet associations::
+
+
+create n/w acl:
+by default no subnets attached with it.
+
+so for subents click edit. it shows all subnets.
+
+
+must have gaps b/w rules like 100,110,120
+
+============
+network access control list and security group is important common reason for communication b/w aws resources and vpc is not working properly
+============
+
+rule with lower number processs first before rule with higer no.
+
+============
+SUBNeT CAN be associate only one n/w access point.
+
+
+Subnets::
+a subsection of n/w 
+
+if we created vpc then subnet created suppose we are in north vargina so there are 6 availablity zone , now having 1 subnet with 6 availablity zone
+
+subnet cannot expan more then one availablity zone
+
+a1=suppose we have 1 availablity zone with ec2 instance (public subnet) and rds(private)
+a2=suppose we have 1 availablity zone with ec2 instance (public subnet) and rds(private)
+
+a1 and a2 associate with n/w access control list
+route table comm. b/w subnets if necess. or outer n/w
+
+in init route table has no subnet attached then we explicity attached with it
+
+
+so by default we have 6 subentes
+so we configure 4 out 6 public  subnet
+and 2 to private subnet
+====================================================================================
+Availablity zones::
+avl. zone work with vpc, high avil. and fault tolarance
+
+ec2 instance and rdds db must be placed into vpc subnets
+and subnets must placed into aval. zone
+
+vpc place all avl. zone reside and also keep all subnets into avl. zone
+
+
+high avl. increase resource in avl. zone and increase avl. zone also
+
+suppose ec2 in one subent and anoteher in another subnet due to some failure it switch
+
+
+replication of data in different avl. zone :: 
+
+fault tolarance::
+
+
+====================================================================================================================================================================================
+aws compute service::
+amazon machine images
+review of instance type component
+ebs volumn basics and snapshot
+using security group with ec2
+ip addressing
+launching and logging into an ec2 instance
+
+computer reside on data center.
+
+amzon ec2 provide scalble computing capcity
+
+black friday in shooping side:: now we need scalablity on holiday load.
+
+temporary holding memory before cpu can process :: ram
+
+firewall ==>help to protect pc
+
+n/w adapter ==>internet or public n/w connectiivty
+
+
+AMI ==>(amzon machine image)
+instance type==> processing power
+EBS==>local storage(elastic block storage)
+n/w access==>virtual n/w address
+security group==>like firewall for communication purpose
+ram==>
+
+purchasing options::
+on demand:: choose any instance and provision and terminate at any time
+
+expensive options
+
+ec2 in service==>
+
+
+reserved instance::
+purchase an instance at set of time period
+
+
+spot instance::
+bid on an instance type. 
+suppose we purchase instance for bid 50 but in provision it go above 50 instance automatically terminated.
+
+sell unused instance
+
+instance type::
+genral purpose
+compute  optimize
+accelerate 
+memory
+storage
+
+
+EBS optimize.
+
+ami(amzon machine image)
+
+bundle include os (other apps)
+
+AMI componnet::
+root volume templete
+launch permission
+block device mapping
+
+
+add in bigger scale ::
+by using single node master ami can launch multiple instance
+
+
+AMI category::
+community ami :: free use
+go to ec2 service ->launch ec2 instance 
+
+aws market place ami
+
+martet place ami==>bundle with packages
+
+
+Myami==>
+
+instance type::
+
+family ==>based on memory ,cpu ,gpu type
+type==>t2.micro..
+vcpu==>...
+
+
+some of have ebs storeage and some of ssd 
+ebs optimization
+network performance
+
+
+EBS::
+provide block storage volume.
+attached with ec2
+
+
+
+IOPS ==>unit of measures
+more iops more performance
+
+
+
+root vs additonal ebs volumne::
+all root volumne can be ebs
+
+add storage via going to servcie ==>ec2==>choose ami ==>add storeage==>delete on termination if check(it will survie in case of instance terminated)==>add ebs to root==>
+
+now in under elastic block storage ==>create volume==>
+
+can be attache with one and detached with
+
+snapshot used for duplicate or backup creation ==> like taking picture of ebs and copy into different ebs
+
+EBS==>ebs is indeipendent of ec2
+
+Security groups:: same as n/w access control list 
+they are allowed denied traffic they are found in instance levell not in subnets ..
+they are acting likes virtual firewall
+when we launch instance they we attached secuitry groups with it that allowed trafiic rules 
+
+n/w access group allowed in subnet level 
+++
+n/w access have numbers rules in secuity group have no numbers assingn
+n/w acces we can create denied rules but in security group has no denied rules
+
+
+internet gateway ==>elb(load balancer (layer 7 n/w))==>
+
+by default configureation of secuirty gorup:
+all inbound rules ::denied
+all outbound rules ::allowed
+
+
+ec2 dashboard ==>go to security groups==>
+
+create security groups:
+
+security groups are statefull 
+n/w access control list is state less
+
+security group directly asso. with ec2 instance still go to n/w access control list 
+
+go to add rule:
+http::
+there is default denied in security groups 
+but in nac list we can directly denied rule create
+
+
+elastic load balancer send some of request to another ec2
+security group statefull.
+
+
+secutity group in instance level but acl in vpc level
+
+
+IP addressing::
+attaching ebs to security groups.
+
+public and private ip address::
+for instance provide public ip address.
+
+
+
+go to ec2 -->launch instance-->t2micro-->auto assing public ip address-->
+it is due to already vpc(default vpc)
+
+another wise create vpc==>
+name==>testvpc
+cidr block==>10.20.0.0/24
+now after create subnet==>
+name tag==>test
+avl zone
+ipv4 block==>10.20.0.0/24(cidr block)
+
+
+ec2==>ip address=>security group==>n/w acl==>route table==>internet gateway==>internet
+
+lunching ec2 instance::
+go to ec2(launch instance)
+select an ami
+select instance type
+configure instance details
+  n/w ==>vpc selected here
+  subenet-->multiple subnet
+running bash script::(add bash)
+yum update -y
+yum install -y httpd
+servcie httpd start
+
+add storage type
+
+add tages::
+key and value
+configure security group:
+
+ssh allowed
+add rule for http also:
+http tcp 80 allow to all
+
+lauch 
+
+create new key pair
+
+key pair name ==>essential key pair==>download key pair
+
+launch instance
+
+
+connect to from ec2 instance dash board::
+
+chmod -400 assembly.pem
+
+ssh -i dns user@ip
+
+suppose ec2 not communnitcate with internet then go to 
+
+vpc ==>network acl==> click on your acl ==>subnet association 
+
+then check out rules for inboud and outbound rule
+
+firstly outbound rules port 1024-65535 to 1-65535
+now still not working
+now to check inbound rules ::
+
+click edit
+type custom  tcp rule
+ports 1-65535
+
+
+httpd apache service install 
+servic httpd start
+
+storage services::
+s3::simple block storage service
+
+virtual hardware=>access from anywhere
+
+basic::
+primary storeage service
+bucket(root/top level folder) 
+
+create bucket::
+name ==>unique name
+region==>closed to me
+versioning==>
+
+object level logging and logs
+
+next(without select)
+
+
+setting public permission
+
+objects::files
+
+pricing changes on the basis of region
+
+bucket name consist ==>lower letter ,hypen,small char
+
+storage class::
+standard
+
+encrtype+n
+metadata
+tag
+name for tracking data
+
+
+storage classes:
+standard
+standard and frequent access
+one zone frequent access==>
+glacier==>long terms archieve(chepest)
+
+chaange storeage class on clicking in object
+
+cost reduction
+standard >standard and fre. acc>one zone> glacier
+
+
+s3 object life cycle::
+set of rules migration of objects from one to another storage class
+
+frequently:: standard
+non frequent:: standard infrequent
+day 90+ not more use:: glacier
+
+lifecycle located at bucket level
+
+lifecycle::
+
+click bucket==>management==>add lifecycle rule==>
+
+configure transacton==>for current==>trans standard after==>30
+another transaction ==>transaction to glacier==>90 days
+
+permission::
+
+object versioning::
+vesioning on or off
+
+
+aws database::
+
+security group also provide security to rds as well
+
+ssh tunneling effect db
+
+
+RDS & Dynamo db::
+
+rds ==>uses rows and columns
+nosql==>json (name-value document & no structre data type)
+
+RDS instace classes==>similar to ec2 
+
+proviosing of rds aurora dabase::
+
+
+rds data base provisoinined into private subnet attached with routing table (no intenret connnection)
+
+ssh tunelling configureing (we have ec2 iinstace via using ssh tunneling can communicate with rds)
+
+configures a private subent grup::
+nav. to subnet gorups
+create db subnet groups
+then setup db
+
+go to rds==>subnet grup==>create subnet gorup(name,vpc,avl. zone(go to service vpc ==>subnet (check subnet avl. zone)),)==>put description ==>create
+==>lanuch rds(going to dashboard)
+
+
+setting ;:
+name of db
+username
+pssword
+
+so secuirty groups rules needs to change::
+mysql to allow 3306 port and all ips 0.0.0.0/0
+
+now again go to vpc
+network acl ==>inbound + outbound ==>traffic allowed
+can check route table also
+
+
+monitoring alerts and notification service::
+
+SNS==>simple notification service
+
+sns basic==>
+
+atomatically send mail ,text on the basic of some alerts or events
+web service ()
+sns ==>two clients 1==>publisher(create a topics) 2==>subscriber(receive message like email ,labda,sqs etc)
+
+
+cloud watch monitor ec2 instace::
+
+
+componet of sns::
+
+sns max allowed 256 kbbytes
+
+like threasolding for billing and etc.
+
+sns can be imple. via cloud watch
+
+
+using sns::
+add topic::
+go sns==>dashboard==>getstarts==>create topic==>name, text message
+==>create topic==>create subscrfiptoin==>protocol email,endpint (email)==>
+
+biling alarm.
+auto scale set up
+biling
+to to topic==>click on action ==>subscript to topic==>create subcription 
+auto scaling gorup
+to to topic==>click on action ==>subscript to topic==>create subcription 
+
+after billing end point , set sns end point
+
+
+https://linuxacademy.com/course/aws-certified-sys-ops-administrator-associate-soa-c-01/
+https://linuxacademy.com/learning-path/amazon-web-services-master-level/
+https://linuxacademy.com/course/automating-aws-with-lambda-python-and-boto-3/
+https://linuxacademy.com/course/aws-advanced-networking-specialty/
+https://linuxacademy.com/course/aws-certified-machine-learning-specialty/
+https://tutorialsdojo.com/aws-certified-solutions-architect-associate/
+
+
+monitoring ,alerts and notification::
+
+
+cloud trails::
+cloud watch::
+monitor various account::
+monitor another service inside aws. and based on events happend trigger alarms and send notification.
+you can collect information. 
+
+
+   cloudwatch
+  /    |    \
+ec2   s3   billing
+
+cloud watch dashboard.
+collect and track matrics.
+
+
+create dashboard::
+dashboard of cloud watch==>dashboard==>create dashboard==>
+
+dash board based on ec2:
+all matrics:
+cpu utilization.
+
+once matrix select then alarm thresold open
+
+name :::
+description ::
+
+whenever when cpu utilization go higer particular condition
+
+
+actions::
+whenever alarm stats::
+send notification no.:: essentials grups 
+
+create alarm.
+
+
+cloud trail basics::
+service that allow to track varous action taken while your aws account
+
+
+
+    (log saved into s3 bucket)aws cloud trail==>s3
+			      /     \
+			   ec2      s3
+
+
+go to cloud trails ==>trails
+
+data event =>s3==>create a s3 bucket (for storing logs )==>in advance set prefix, enable log validation
+
+Elastic Load balancing ::
+
+    ELB
+     |
+route table
+     |
+    NACL
+    /  \
+  vpc1 vpc2
+
+Applicatoin load balancer and elasticity::
+ELB:: elb evenlly distrubuted traffice b/w ec2 instances
+
+load bal. income traffic multpile ec2 instance in multiple avl. zone, unhelthy to helty insatnces.
+
+potially overloading removing
+
+create an appl. load balancer , secuirty gourp, comm. protocol::
+
+ec2==>load balancer==>create load balancer(classic(pre. gern. load balancer),n/w(ultra hig per. with static ip addre.) ,applicatoin(set up for app of http ,tcp))
+
+name ::
+internet facing ==>check
+ip address ==>ipv4
+
+listeners::
+http   :: 80 (load balancer protoocol)
+
+avl. zone
+
+vpc :
+select atleast two avl. zone
+next>
+configure security group.
+
+select one
+
+next>
+
+configure routing::
+target group: 
+name 
+protocol
+target type:
+
+health check
+protocol  http
+path  /
+
+advance health check::
+next register target>
+
+check =>add to registry==>next to review==>create
+
+
+diff b/w load balancing ,elasticity and scalablity::
+load bal.==>evenlly distrubute traffice among all ec2
+elasticity ==> changing instance type increase ec2 , instance ,n/w 
+scalablity  ==>incre. and dec. ec2
+
+load balan. and autoscale combine ==>increse scalalblity
+
+auto scalaing basics==>
+adding and removing ec2 instance based on traffic size
+
+scalablity increase instance type
+
+autoscaling :: automaticall adding and removing instance based on app demand
+
+
+
+			elb
+		         |
+			/ \
+		webserver1 webserver2    (auto scaling so that on the basis of thresold in can inc and dec)
+
+auto scaling basiscs::
+launch configuration(in templetes used to add new instance on demand )
+autoscaling group(automatically add or remove)
+
+using autoscaling::
+
+lauch configuration::
+go to ec2==>auto scaling selection ==>lauch configuration==>create lauch configuration==>
+select ami ==>t2 micro ==>name (not select any) advance details ==>just update bash for apache 
+yum update -y
+yum install -y httpd
+service httpd start
+
+assign public ip to instace 
+not adding any another storage
+next ==>go to selct specific security group
+existing ==> and configure some of ports 
+review
+create lauch configuration
+key pair either used existing or create new
+create lauch configuration
+create an autoscaling configuration
+
+lauch configu
+group size 1
+n/w
+subents
+advance details
+load balancer
+targert groups
+monitoring(not detail bcoz of cost reduce)
+next confiugration 
+auto scaling policies
+
+scaling b/w 1 to 3
+scale group
+name 
+metic type
+target value ==>when increase cpu utilization gt 80
+instance need
+
+configure notificatoin
+
+tags add when you like
+
+review
+
+submit
+
+monitoring and managing service::
+
+
+route 53::
+where you configure manage web domain .
+definiation ::
+1::register domain name.
+2::domain name system service :: resolve domain to ip
+3::health check up  || reachable aval. 
+
+
+like phone book there is dns server existing for resolving doman name
+
+router 53 register domain name 
+
+
+			dns server(contain ip address of load balancer)
+			   |
+			route 53
+			  |
+			internet gatway
+			  |
+			elb
+			  |
+			nacl
+				
+
+using route 53::
+register domain
+setup hosted zone 
+configure record set
+route traffic to elastic load balancer
+
+route 53 from service===>domain registration(if not doing anything in route 53) ==>
+domain branch ==> existing or new ==>continue==>
+
+disable privacy policy so no one can lookup dns
+
+go to domain 
+
+create record sets::
+needs to create A records.
+
+alias target ==> elb previously created
+
+
+evaluatied target policy
+
+cloud front @ route 53 ::
+cloud front::
+aws service replicate data to reduce latancy and increate performance in any location 
+
+data can be repliated into edge location
+
+it is distribution on s3
+
+
+goto cloudfron ==>create distribution==>(web based(live stram)/RTMP(speedup media file using rtmp protocol))
+
+
+default cache behaviour::
+
+
+Lambda::
+
+lambda basic::
+lambda server less computing . next gen. comp. to replace ec2
+
+you can only pay for computing
+
+
+          internet
+	    |
+          lambda
+
+
+lambda test::
+open lambda from servcie (under compute)
+
+author from scratch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
