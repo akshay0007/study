@@ -1,4 +1,5 @@
-java application
+Hibernate Basic---
+
 persistent object
 
   hibernate properties xml mapping(configuration,session factory,sessiion,transaction,query,criteria)
