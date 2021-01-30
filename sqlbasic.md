@@ -627,8 +627,8 @@ and department table has
 
 getting all employees respecting to dept id
 
-select e.ename,d.dname from employees e join department d
-on e.deptid=d.deptid
+	select e.ename,d.dname from employees e join department d
+	on e.deptid=d.deptid
 
 suppose table employee has washim but not have any deptid and in department deptid 40 not 
 comming into employees table then result exclude both of rows in join query 
@@ -644,27 +644,27 @@ on e.deptid=d.deptid
 
 //then o/p null training also selected in right join case
 
-select e.ename,d.dname from employees e right outer join department d
-on e.deptid=d.deptid where e.enmae is null;
+	select e.ename,d.dname from employees e right outer join department d
+	on e.deptid=d.deptid where e.enmae is null;
 
-select d.dname ,count(e.ename) from employees e right outer join department d
-on e.deptid=d.deptid group by d.dname;
+	select d.dname ,count(e.ename) from employees e right outer join department d
+	on e.deptid=d.deptid group by d.dname;
 
-select d.dname ,if (count(e.ename)=0,'no','yes') as has emplyees from employees e right outer join department d
-on e.deptid=d.deptid group by d.dname;
+	select d.dname ,if (count(e.ename)=0,'no','yes') as has emplyees from employees e right outer join department d
+	on e.deptid=d.deptid group by d.dname;
 
-select d.dname report ,count(*) from employees e right outer join  department d 
-on d.deptid=e.deptid group by gender;
+	select d.dname report ,count(*) from employees e right outer join  department d 
+	on d.deptid=e.deptid group by gender;
 
  
 self join table join iteself called self join::
 suppose table emp2(empid,ename,mgrid)
 
-select * from emp2 e ,emp2 m;
+	select * from emp2 e ,emp2 m;
 
-select e.enmae as employee ,m.ename as manager 
-from emp2 as e join emp2 as m
-on e.mid=m.empid;
+	select e.enmae as employee ,m.ename as manager 
+	from emp2 as e join emp2 as m
+	on e.mid=m.empid;
 
 
 select count(*) as coutn,m.ename as manager
@@ -680,6 +680,7 @@ on extract(year,e.hiredate)=extract(year,d.hiredate) and e.ename!=d.ename where 
 and d.deptid=20;
 
 subquery ::query with in qury::
+
 the innermost subquery executed first upon whose result immediatetly nested query is executed
 single row subquery::when the subquery return only one row in this we use oprator like =,!=,>,<,>=,<=
 multiple row subquery ==> when the subquery returns more then one row,in this case we use opreator 
@@ -689,34 +690,36 @@ correleted subquery:: a subquery that takes information from outer query
 suppose employee table has (eid,ename,salary ,deptid,designation,mid)
 in department(deptid,dname,location)
 
-select ename from emplyees where salary >(select salary from employees where ename='abc');
+	select ename from emplyees where salary >(select salary from employees where ename='abc');
 
 single row subquery::
-select count(*) from employees where >(select salary from employees where ename='abc');
 
-select count(* ) from employees where >(select avg(salary) from employees )
+	select count(*) from employees where >(select salary from employees where ename='abc');
 
-select enmae,extract(year,hiredate) as yeras from employees where yeras= select extract(year,hiredate) from employees where ename='ansita'
-and enmae!='abc';
-	
-select ename from employees where eid=(select mid from employees where ename='abhinav')
+	select count(* ) from employees where >(select avg(salary) from employees )
 
+	select enmae,extract(year,hiredate) as yeras from employees where yeras= select extract(year,hiredate) from employees where ename='ansita'
+	and enmae!='abc';
 
-select location from department where deptid=(select deptid from employees where ename='nikhil')
-
-select location from department as d join employees as e on e.deptid=d.deptid where e.ename='nikhil';
-
-select count(*) from employees where mid=(select eid from employees where ename='nikhil')
+	select ename from employees where eid=(select mid from employees where ename='abhinav')
 
 
-select count(*) from (
-select e.enname as emp ,m.enmae as mgr
-from employees e join employees m on 
-e.mid=e.eid where m.enmae='nikhil') as a
+	select location from department where deptid=(select deptid from employees where ename='nikhil')
 
-)
+	select location from department as d join employees as e on e.deptid=d.deptid where e.ename='nikhil';
+
+	select count(*) from employees where mid=(select eid from employees where ename='nikhil')
+
+
+	select count(*) from (
+	select e.enname as emp ,m.enmae as mgr
+	from employees e join employees m on 
+	e.mid=e.eid where m.enmae='nikhil') as a
+
+	)
 
 multiple row subqueries::
+
 suppose we have city table and it has colums(city_id,city_name,sid)
 and state has colums (sid,sname,cid)
 
@@ -729,12 +732,13 @@ select city_name from city where sid in(select sid from state where
 cid in (select cid from coutry where cname='india'))
 
 
-select name from employee where eid in(select mid from employee)
+	select name from employee where eid in(select mid from employee)
 
-select name from employee where eid not in (select mid from employee)
+	select name from employee where eid not in (select mid from employee)
 
 
 corelated subqueryies::
+
 a subquery whose result dependent on the outer queyr is a correlated subquery
 when an alias name for outer query table is used in the subqeury then the query become correlated subqeury
 
@@ -743,9 +747,9 @@ bottom to up approach followed by coreelated subquery
 select ename from employees as e where salary>(select avg(salary) from employees where deptid=e.deptid);
 
 
-select ename from employees as e where exits(select * from employees where mid=e.eid)
+	select ename from employees as e where exits(select * from employees where mid=e.eid)
 
-select deptname from department as d where not exits(select * from employees where deptid=d.deptid) 
+	select deptname from department as d where not exits(select * from employees where deptid=d.deptid) 
 
 
 
@@ -762,31 +766,32 @@ Advance lecutrues::
 they are just logic oprators
 
 creation of views::
-create view vi as select * from employees;//it contains store query
+
+	create view vi as select * from employees;//it contains store query
 
 drop view vi;
 
 now we used view for getting datas
 
-select eid ,ename from vi;
+	select eid ,ename from vi;
 
 create or replace view vi as select * from emp1 where deptid=10//if already have definintion of view then it replace with new one
 
 
-create or replace view v2 as(
-select e.ename as name from employees as e joins department as d on e.deptid=d.deptid
-) ;
+	create or replace view v2 as(
+	select e.ename as name from employees as e joins department as d on e.deptid=d.deptid
+	) ;
 
 
 now on the basis of view v2 we are find all filter so that we can evaluate more complex queries
 
-select ename from v2 where ename='abc';
+	select ename from v2 where ename='abc';
 
 
-create view deptreports as(
-selct d.dname ,min(salary),max(salary) from employee e join department d on e.deptid=d.deptid
-group by d.dname 
-);
+	create view deptreports as(
+	selct d.dname ,min(salary),max(salary) from employee e join department d on e.deptid=d.deptid
+	group by d.dname 
+	);
 
 select * from deptreports;
 
@@ -798,44 +803,46 @@ only simple view can be updatable view containing joins,aggregate funciotn,havin
 WITH CHECK OPTION is used to maintain consistency of views so this clasue is used for preventing  us from inserting 
 and update rows which are not visible through views::
 
-create view v1 as select * from employees;
+	create view v1 as select * from employees;
 
-insert into v1 values(1,'name','dd');
+	insert into v1 values(1,'name','dd');
 
-select * from v1;
-select * from employees ;
+	select * from v1;
+	select * from employees ;
 
-//both are updated in that case
+	//both are updated in that case
 
-delete ,update,insert all three are works perfectly and show immediate response into employee tables;
-vice versa 
+	delete ,update,insert all three are works perfectly and show immediate response into employee tables;
+	vice versa 
 
 
 meta data view information::
-desc infromation_schema.views//getting all infromation in tablet format
 
-select table_name,is_updatable from information_schma,views where table_schma='databaseschema'
+	desc infromation_schema.views//getting all infromation in tablet format
 
-with check option::this constraint only works in oracle databases
+	select table_name,is_updatable from information_schma,views where table_schma='databaseschema'
 
-create veiw v2 as select * from employee where age>20;
+	with check option::this constraint only works in oracle databases
 
-update employee set age=99 where eid=1;
-update employee set age=1 where eid=2;
-update employee set age=0 where eid=3;
+	create veiw v2 as select * from employee where age>20;
 
-select * from v2;
-op:o/p of row whose age is 99 bcoze it fullfill all constraints;
+	update employee set age=99 where eid=1;
+	update employee set age=1 where eid=2;
+	update employee set age=0 where eid=3;
+
+	select * from v2;
+	op:o/p of row whose age is 99 bcoze it fullfill all constraints;
 
 check options::
-create veiw v2 as select * from employee where age>20 	WITHD CHECK OPTION;
 
-insert into v2 values('bame','12')//age less then 20 not inserted into tables;
+	create veiw v2 as select * from employee where age>20 	WITHD CHECK OPTION;
+
+	insert into v2 values('bame','12')//age less then 20 not inserted into tables;
 
 
-create view v2 as select * from emp where mobile like '91__________' WITH CHECK OPTION;
-insert into v2 values('hja','9099')//not inserted
-insert into v2 values('hja','911919191919')//inserted along with 10 digits long number
+	create view v2 as select * from emp where mobile like '91__________' WITH CHECK OPTION;
+	insert into v2 values('hja','9099')//not inserted
+	insert into v2 values('hja','911919191919')//inserted along with 10 digits long number
 
 
 
@@ -846,50 +853,50 @@ associated with table occures
 
 trigger are special type of store procedure that are executed automatically on firing of some events 
 
-trigger ares used
-Data intergrity
-schedule task and audit the changed table data
+	trigger ares used
+	Data intergrity
+	schedule task and audit the changed table data
 
 
-trigger creation ""
-create trigger <triger name > <trigger time(before after)> <trigger event(insert,delete,update)> On <tablename> begin end;
+	trigger creation ""
+	create trigger <triger name > <trigger time(before after)> <trigger event(insert,delete,update)> On <tablename> begin end;
 
-delimiter $$
-create trigger trig_emp before insert
-on emp
-for each row
-begin
-
-
-end $$
-delimter ;
-
-create table trig_log(logs varchar(222));
-
-delimiter $$
-create trigger trig_emp after insert
-on emp
-for each row
-begin
-	insert into trig_logs values('a new rows is inserted into it');
-
-end $$
-delimter ;
+	delimiter $$
+	create trigger trig_emp before insert
+	on emp
+	for each row
+	begin
 
 
-delimiter $$
-create trigger trig_emp after update
-on emp
-for each row
-begin
-	update emp set ename='' where eid ='';
+	end $$
+	delimter ;
 
-end $$
-delimter ;
+	create table trig_log(logs varchar(222));
 
-delete from trig_logs;
+	delimiter $$
+	create trigger trig_emp after insert
+	on emp
+	for each row
+	begin
+		insert into trig_logs values('a new rows is inserted into it');
 
-drop trigger trig_emp;
+	end $$
+	delimter ;
+
+
+	delimiter $$
+	create trigger trig_emp after update
+	on emp
+	for each row
+	begin
+		update emp set ename='' where eid ='';
+
+	end $$
+	delimter ;
+
+	delete from trig_logs;
+
+	drop trigger trig_emp;
 
 
 
@@ -925,33 +932,35 @@ end $$
 
 
 Triggers::
+
 trigger to maintain the audit infromation of emp table having information about operation time,oldname ,deptid,newname 
 and deptid
 
 trigger for automatic id genrateion of emp table
 
 
-crate table audit_info(operation varchar(22),timeops datetime,vold varchar(222),vnew varchar(222));
+	crate table audit_info(operation varchar(22),timeops datetime,vold varchar(222),vnew varchar(222));
 
-create trigger insert_emp insert on emp 
-for each row
-begin 
-insert into audit_emp values('insert',curdate(),null,concat(NEW.ename,NEW,deptid));
+	create trigger insert_emp insert on emp 
+	for each row
+	begin 
+	insert into audit_emp values('insert',curdate(),null,concat(NEW.ename,NEW,deptid));
 
 
-create trigger trig_emp before insert on emp 
-for each row
-begin 
-declare maxsno int;
-select max (substring (eid,6,length(eid)) into maxsno from emp)
-if maxsno is null then 
-	set maxsno=0;
-endif;
-set NEW.eid=concat('MATHO',(maxsno+1))
-end $$
+	create trigger trig_emp before insert on emp 
+	for each row
+	begin 
+	declare maxsno int;
+	select max (substring (eid,6,length(eid)) into maxsno from emp)
+	if maxsno is null then 
+		set maxsno=0;
+	endif;
+	set NEW.eid=concat('MATHO',(maxsno+1))
+	end $$
 
 
 indexes::
+
 index are used by queries to find data quickly
 
 if there is no index to help the query then query engine perform entire table scan
@@ -961,21 +970,21 @@ to create a index use create index <index name> on <tablename> (<column name>)
 to drop index drop index <index name> on <table name>
 
 
-suppsos emp table
-+-------------+-------------+------+-----+---------+-------+
-| Field       | Type        | Null | Key | Default | Extra |
-+-------------+-------------+------+-----+---------+-------+
-| eid         | int(11)     | NO   | PRI | NULL    |       |
-| ename       | varchar(44) | YES  |     | NULL    |       |
-| salary      | varchar(44) | YES  |     | NULL    |       |
-| desgination | varchar(44) | YES  |     | NULL    |       |
-| mgrid       | int(11)     | YES  |     | NULL    |       |
-| gender      | varchar(1)  | YES  |     | NULL    |       |
-| hiredate    | datetime    | YES  |     | NULL    |       |
-+-------------+-------------+------+-----+---------+-------+
+	suppsos emp table
+	+-------------+-------------+------+-----+---------+-------+
+	| Field       | Type        | Null | Key | Default | Extra |
+	+-------------+-------------+------+-----+---------+-------+
+	| eid         | int(11)     | NO   | PRI | NULL    |       |
+	| ename       | varchar(44) | YES  |     | NULL    |       |
+	| salary      | varchar(44) | YES  |     | NULL    |       |
+	| desgination | varchar(44) | YES  |     | NULL    |       |
+	| mgrid       | int(11)     | YES  |     | NULL    |       |
+	| gender      | varchar(1)  | YES  |     | NULL    |       |
+	| hiredate    | datetime    | YES  |     | NULL    |       |
+	+-------------+-------------+------+-----+---------+-------+
 
-===============================================================
-explain select ename from employees where salary=5000
+	===============================================================
+	explain select ename from employees where salary=5000
 
 like number of rows have been scans 
 ==================================================================
@@ -988,16 +997,16 @@ always scondary space is allocated
 index is like searching in books for certain page no.
 
 
-create index index2 on employees(salary);
-drop index index2 on employees;
+	create index index2 on employees(salary);
+	drop index index2 on employees;
 
-select ename form employees where salary =5000;
-if salary on 50 rows it traverse 50 rows and time is take by query is more
+	select ename form employees where salary =5000;
+	if salary on 50 rows it traverse 50 rows and time is take by query is more
 
-but if u create index::
-create index index2 on employees(salary);
-then search for :::
-select ename form employees where salary =5000;
+	but if u create index::
+	create index index2 on employees(salary);
+	then search for :::
+	select ename form employees where salary =5000;
 
 then it travers only one rows
 
@@ -1005,7 +1014,8 @@ show desc ::using explain qeury:::::
 explain select ename from employees where salary=5000
 
 meta data information::
-desc information_schema.innodb_sys_tables;
+
+	desc information_schema.innodb_sys_tables;
 
 
 select * from employee where salary=6000;
@@ -1013,12 +1023,13 @@ then it go through all data and
 
 idexes on commision column 
 
-create index index3 on employees (commission);
+	create index index3 on employees (commission);
 
 explain select ename from employees where commission =50000;
 
 
 cluster indexes;
+
 secondary index allocation is differently
 
 
@@ -1033,6 +1044,7 @@ storing data of the table into insertion order::
 
 
 cluster and secondary indexes::
+
 a clustered index determines the physical order of data in a table it is analogus to a telephone directory,it doesnot required any addition disk space.
 
 a table can have only one cluster index .
@@ -1043,138 +1055,142 @@ secondary index is same as index of text book where data stored in one place and
 
 in secondary index data storage in asceding order and a single table has more then one secondary indexes.
 
-select table_id from information_schema.innodb_sys_talbes wher name='test/emp'
+	select table_id from information_schema.innodb_sys_talbes wher name='test/emp'
 
-primary key create automatically cluster index into table ;	
+	primary key create automatically cluster index into table ;	
 
 
 disadvantages::
+
 insertion , deletion and updataion is create more complexcity into tables.
 
 
 stored procedures:::
+
 it is segement of decalarative statement stored inside database catalogs
 
 it increase performance ,reduce network traffic,provide code resusality and security..
 
 stored in pass in complile format inside database;
 
-create procedure <procedure name>(parm_list)
-begin
-  varialble declaration;
-  perform some operation
-end
+	create procedure <procedure name>(parm_list)
+	begin
+	  varialble declaration;
+	  perform some operation
+	end
 
 paramert passed inside store procedure::
 3 fromat::
-IN, OUT and INOUT;
 
 
-set @a=2;
-
-create  procedure pp5(IN a integer)
-begin 
-set a=10;
-end &
-
-o/p::2
-create  procedure pp5(OUT a integer)
-begin 
-set a=10;
-end &
-
-o/p::10
-
-create  procedure pp5(INOUT a integer)
-begin 
-set a=10;
-end &
-
-o/p::
-
-call pp5(@a);
-op
- 
-delimiter &
-
-set @a=4;
-create procedure pp1(IN a integer)
-begin 
-set a=a+10;
-end &
+	IN, OUT and INOUT;
 
 
-number is odd or even ::
-delimiter &
+	set @a=2;
 
-create procedure odd_even(IN num integer)
-begin 
-if num%2 =0 then
-select 'the number is even';
-else 
-select 'number is odd';
-end if;
-end &
+	create  procedure pp5(IN a integer)
+	begin 
+	set a=10;
+	end &
+
+	o/p::2
+	create  procedure pp5(OUT a integer)
+	begin 
+	set a=10;
+	end &
+
+	o/p::10
+
+	create  procedure pp5(INOUT a integer)
+	begin 
+	set a=10;
+	end &
+
+	o/p::
+
+	call pp5(@a);
+	op
+
+	delimiter &
+
+	set @a=4;
+	create procedure pp1(IN a integer)
+	begin 
+	set a=a+10;
+	end &
+
+
+	number is odd or even ::
+	delimiter &
+
+	create procedure odd_even(IN num integer)
+	begin 
+	if num%2 =0 then
+	select 'the number is even';
+	else 
+	select 'number is odd';
+	end if;
+	end &
 
 loops::
 while loops::
 
 
-delimiter &
-create procedure id_prime(IN a integer)
-begin 
-declare count integer;
-declare num integer;
-set num=2;
-set count=0;
+	delimiter &
+	create procedure id_prime(IN a integer)
+	begin 
+	declare count integer;
+	declare num integer;
+	set num=2;
+	set count=0;
 
-while num<=a/2 do
-if a%num=0 then
-set count=count+1;
-end if;
-set num=num+1;
-end while
-if count=0 then
-select 'the number is prime';
-else 
-select 'the number is composite';
-end if
-end &
+	while num<=a/2 do
+	if a%num=0 then
+	set count=count+1;
+	end if;
+	set num=num+1;
+	end while
+	if count=0 then
+	select 'the number is prime';
+	else 
+	select 'the number is composite';
+	end if
+	end &
 
-delimiter &
-create procedure num_employees (IN dnamve varchar(44))
-begin 
-declare cnt integer;
-select count(*) into cnt from employees where deptid=(select deptid from department where dname=dnamve);
-select cnt;
-end &
+	delimiter &
+	create procedure num_employees (IN dnamve varchar(44))
+	begin 
+	declare cnt integer;
+	select count(*) into cnt from employees where deptid=(select deptid from department where dname=dnamve);
+	select cnt;
+	end &
 
 
 second approach::
 
-delimiter &
-create procedure num_employees (IN dnamve varchar(44),INOUT cnt integer,INOUT avg integer)
-begin 
+	delimiter &
+	create procedure num_employees (IN dnamve varchar(44),INOUT cnt integer,INOUT avg integer)
+	begin 
 
-select count(*) into cnt from employees where deptid=(select deptid from department where dname=dnamve);
+	select count(*) into cnt from employees where deptid=(select deptid from department where dname=dnamve);
 
-select avg(salary) into avg from employees where deptid=(select deptid from department where dname=dnamve);
+	select avg(salary) into avg from employees where deptid=(select deptid from department where dname=dnamve);
 
-end &
+	end &
 
-set @cnt=0;
-set @avg=0;
-call num_employees('sales',@cnt,@avg);
+	set @cnt=0;
+	set @avg=0;
+	call num_employees('sales',@cnt,@avg);
 
-select @cnt;
-select @avg;
+	select @cnt;
+	select @avg;
 
 
-create procedure emp_dept(IN eid integer,INOUT assignname varchar(100))
-begin 
-select dname into assignname  from department where deptid=(select deptid from employees where eid=eid);
+	create procedure emp_dept(IN eid integer,INOUT assignname varchar(100))
+	begin 
+	select dname into assignname  from department where deptid=(select deptid from employees where eid=eid);
 
-end
+	end
 
 
 select last_day('1993-07-01');
@@ -1186,6 +1202,7 @@ select last_day('1993-07-01');
 
 
 Cursor::not very performace good
+
 IT allow to iterate a set of rows returns by query and process them accordingly
 
 we create cursor inside stored procedure to handle result sett returned by query
@@ -1199,61 +1216,61 @@ open
 fetch
 close
 
-Declare <cursor name> for select_statement
+	Declare <cursor name> for select_statement
 
-Open <cursor_name> initailaze the result set for operation
+	Open <cursor_name> initailaze the result set for operation
 
-Fetch cursor_name into varialbe list to retrieve the next row pointed by the cursorr and move the cursor to the next row in the result set
+	Fetch cursor_name into varialbe list to retrieve the next row pointed by the cursorr and move the cursor to the next row in the result set
 
-Close <cursor_name> to deactive the cursor and release memory associated by cursor
-
-
+	Close <cursor_name> to deactive the cursor and release memory associated by cursor
 
 
-select * from employees ;
-result is resultset and all results is proceessed by row by row
 
 
-delimiter &
-create procedure procemp()
-begin
-declare v_ename varchar(100);
-declare v_salary int;
-declare v_finished integer default 0;
-
-declare  c1 cursor for select ename,salary from employees;
-declare continue handler for NOT FOUND set v_finished=1;
-open c1;
-
-get_emp:LOOP
- fetch c1 into v_ename,v_salary;
- if v_finished=1 then 
-	leave get_emp;
- end if;
- select concat(v_ename,v_salary);
-END LOOP get_emp;
-
-close c1;
-end &
-
-delimiter &
-create procedure listemp(IN deptidpass int(44),inout listdata varchar(1000))
-begin
-
-declare v_ename varchar(1000);
-declare v_finished integer default 0;
-
-declare c1 cursor for  select empname from employees where deptid=deptidpass;
-declare continue handler for NOT FOUND set v_finished=1;
-
-get_emp:LOOP
-fetch c1 into v_ename;
-if v_finished=1 then
- leave get_emp;
-end if;
-set emplist=concat(listdata,concat('',v_ename));
+	select * from employees ;
+	result is resultset and all results is proceessed by row by row
 
 
-END LOOP getemp;
-close c1;
-end &
+	delimiter &
+	create procedure procemp()
+	begin
+	declare v_ename varchar(100);
+	declare v_salary int;
+	declare v_finished integer default 0;
+
+	declare  c1 cursor for select ename,salary from employees;
+	declare continue handler for NOT FOUND set v_finished=1;
+	open c1;
+
+	get_emp:LOOP
+	 fetch c1 into v_ename,v_salary;
+	 if v_finished=1 then 
+		leave get_emp;
+	 end if;
+	 select concat(v_ename,v_salary);
+	END LOOP get_emp;
+
+	close c1;
+	end &
+
+	delimiter &
+	create procedure listemp(IN deptidpass int(44),inout listdata varchar(1000))
+	begin
+
+	declare v_ename varchar(1000);
+	declare v_finished integer default 0;
+
+	declare c1 cursor for  select empname from employees where deptid=deptidpass;
+	declare continue handler for NOT FOUND set v_finished=1;
+
+	get_emp:LOOP
+	fetch c1 into v_ename;
+	if v_finished=1 then
+	 leave get_emp;
+	end if;
+	set emplist=concat(listdata,concat('',v_ename));
+
+
+	END LOOP getemp;
+	close c1;
+	end &
