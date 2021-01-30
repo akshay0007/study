@@ -64,6 +64,6 @@ Replicaiton Algo--
 
 GroupChatID--
 
-  separate table partitioned
+    separate table partitioned
 
 
