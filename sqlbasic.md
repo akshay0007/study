@@ -1,30 +1,33 @@
 ddl command:data definiation language 
 define and modify the databaese structure of table or schema
 ddl commandss::
-create
-alter 
-drop
-truncate
-rename
+
+	create
+	alter 
+	drop
+	truncate
+	rename
  
 
-desc <table_name>
-create table <tablename>(column1 datatype,column1 datatype);
-drop table <tablename>
-alter table <tablename> add <columnname> <datatype>
+	desc <table_name>
+	create table <tablename>(column1 datatype,column1 datatype);
+	drop table <tablename>
+	alter table <tablename> add <columnname> <datatype>
 
-alter table <tablename> drop <columnname>
-modifing column::
-alter table <tablename> modify <columnname> <datatype> default <value>
-default value::
-alter table <tablename> alter <columnname> default 'defaultvalue' ;
+	alter table <tablename> drop <columnname>
+	modifing column::
+	alter table <tablename> modify <columnname> <datatype> default <value>
+	default value::
+	alter table <tablename> alter <columnname> default 'defaultvalue' ;
 
 rename change tablename::
-alter table <tablenamn> rename to <newtablename>;
+
+	alter table <tablenamn> rename to <newtablename>;
 
 truncate::
-:truncate table student;(drop table columns ddl commands it cannot be rooled back table structre rename same but columns are deleted)
-:delete from student;(it is dml command)
+
+	:truncate table student;(drop table columns ddl commands it cannot be rooled back table structre rename same but columns are deleted)
+	:delete from student;(it is dml command)
 
 in drop student( table completly remove )
 
@@ -35,16 +38,18 @@ update
 delete
 
 insert::
-insert into <tablename>(column1 ,column ... ) values (value1,value...),(value1,value...);
+
+	insert into <tablename>(column1 ,column ... ) values (value1,value...),(value1,value...);
 
 update::
-update <tablename> set <columnname>=value where <columnname>=value;
+
+	update <tablename> set <columnname>=value where <columnname>=value;
 
 update student set age=10,name='dd' where sid=4;
 
 delete::
-delete from <tablename> where <columnanme>=value;
-delete from <tablename> (whole table rows delete )
+	delete from <tablename> where <columnanme>=value;
+	delete from <tablename> (whole table rows delete )
 
 
 date function::
@@ -52,62 +57,71 @@ current date::
 curdate();
 
 MONTHS DIFF
-timestampdiff(month,'YYYY-MM-DD','YYYY-MM-DD')
 
-timestampdiff(day,'YYYY-MM-DD','YYYY-MM-DD')
+	timestampdiff(month,'YYYY-MM-DD','YYYY-MM-DD')
+
+	timestampdiff(day,'YYYY-MM-DD','YYYY-MM-DD')
 
 select ename,salary,timestamdiff(year,hiredate,curdate()) as yearworked from employees;
 
 
 ::salary diff and increment salary of those employees whose hire date greater then 1 years::
-select ename,hiredate,timestampdiff(year,hiredate,curdate()) as yearworked,
-if(timestampdiff(year,hiredate,curdate())>1,salary+salary*0.1,salary) as newsalary from employees;
+
+	select ename,hiredate,timestampdiff(year,hiredate,curdate()) as yearworked,
+	if(timestampdiff(year,hiredate,curdate())>1,salary+salary*0.1,salary) as newsalary from employees;
 
 QUARTER function::
-select quarter(curdate());
+
+	select quarter(curdate());
 
 
-case :::
-select ename ,hiredate ,case
-	when quarter(hiredate) 1 then 'firstquarter'
-	when quarter(hiredate) 2 then 'secquarter'
-	when quarter(hiredate) 3 then 'thrquarter'
-	when quarter(hiredate) 4 then 'fourquarter'
-	end as hireQuarter
-from employees;
+	case :::
+	select ename ,hiredate ,case
+		when quarter(hiredate) 1 then 'firstquarter'
+		when quarter(hiredate) 2 then 'secquarter'
+		when quarter(hiredate) 3 then 'thrquarter'
+		when quarter(hiredate) 4 then 'fourquarter'
+		end as hireQuarter
+	from employees;
 
 
 current dayname::
 dayname(curdate()):
 
 case example::
-select case(dayname(curdate()))
-	when 'sunday' then 'weekend'
-	when 'saturday' then 'weekend'
-	else 'weekday'
-end as dow;
+
+	select case(dayname(curdate()))
+		when 'sunday' then 'weekend'
+		when 'saturday' then 'weekend'
+		else 'weekday'
+	end as dow;
 
 ::current months::
-select extract(month from curdate());
+
+	select extract(month from curdate());
 
 
 str_to_date function::
-select str_to_date('11-12-17','%m-%d-%y');
+
+	select str_to_date('11-12-17','%m-%d-%y');
 op:: 2017-11-12 
 
 select clauses::return row by row
-select * from <tablename>;
-select columnname,... from <tablename>;
-select a from <tablename>  it goes to each row then retreive
+
+	select * from <tablename>;
+	select columnname,... from <tablename>;
+	select a from <tablename>  it goes to each row then retreive
 
 where clause::
 select ename,salary,salary*12 as 'yearsal' from employees;
 
 select used by row by row
-where clause use for filtering data
-select ename,salary,salary*12 as 'yearsal' from employees where deptid=20 and salary>12000;
 
-select ename,salary,salary*12 as 'yearsal' from employees where (deptid=20 or deptid=10) and salary>12000;
+where clause use for filtering data
+
+	select ename,salary,salary*12 as 'yearsal' from employees where deptid=20 and salary>12000;
+
+	select ename,salary,salary*12 as 'yearsal' from employees where (deptid=20 or deptid=10) and salary>12000;
 
 clasuse in sql::
 in, between and likes::
@@ -115,73 +129,85 @@ in == exact matching
 between == range matching
 like == pattern matching
 
-select ename ,salary from employees where designation='abc' or designation='xyz';
+	select ename ,salary from employees where designation='abc' or designation='xyz';
 
 in clause
-select ename ,salary from employees where designation in('abc','xyz') ;
 
-select ename ,salary from employees where deptid=10 or deptid=20;
-select ename ,salary from employees where deptid in(10,20) and salary>20000;
+	select ename ,salary from employees where designation in('abc','xyz') ;
+
+	select ename ,salary from employees where deptid=10 or deptid=20;
+	select ename ,salary from employees where deptid in(10,20) and salary>20000;
 
 between::>= and <=
-select ename from employees where salary>=20000 and salary<=30000;
-select ename from employees where salary between 20000 and 30000;
 
-select ename from employees where salary between 20000 and 30000 and deptid=10;
+	select ename from employees where salary>=20000 and salary<=30000;
+	select ename from employees where salary between 20000 and 30000;
 
-select ename from employees where salary between 20000 and 30000 and deptid in(10);
+	select ename from employees where salary between 20000 and 30000 and deptid=10;
+
+	select ename from employees where salary between 20000 and 30000 and deptid in(10);
 
 
 Like::%(match any string) _(single character matching)::
-select ename from employees where ename like 'n%'; start with n
-select ename from employees where ename like '%n'; end with n
 
-select ename from employees where ename like '___'; contain 3 char
+	select ename from employees where ename like 'n%'; start with n
+	select ename from employees where ename like '%n'; end with n
 
-select ename ,designation from employees where desgination in('mangaer','developer') and ename like 'n%';
+	select ename from employees where ename like '___'; contain 3 char
+
+	select ename ,designation from employees where desgination in('mangaer','developer') and ename like 'n%';
 
 
 handling null values::
-null::undertermine value
-0::it is determine value
 
-null value +any arthematic operation is undertermine value
-null value cannt be equate:
-select ename from employees where commission =null
+	null::undertermine value
+	0::it is determine value
+
+	null value +any arthematic operation is undertermine value
+	null value cannt be equate:
+	select ename from employees where commission =null
 
 so we are using is clause:
-select ename from employees where commission is null
-select ename from employees where commission is not null
+
+	select ename from employees where commission is null
+	select ename from employees where commission is not null
 
 
 orderby clause::by default asc order
-select ename ,salary from employees order by salary;
 
-select ename ,salary from employees order by salary desc;
+	select ename ,salary from employees order by salary;
+
+	select ename ,salary from employees order by salary desc;
 
 first sort by deptid then if any dept id is repeated then they sort on bais of salary
-select ename ,salary from employees order by deptid, salary;
-like 
-depid salary
-30 3000
-30 4000
-20 2000
-20 3000
 
-used order by with conjunctio of where clause
-select ename ,salary from employees where deptid=20 order by salary desc;
+	select ename ,salary from employees order by deptid, salary;
+	like 
+	depid salary
+	30 3000
+	30 4000
+	20 2000
+	20 3000
+
+used order by with conjunction of where clause
+
+	select ename ,salary from employees where deptid=20 order by salary desc;
 
 limit key word::fetch me firsts three records
-select eid from employees limit 3;
+
+	select eid from employees limit 3;
 
 indexing limits:: limit 1,3 one index and three rows
-select eid from employees limit 1,3; getting 3 rows
+
+	select eid from employees limit 1,3; getting 3 rows
 
 higehest salary::
-select eid from employees order by salary desc limit 1;
+	
+	select eid from employees order by salary desc limit 1;
 
 second highest salary
-select eid from employees order by salary desc limit 1,1; //indexing 1 and 1
+
+	select eid from employees order by salary desc limit 1,1; //indexing 1 and 1
 
 case statements::
 case <expression> 
@@ -192,76 +218,88 @@ end
 
 find number is even or odd
 
-set @number=10;
-select case(@number%2)
-when 0 then 'even'
-when 1 then 'odd'
-end as ecode
+	set @number=10;
+	select case(@number%2)
+	when 0 then 'even'
+	when 1 then 'odd'
+	end as ecode
 
 for aliasing using as
 
 conditionally increment sallary on basis of dept manage increase by 2000 if developer incr by 1000 else remain same
 
-select ename ,salary ,case(designation)
-when 'manger' then salary +2000
-when 'developer' then salary +1000
-else salary 
-end as netsalary 
-from employees;
+	select ename ,salary ,case(designation)
+	when 'manger' then salary +2000
+	when 'developer' then salary +1000
+	else salary 
+	end as netsalary 
+	from employees;
 
 adding prefix mr,mrs on the basis of gender
-select ename, case(gender)
-when 'm' then concat('mr',ename)
-when 'F' then concat('mrs',ename)
-else ename end as name
-from employees;
+
+	select ename, case(gender)
+	when 'm' then concat('mr',ename)
+	when 'F' then concat('mrs',ename)
+	else ename end as name
+	from employees;
 
 string function::
 length function
-select length('abc');
-op :3
+
+	select length('abc');
+	op :3
 
 upper::
-select upper('abc');
+
+	select upper('abc');
 
 substring::
-select substring('nikhil',2,4)
-op::ikhi (from second pos we extract 4 character)
+
+	select substring('nikhil',2,4)
+	op::ikhi (from second pos we extract 4 character)
 
 instr() ::index pos find out
-select instr('nikhil' ,'i')
-first occurance of i
-op::2
+
+	select instr('nikhil' ,'i')
+	first occurance of i
+	op::2
 
 concat('','') concat both of string and 2 level of nesting is perform
 
 for adding first and last name with space seprator::
-select first,last,concat(first,concat(' ',last)) from employees;
+
+	select first,last,concat(first,concat(' ',last)) from employees;
 
 ltrim()::remove left side  trailling spaces
-select ltrim('  abc');
-op abc
+
+	select ltrim('  abc');
+	op abc
 
 repeat ::repetion of particular value
-like repeat('*',5)::*****
+
+	like repeat('*',5)::*****
 
 replace('amit','a','v'):replace a with v
-op:::vmit
+
+	op:::vmit
 
 
 null releated function in mysql::
-ifnull(expr1,expr2)
+
+	ifnull(expr1,expr2)
 
 if expr1 is null then it returns expr2
 else it returns expr1
 
-select if(3,4);
+	select if(3,4);
 op 4
-select if(null,4)
+
+	select if(null,4)
 op 4
 
 effective salary find out
-select ename ,ifnull(salary+commision,salary) from employees;
+
+	select ename ,ifnull(salary+commision,salary) from employees;
 
 if condition::
 select if(2>3,'aa','bb')
@@ -269,60 +307,64 @@ op bb
 
 group functions::
 
-group function act on multiple row at a time like sum,avg,min,max,count
+	group function act on multiple row at a time like sum,avg,min,max,count
 
-group function do not oprate on null values
+	group function do not oprate on null values
 
-group function evaluate after where clause
+	group function evaluate after where clause
 
-::
-select count(*) from employees;
-select sum(salary) from employees;
-select min(salary) from employees;
-select avg(salary) from employees;
+
+	select count(*) from employees;
+	select sum(salary) from employees;
+	select min(salary) from employees;
+	select avg(salary) from employees;
 
 
 group function always evaluated after filtering of rows:
 
-select count(name) from employees where salary  between 400 and 500;
 
-goup function cannt be evaluate for null values
-select count(commision ) from employee;
+	select count(name) from employees where salary  between 400 and 500;
 
-give 8  instead of 10 because 2 values are null
+	goup function cannt be evaluate for null values
+	select count(commision ) from employee;
 
-select ename extract(year from hiredate) as hiredate from employees;
+	give 8  instead of 10 because 2 values are null
 
-select enmae,timestampdiff(year,hiredate,curdate()) from employees
-select count(*) from employees where timestampdiff(year,hiredate,curdate())>1;
+	select ename extract(year from hiredate) as hiredate from employees;
+
+	select enmae,timestampdiff(year,hiredate,curdate()) from employees
+	select count(*) from employees where timestampdiff(year,hiredate,curdate())>1;
 
 distinct keyword::
-select count (distinct deptid,desigmation ) from employees;
+
+	select count (distinct deptid,desigmation ) from employees;
 
 count of male and female
 
-select 
-sum(case(gender) when 'm' then 1 else 0 end) as males,
-sum(case(gender) when 'f' then 1 else 0 end) as females,
-from employees;
+	select 
+	sum(case(gender) when 'm' then 1 else 0 end) as males,
+	sum(case(gender) when 'f' then 1 else 0 end) as females,
+	from employees;
 
 group by clause in mysql::
-group function cannt oprate on null values
-it execute after the where clause
-it can never be written inside where clause
-only the columns mentioned in the group by clause can be selected using the select clause
+
+	group function cannt oprate on null values
+	it execute after the where clause
+	it can never be written inside where clause
+	only the columns mentioned in the group by clause can be selected using the select clause
 
 
 select distinct deptid from employees;
-select deptid ,count(*) as noemployee from employees group by deptid;
+
+	select deptid ,count(*) as noemployee from employees group by deptid;
 
 first grouping perform then group function applied.
 
-select deptid,max(salary) from employees group by deptid;
+	select deptid,max(salary) from employees group by deptid;
 
-select extract(year from hiredate) ,count(*) from employees group by extrct(year from hiredate);
+	select extract(year from hiredate) ,count(*) from employees group by extrct(year from hiredate);
 
-group clasue execute after where clause::
+	group clasue execute after where clause::
 
 select deptid,count(*)
 from employees where deptid in(10,20) group by deptid;
@@ -330,35 +372,39 @@ from employees where deptid in(10,20) group by deptid;
 
 *********************************************
 *********************************************
-1:flow of groups::
-2:where 
-3:group by
-4:group function
-5:having clause
-6:order by
+
+	1:flow of groups::
+	2:where 
+	3:group by
+	4:group function
+	5:having clause
+	6:order by
+	
 *********************************************
 *********************************************
-select designation ,avg(salary)
-from employees where desgination in (''mager','tech');
-group by desgination;
+
+	select designation ,avg(salary)
+	from employees where desgination in (''mager','tech');
+	group by desgination;
 
 group function can never be written inside where clause::
 
 
-select deptid ,count(*) from employees 
-where count(*)>2 (this is wrong due to inside where clause,for this we are using having clause) group by deptid 
+	select deptid ,count(*) from employees 
+	where count(*)>2 (this is wrong due to inside where clause,for this we are using having clause) group by deptid 
 
 Having clause::
-bcoz we cannt write group function inside where then having clause comes
+
+	bcoz we cannt write group function inside where then having clause comes
 
 
 select deptid,count(*) from employees group by deptid having count(*)>2 
 
 select deptid,name ,count(*) as desgcount employees group by designation having desgcount=1
 
-select desgniation ,avg(salary) as avgsal
- from employees where desgination in('a','b')
-having avgsal>2000 order by desgination desc;
+	select desgniation ,avg(salary) as avgsal
+	 from employees where desgination in('a','b')
+	having avgsal>2000 order by desgination desc;
 
 select extract(year from hiredate) as yer .count(*) as coutyear from employees where extract(year from hiredate) in ('2015','2016')
 group by yer
@@ -366,6 +412,7 @@ group by yer
 
 
 primary key constraint::
+
 :set of columns so it can be identify uniquely
 :it must contain unique and not null values
 :composition primary key can have multiple columns whose combination alway be unique
@@ -373,35 +420,39 @@ primary key constraint::
 alter table <tablename> add constraint <constraintname > primary key (<column name>)
 :to drop primary key use alter table <table name> drop primary key
 
-create table movie(mname varchar(44) primary key,director varchar(44));
-insert into movie values('abc','xyz'),('rst','xyz');
+	create table movie(mname varchar(44) primary key,director varchar(44));
+	insert into movie values('abc','xyz'),('rst','xyz');
 
 drop primary key::
-alter table movie drop primary key;
+	
+	alter table movie drop primary key;
 
 add primary key::
-alter table movie add constraint mname_movie_pk(colun_table_primaryke) primary key(mname);
+
+	alter table movie add constraint mname_movie_pk(colun_table_primaryke) primary key(mname);
 
 composite primary key::
-alter table movie drop primary key;
-alter table movie add column ryear int;
 
-alter table movie add mname_ryear_movie_pk primary key(mname,ryear);
+	alter table movie drop primary key;
+	alter table movie add column ryear int;
 
-:a table have only one primary key
+	alter table movie add mname_ryear_movie_pk primary key(mname,ryear);
 
-delete from movie where ryear=0;
+	:a table have only one primary key
+
+	delete from movie where ryear=0;
 
 metadataview::
-desc information_schema.key_column_usage;
+	
+	desc information_schema.key_column_usage;
 
 ******************************************************
 meta data information getting from information_schema
 *******************************************************
 
-not null constraint in mysql::
-it force to column not null 
-syntex::<column_name> <datatype> NOT NULL
+	not null constraint in mysql::
+	it force to column not null 
+	syntex::<column_name> <datatype> NOT NULL
 
 TO add in existing columns::
 <tablename> change <old_colmnname> <newcolumnname> <newcolumndefinition>
@@ -413,6 +464,7 @@ create table test11(sno int not null default 0);
 
 
 foreign key constraints::
+
 :refrential intergrity between two tables it points the primary key of another table
 :it can be set to null
 :it denote parent child relationship a child cann't be inserted unless parent exists and parnet cann't be deleted if child exists
@@ -422,37 +474,42 @@ to create a foreign key in create table statement use
 key(<columnname>) references <tablename>(<columnname>) [on update action] [on delete action]
 
 table structure::
+
 suppose emp table (eid,ename,deptid)   ::child table
 and in dept(deptid,dname)  ::parent table
 
 to add a foreign key constraint to existing tables:
-alter table <tablename> add constraint <constraintname> FOREIGN KEY(<columnname>) references <tablename>(columnname) [on update action] [on delete action]
+
+	alter table <tablename> add constraint <constraintname> FOREIGN KEY(<columnname>) references <tablename>(columnname) [on update action] [on delete action]
 
 to drop a foreign key use ::
-alter table <tablename> drop foreign key <foreign key name>
+
+	alter table <tablename> drop foreign key <foreign key name>
 
 ::foreign key points to the the primary key of another key so foreign key always add child table :
 
 
-alter table emp add constraint emp_dept_deptid_fk foreign key(deptid) refrences dept(deptid);
+	alter table emp add constraint emp_dept_deptid_fk foreign key(deptid) refrences dept(deptid);
 
-alter table dept add constraint dept_deptid+p primary key(deptid);
+	alter table dept add constraint dept_deptid+p primary key(deptid);
 
 parent cannot be deleted until child be deleted yet
 
-create table emp12(eid int primary key,ename varchar(20), deptid int ,foreign key (deptid) refrences dept(deptid));
+	create table emp12(eid int primary key,ename varchar(20), deptid int ,foreign key (deptid) refrences dept(deptid));
 
 meta data view for foreign key::
-desc infromation_schema.key_column_usage;
+
+	desc infromation_schema.key_column_usage;
 
 
 drop table emp13;
 
 to drop foreign key use
-alter table <tablename> drop foreign key <foreignkeyname>
+
+	alter 	table <tablename> drop foreign key <foreignkeyname>
 
 
-two clasue on update and delete actions::it can be set to cascade,set null,restrict
+	two clasue on update and delete actions::it can be set to cascade,set null,restrict
 
 *****************************
 show create table emp;
@@ -461,31 +518,36 @@ alter table emp drop foreign key emp_dept_deptid_fk;
 
 
 ::on delete cascade::on delete parent row child row cascaded:
+
 dependent child records also deleted.
-alter table emp add constraint emp_dept_deptid_fk foreign key(deptid) refrences dept(deptid) on delete cascade;
+
+	alter table emp add constraint emp_dept_deptid_fk foreign key(deptid) refrences dept(deptid) on delete cascade;
 
 ::in set null null value set in columns:
-alter table emp add constraint emp_dept_deptid_fk foreign
- key(deptid) refrences dept(deptid) on delete set null;
+
+	alter table emp add constraint emp_dept_deptid_fk foreign
+	 key(deptid) refrences dept(deptid) on delete set null;
 
 ::restrict value set in columns: it is restricting to deleting rows
-alter table emp add constraint emp_dept_deptid_fk foreign
- key(deptid) refrences dept(deptid) on delete restrict;
+
+	alter table emp add constraint emp_dept_deptid_fk foreign
+	 key(deptid) refrences dept(deptid) on delete restrict;
 
 
 ::on update cascade;
-alter table emp add constraint emp_dept_deptid_fk foreign
- key(deptid) refrences dept(deptid) on update cascade;
+
+	alter table emp add constraint emp_dept_deptid_fk foreign
+	 key(deptid) refrences dept(deptid) on update cascade;
 
 suppose dept id 10,20 in there we are updateing 20 to 30 then in on cascade update it update into child and parent to 30:
 
 now create table of country,states and city::
 
-create table country (cid int primary key,cname varchar(20));
+	create table country (cid int primary key,cname varchar(20));
 
-create table state (sid int ,sname varchar(20),cid int);
-alter table state add constraint state_pk primary key(sid) 
-alter table state add constraint country_state_cid_fk foreign key (cid) refrences country(cid) on delete cacade;
+	create table state (sid int ,sname varchar(20),cid int);
+	alter table state add constraint state_pk primary key(sid) 
+	alter table state add constraint country_state_cid_fk foreign key (cid) refrences country(cid) on delete cacade;
 
 create table city (cid int ,cname varchar(20));
 alter table city add constraint state_city_cid_fk foreign key (sid) refrences state(sid) on delete cacade;
@@ -508,25 +570,27 @@ eid and mgrid has constraint relationship::
 alter table emp add constraint foreign key (mgrid) refrences emp(eid);
 
 introduction to joins::
+
 joins==used to fetch data from multiple table:
-cross join
-inner join
-left outer join
-right outer join
-self join
+
+	cross join
+	inner join
+	left outer join
+	right outer join
+	self join
 
 select * from emp1,dept1;
 suppose emp1 has 2 rows and dept1 has 3 rows 
 then op rows--6
 
 
-select e.ename ,d.dname from emp1 e cross join dept1 d
+	select e.ename ,d.dname from emp1 e cross join dept1 d
 
-select deptid from emp1 e cross join dept1 d becoz deptid is share b/w both then it gives ambiguse problem
+	select deptid from emp1 e cross join dept1 d becoz deptid is share b/w both then it gives ambiguse problem
 
-select d.deptid from emp1 e cross join dept1 d 
+	select d.deptid from emp1 e cross join dept1 d 
 
-select e.ename ,d.dname from emp1 as e cross join dept1 as d where e.deptid=d.deptid;
+	select e.ename ,d.dname from emp1 as e cross join dept1 as d where e.deptid=d.deptid;
 
 for inner join
 select e.ename ,d.dname from emp1 as e inner join dept1 as d on e.deptid=d.deptid;
@@ -688,10 +752,11 @@ select deptname from department as d where not exits(select * from employees whe
 
 =================================================================================================================
 Advance lecutrues::
-views are database  object contains store query so it increase performance of database
-views are used to simplify complex queries
-it provide extra layer of security
-it can either be simple or complex
+
+	views are database  object contains store query so it increase performance of database
+	views are used to simplify complex queries
+	it provide extra layer of security
+	it can either be simple or complex
 
 
 they are just logic oprators
